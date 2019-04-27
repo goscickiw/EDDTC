@@ -1,0 +1,57 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="edd_repo_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="tlf_files_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\EDDiscovery\Translations\</Value>
+    </Setting>
+    <Setting Name="uc_files_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\EDDiscovery\UserControls\</Value>
+    </Setting>
+    <Setting Name="je_files_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\EliteDangerous\JournalEvents\</Value>
+    </Setting>
+    <Setting Name="ed_files_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\EliteDangerous\EliteDangerous\</Value>
+    </Setting>
+    <Setting Name="diff_wordwrap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="tran_wordwrap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="exmp_wordwrap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="tlf_files_naming" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*-*.tlf</Value>
+    </Setting>
+    <Setting Name="uc_files_naming" Type="System.String" Scope="User">
+      <Value Profile="(Default)">translation-*-uc.tlp</Value>
+    </Setting>
+    <Setting Name="je_files_naming" Type="System.String" Scope="User">
+      <Value Profile="(Default)">translation-*-je.tlp</Value>
+    </Setting>
+    <Setting Name="ed_files_naming" Type="System.String" Scope="User">
+      <Value Profile="(Default)">translation-*-ed.tlp</Value>
+    </Setting>
+    <Setting Name="example_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">example-ex.tlf</Value>
+    </Setting>
+    <Setting Name="tran_showexample" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="exmp_showtranslation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="diff_ignore_removed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="tran_hide_translated" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
