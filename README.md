@@ -32,4 +32,8 @@ You can fill in the cells in the **Translation Text (editable)** column. If you 
 6. Go to the **Translation File** tab. The added IDs will be highlighted in gray.<br />
 As you can see, the IDs were added in the correct section. If an entire new section was added, it will be placed on the bottom of the table.<br />
 ![step6](https://user-images.githubusercontent.com/39399945/56853356-c8337500-6926-11e9-88af-210f8f3e9481.PNG)<br />
-You can edit the translations and copy the examples the same way as in step 4.
+You can edit the translations and copy the examples the same way as in step 4. When you're done with your work, press <kbd>Save Translation</kbd>. EDDTC will apply your changes to the translation file.
+
+7. I suggest using GitHub Desktop to review the changes made by EDDTC to the translation files before committing them. This is how the changes look like in GitHub Desktop:<br />
+![step7](https://user-images.githubusercontent.com/39399945/56853459-a89d4c00-6928-11e9-887f-6b94527d831d.PNG)<br />
+(These changes were just for demonstration, i discarded them later)
