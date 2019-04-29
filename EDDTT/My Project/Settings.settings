@@ -1,0 +1,69 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="edd_repo_set" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="edd_repo_dir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="last_language" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="lang_mainfile_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\EDDiscovery\Translations\</Value>
+    </Setting>
+    <Setting Name="lang_mainfile_naming" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*-*.tlf</Value>
+    </Setting>
+    <Setting Name="lang_exfile_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">example-ex.tlf</Value>
+    </Setting>
+    <Setting Name="lang_uc_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\EDDiscovery\UserControls\</Value>
+    </Setting>
+    <Setting Name="lang_uc_naming" Type="System.String" Scope="User">
+      <Value Profile="(Default)">translation-*-uc.tlp</Value>
+    </Setting>
+    <Setting Name="lang_je_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\EliteDangerous\JournalEvents\</Value>
+    </Setting>
+    <Setting Name="lang_je_naming" Type="System.String" Scope="User">
+      <Value Profile="(Default)">translation-*-je.tlp</Value>
+    </Setting>
+    <Setting Name="lang_ed_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\EliteDangerous\EliteDangerous\</Value>
+    </Setting>
+    <Setting Name="lang_ed_naming" Type="System.String" Scope="User">
+      <Value Profile="(Default)">translation-*-ed.tlp</Value>
+    </Setting>
+    <Setting Name="tran_hide_translated" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="tran_wordwrap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="tran_show_example" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="diff_wordwrap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="diff_ignore_removed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="auto_load_files" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="auto_check_edd_repo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="exmp_wordwrap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="exmp_show_translation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

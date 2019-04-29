@@ -56,61 +56,181 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property edd_repo_path() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property edd_repo_set() As Boolean
             Get
-                Return CType(Me("edd_repo_path"),String)
+                Return CType(Me("edd_repo_set"),Boolean)
             End Get
             Set
-                Me("edd_repo_path") = value
+                Me("edd_repo_set") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property edd_repo_dir() As String
+            Get
+                Return CType(Me("edd_repo_dir"),String)
+            End Get
+            Set
+                Me("edd_repo_dir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property last_language() As String
+            Get
+                Return CType(Me("last_language"),String)
+            End Get
+            Set
+                Me("last_language") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("\EDDiscovery\Translations\")>  _
-        Public Property tlf_files_path() As String
+        Public Property lang_mainfile_path() As String
             Get
-                Return CType(Me("tlf_files_path"),String)
+                Return CType(Me("lang_mainfile_path"),String)
             End Get
             Set
-                Me("tlf_files_path") = value
+                Me("lang_mainfile_path") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("*-*.tlf")>  _
+        Public Property lang_mainfile_naming() As String
+            Get
+                Return CType(Me("lang_mainfile_naming"),String)
+            End Get
+            Set
+                Me("lang_mainfile_naming") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("example-ex.tlf")>  _
+        Public Property lang_exfile_name() As String
+            Get
+                Return CType(Me("lang_exfile_name"),String)
+            End Get
+            Set
+                Me("lang_exfile_name") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("\EDDiscovery\UserControls\")>  _
-        Public Property uc_files_path() As String
+        Public Property lang_uc_path() As String
             Get
-                Return CType(Me("uc_files_path"),String)
+                Return CType(Me("lang_uc_path"),String)
             End Get
             Set
-                Me("uc_files_path") = value
+                Me("lang_uc_path") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("translation-*-uc.tlp")>  _
+        Public Property lang_uc_naming() As String
+            Get
+                Return CType(Me("lang_uc_naming"),String)
+            End Get
+            Set
+                Me("lang_uc_naming") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("\EliteDangerous\JournalEvents\")>  _
-        Public Property je_files_path() As String
+        Public Property lang_je_path() As String
             Get
-                Return CType(Me("je_files_path"),String)
+                Return CType(Me("lang_je_path"),String)
             End Get
             Set
-                Me("je_files_path") = value
+                Me("lang_je_path") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("translation-*-je.tlp")>  _
+        Public Property lang_je_naming() As String
+            Get
+                Return CType(Me("lang_je_naming"),String)
+            End Get
+            Set
+                Me("lang_je_naming") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("\EliteDangerous\EliteDangerous\")>  _
-        Public Property ed_files_path() As String
+        Public Property lang_ed_path() As String
             Get
-                Return CType(Me("ed_files_path"),String)
+                Return CType(Me("lang_ed_path"),String)
             End Get
             Set
-                Me("ed_files_path") = value
+                Me("lang_ed_path") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("translation-*-ed.tlp")>  _
+        Public Property lang_ed_naming() As String
+            Get
+                Return CType(Me("lang_ed_naming"),String)
+            End Get
+            Set
+                Me("lang_ed_naming") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property tran_hide_translated() As Boolean
+            Get
+                Return CType(Me("tran_hide_translated"),Boolean)
+            End Get
+            Set
+                Me("tran_hide_translated") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property tran_wordwrap() As Boolean
+            Get
+                Return CType(Me("tran_wordwrap"),Boolean)
+            End Get
+            Set
+                Me("tran_wordwrap") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property tran_show_example() As Boolean
+            Get
+                Return CType(Me("tran_show_example"),Boolean)
+            End Get
+            Set
+                Me("tran_show_example") = value
             End Set
         End Property
         
@@ -129,12 +249,36 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property tran_wordwrap() As Boolean
+        Public Property diff_ignore_removed() As Boolean
             Get
-                Return CType(Me("tran_wordwrap"),Boolean)
+                Return CType(Me("diff_ignore_removed"),Boolean)
             End Get
             Set
-                Me("tran_wordwrap") = value
+                Me("diff_ignore_removed") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property auto_load_files() As Boolean
+            Get
+                Return CType(Me("auto_load_files"),Boolean)
+            End Get
+            Set
+                Me("auto_load_files") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property auto_check_edd_repo() As Boolean
+            Get
+                Return CType(Me("auto_check_edd_repo"),Boolean)
+            End Get
+            Set
+                Me("auto_check_edd_repo") = value
             End Set
         End Property
         
@@ -152,109 +296,13 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("*-*.tlf")>  _
-        Public Property tlf_files_naming() As String
-            Get
-                Return CType(Me("tlf_files_naming"),String)
-            End Get
-            Set
-                Me("tlf_files_naming") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("translation-*-uc.tlp")>  _
-        Public Property uc_files_naming() As String
-            Get
-                Return CType(Me("uc_files_naming"),String)
-            End Get
-            Set
-                Me("uc_files_naming") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("translation-*-je.tlp")>  _
-        Public Property je_files_naming() As String
-            Get
-                Return CType(Me("je_files_naming"),String)
-            End Get
-            Set
-                Me("je_files_naming") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("translation-*-ed.tlp")>  _
-        Public Property ed_files_naming() As String
-            Get
-                Return CType(Me("ed_files_naming"),String)
-            End Get
-            Set
-                Me("ed_files_naming") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("example-ex.tlf")>  _
-        Public Property example_name() As String
-            Get
-                Return CType(Me("example_name"),String)
-            End Get
-            Set
-                Me("example_name") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property tran_showexample() As Boolean
-            Get
-                Return CType(Me("tran_showexample"),Boolean)
-            End Get
-            Set
-                Me("tran_showexample") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property exmp_showtranslation() As Boolean
+        Public Property exmp_show_translation() As Boolean
             Get
-                Return CType(Me("exmp_showtranslation"),Boolean)
+                Return CType(Me("exmp_show_translation"),Boolean)
             End Get
             Set
-                Me("exmp_showtranslation") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property diff_ignore_removed() As Boolean
-            Get
-                Return CType(Me("diff_ignore_removed"),Boolean)
-            End Get
-            Set
-                Me("diff_ignore_removed") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property tran_hide_translated() As Boolean
-            Get
-                Return CType(Me("tran_hide_translated"),Boolean)
-            End Get
-            Set
-                Me("tran_hide_translated") = value
+                Me("exmp_show_translation") = value
             End Set
         End Property
     End Class
@@ -268,9 +316,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.EDDTC.My.MySettings
+        Friend ReadOnly Property Settings() As Global.EDDTT.My.MySettings
             Get
-                Return Global.EDDTC.My.MySettings.Default
+                Return Global.EDDTT.My.MySettings.Default
             End Get
         End Property
     End Module
