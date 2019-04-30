@@ -15,7 +15,7 @@
       <Value Profile="(Default)">\EDDiscovery\Translations\</Value>
     </Setting>
     <Setting Name="lang_mainfile_naming" Type="System.String" Scope="User">
-      <Value Profile="(Default)">*-*.tlf</Value>
+      <Value Profile="(Default)">{0}-{1}.tlf</Value>
     </Setting>
     <Setting Name="lang_exfile_name" Type="System.String" Scope="User">
       <Value Profile="(Default)">example-ex.tlf</Value>
@@ -24,19 +24,19 @@
       <Value Profile="(Default)">\EDDiscovery\UserControls\</Value>
     </Setting>
     <Setting Name="lang_uc_naming" Type="System.String" Scope="User">
-      <Value Profile="(Default)">translation-*-uc.tlp</Value>
+      <Value Profile="(Default)">translation-{0}-uc.tlp</Value>
     </Setting>
     <Setting Name="lang_je_path" Type="System.String" Scope="User">
       <Value Profile="(Default)">\EliteDangerous\JournalEvents\</Value>
     </Setting>
     <Setting Name="lang_je_naming" Type="System.String" Scope="User">
-      <Value Profile="(Default)">translation-*-je.tlp</Value>
+      <Value Profile="(Default)">translation-{0}-je.tlp</Value>
     </Setting>
     <Setting Name="lang_ed_path" Type="System.String" Scope="User">
       <Value Profile="(Default)">\EliteDangerous\EliteDangerous\</Value>
     </Setting>
     <Setting Name="lang_ed_naming" Type="System.String" Scope="User">
-      <Value Profile="(Default)">translation-*-ed.tlp</Value>
+      <Value Profile="(Default)">translation-{0}-ed.tlp</Value>
     </Setting>
     <Setting Name="tran_hide_translated" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

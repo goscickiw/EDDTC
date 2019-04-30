@@ -1,10 +1,12 @@
 ﻿Imports System.IO
 Imports System.Text
 
+'TODO Prevent program being unable to open in case of of invalid naming format settings
+
 Public Class Main
 
 
-    Private Const problematic As String = "\" & Chr(34)
+    Private Const problematic As String = "\"""
     Private Const replacement As String = "╬"
 
     Dim file_encoding As Encoding = Nothing
@@ -45,8 +47,10 @@ Public Class Main
                 End If
             Next
             If Not String.IsNullOrWhiteSpace(missing_subdirectories) Then
-                MsgBox("The following subdirectories are not present in the repository directory:" & Environment.NewLine & missing_subdirectories &
-                       Environment.NewLine & "Please choose a correct EDDiscovery repository directory or check the Path Settings.", MsgBoxStyle.Exclamation, "Missing Translation Subdirectories")
+                MsgBox("The following subdirectories are not present in the repository directory:" &
+                       Environment.NewLine & missing_subdirectories & Environment.NewLine &
+                       "Please choose a correct EDDiscovery repository directory or check the Path Settings.",
+                       MsgBoxStyle.Exclamation, "Missing Translation Subdirectories")
                 .edd_repo_set = False
                 Refresh_settings()
                 Return False
@@ -59,8 +63,10 @@ Public Class Main
                 End If
             Next
             If Not String.IsNullOrWhiteSpace(missing_example_files) Then
-                MsgBox("The following example files are not present in the repository:" & Environment.NewLine & missing_example_files &
-                       Environment.NewLine & "Please choose a correct EDDiscovery repository directory or check the Path Settings.", MsgBoxStyle.Exclamation, "Missing Example Files")
+                MsgBox("The following example files are not present in the repository:" & Environment.NewLine &
+                       missing_example_files & Environment.NewLine &
+                       "Please choose a correct EDDiscovery repository directory or check the Path Settings.",
+                       MsgBoxStyle.Exclamation, "Missing Example Files")
                 .edd_repo_set = False
                 Refresh_settings()
                 Return False
@@ -79,7 +85,21 @@ Public Class Main
 #End Region
 
 
-#Region "File path auto-detection"
+#Region "Detecting and setting paths"
+
+    'Set example file path
+    Private Sub set_example_file_path(sender As Object, e As EventArgs) Handles b_example_browse.Click
+        If set_file_path.ShowDialog() = DialogResult.OK Then
+            tb_example_path.Text = set_file_path.FileName
+        End If
+    End Sub
+
+    'Set translation file path
+    Private Sub set_translation_file_path(sender As Object, e As EventArgs) Handles b_translation_browse.Click
+        If set_file_path.ShowDialog() = DialogResult.OK Then
+            tb_translation_path.Text = set_file_path.FileName
+        End If
+    End Sub
 
     'Auto-Set Paths
     Private Sub Auto_detect_paths(sender As Object, e As EventArgs) Handles b_setpaths_mainfile.Click, b_setpaths_uc.Click, b_setpaths_je.Click, b_setpaths_ed.Click
@@ -119,7 +139,8 @@ Public Class Main
             Dim mainfile_dir As New DirectoryInfo(.edd_repo_dir & .lang_mainfile_path)
             If mainfile_dir.Exists Then
                 For Each file In mainfile_dir.GetFiles()
-                    If file IsNot Nothing AndAlso file.ToString() Like .lang_mainfile_naming AndAlso Not file.ToString.ToLower.Contains(.lang_exfile_name.ToLower) Then
+                    If file IsNot Nothing AndAlso file.ToString() Like Format_to_detector(.lang_mainfile_naming) AndAlso
+                        Not file.ToString.ToLower.Contains(.lang_exfile_name.ToLower) Then
                         cb_language.Items.Add(file.Name.Substring(0, file.Name.IndexOf(".")))
                     End If
                 Next
@@ -144,19 +165,32 @@ Public Class Main
     'Generate file paths list for language
     Private Function Filepaths_main_uc_je_ed(main_file_name As String) As List(Of String)
 
-        Dim lang_short_start As Integer = My.Settings.lang_mainfile_naming.IndexOf("*")
-        Dim lang_short As String = main_file_name.Substring(lang_short_start, main_file_name.IndexOf(My.Settings.lang_mainfile_naming(lang_short_start + 1)))
+        Dim lang_short_start As Integer = My.Settings.lang_mainfile_naming.IndexOf("{0}")
+        Dim lang_short As String = main_file_name.Substring(lang_short_start, main_file_name.IndexOf(My.Settings.lang_mainfile_naming(lang_short_start + 3)))
 
         Dim files_list As New List(Of String) From {
             My.Settings.lang_mainfile_path & main_file_name,
-            My.Settings.lang_uc_path & Insert_at(My.Settings.lang_uc_naming, lang_short, "*"),
-            My.Settings.lang_je_path & Insert_at(My.Settings.lang_je_naming, lang_short, "*"),
-            My.Settings.lang_ed_path & Insert_at(My.Settings.lang_ed_naming, lang_short, "*")
+            My.Settings.lang_uc_path & String.Format(My.Settings.lang_uc_naming, lang_short),
+            My.Settings.lang_je_path & String.Format(My.Settings.lang_je_naming, lang_short),
+            My.Settings.lang_ed_path & String.Format(My.Settings.lang_ed_naming, lang_short)
         }
 
         Return files_list
 
     End Function
+
+    'Clear everything when file paths change
+    Private Sub clear_output_on_file_path_change(sender As Object, e As EventArgs) Handles tb_translation_path.TextChanged, tb_example_path.TextChanged
+        dg_example.Rows.Clear()
+        cb_exmp_inclusions.Items.Clear()
+        cb_exmp_sectorder.Items.Clear()
+
+        dg_translation.Rows.Clear()
+        cb_tran_inclusions.Items.Clear()
+        cb_tran_sectorder.Items.Clear()
+
+        dg_diffs.Rows.Clear()
+    End Sub
 
 #End Region
 
@@ -271,7 +305,7 @@ Public Class Main
         End If
 
         'Update_id_counters()
-        Translation_hide_show_rows()
+        Translation_hide_show_rows(False)
 
     End Sub
 
@@ -297,7 +331,8 @@ Public Class Main
                 line = line.Replace(problematic, replacement)
             End If
 
-            If (line Like "*: " & Chr(34) & "*" & Chr(34) & " *" OrElse line Like "*:" & Chr(34) & "*" & Chr(34) & " *") And Not line Like "//*" Then
+            'If (line Like "*: " & Chr(34) & "*" & Chr(34) & " *" OrElse line Like "*:" & Chr(34) & "*" & Chr(34) & " *") And Not line Like "//*" Then
+            If (line Like "*: ""*"" *" OrElse line Like "*:""*"" *") And Not line Like "//*" Then
 
                 Dim line_sect As String = Nothing
                 Dim line_name As String = Nothing
@@ -320,8 +355,7 @@ Public Class Main
                 line_exmp = line.Substring(line.IndexOf(Chr(34)) + 1)
                 line_exmp = line_exmp.Substring(0, line_exmp.IndexOf(Chr(34)))
 
-                If (line Like "*: " & Chr(34) & "*" & Chr(34) & " => " & Chr(34) & "*" & Chr(34) _
-                    OrElse line Like "*:" & Chr(34) & "*" & Chr(34) & " => " & Chr(34) & "*" & Chr(34)) And Not line Like "* @" Then
+                If (line Like "*: ""*"" => ""*""" OrElse line Like "*:""*"" => ""*""") And Not line Like "* @" Then
                     line_trns = line.Substring(line.IndexOf(" => " & Chr(34)) + 5)
                     line_trns = line_trns.Substring(0, line_trns.IndexOf(Chr(34)))
                 End If
@@ -426,10 +460,10 @@ Public Class Main
 #End Region
 
 
-#Region "Apply Differences to Translation"
+#Region "Applying Differences to Translation"
 
     'Apply differences
-    'TODO Something probably in here caused a section to be split in two. Needs to be diagnosed and fixed.
+    'TODO Something probably in here (or when saving translation) caused a section to be split in two. Needs to be diagnosed and fixed.
     Private Sub Apply_diffs(sender As Object, e As EventArgs) Handles b_diff_apply.Click
         If dg_diffs.Rows.Count > 0 Then
 
@@ -618,14 +652,14 @@ Public Class Main
 
             dg_diffs.Rows.Clear()
 
-            l_status.Text = "Added " & added_id_count & " IDs."
+            l_status.Text = String.Format("Added {0} IDs.", added_id_count)
 
             If removed_id_count > 0 Then
-                l_status.Text += " Removed " & removed_id_count & " IDs."
+                l_status.Text += String.Format(" Removed {0} IDs.", removed_id_count)
             End If
 
             'Update_id_counters()
-            Translation_hide_show_rows()
+            Translation_hide_show_rows(False)
 
         Else
 
@@ -641,23 +675,19 @@ Public Class Main
     'Search
     Private Sub Update_search_filter(sender As Object, e As EventArgs) Handles b_tran_search.Click, b_tran_search_reset.Click
 
-        If sender Is b_tran_search_reset Then
-            tb_tran_search.Text = String.Empty
-        End If
-
-        Translation_hide_show_rows()
+        Translation_hide_show_rows(sender Is b_tran_search)
 
     End Sub
 
     'Hide or show all IDs in translation depending on "Hide Translated" and "Search" options
-    Private Sub Translation_hide_show_rows()
+    Private Sub Translation_hide_show_rows(search_mode As Boolean)
         If dg_translation.Rows.Count > 0 Then
             Dim dg_util As New RowFilteringOptimization(dg_translation)
             dg_util.Start()
             pb_progress.Value = 0
             pb_progress.Maximum = dg_translation.Rows.Count
             For Each row As DataGridViewRow In dg_translation.Rows
-                Dim match As Boolean = String.IsNullOrWhiteSpace(tb_tran_search.Text)
+                Dim match As Boolean = Not search_mode OrElse String.IsNullOrWhiteSpace(tb_tran_search.Text)
                 If Not match Then
                     For Each cell As DataGridViewCell In row.Cells
                         If Not String.IsNullOrWhiteSpace(cell.Value) AndAlso cell.Value Like "*" & tb_tran_search.Text & "*" Then
@@ -713,85 +743,69 @@ Public Class Main
 #End Region
 
 
-#Region "Save translation file"
+#Region "Saving Translation File"
 
+    'TODO Something probably in here (or when applying differences) caused a section to be split in two. Needs to be diagnosed and fixed.
     Private Sub Save_translation(sender As Object, e As EventArgs) Handles b_save_translation.Click
+
         If dg_translation.Rows.Count > 0 Then
 
-            'Checking path and encoding
-            If String.IsNullOrWhiteSpace(tb_translation_path.Text) Then
-                MsgBox("Translation File path cannot be empty." & Environment.NewLine & "(it shouldn't be possible for this error to appear - please report an issue)", MsgBoxStyle.Exclamation, "Cannot Save")
-                l_status.Text = "Saving Failed - translation file path is empty"
-                Exit Sub
-            ElseIf Not Directory.Exists(Path.GetDirectoryName(tb_translation_path.Text)) Then
-                Dim msg As String = "Translation file directory does not exist or has been changed." & Environment.NewLine
-                msg += "Please do not change any of the following directories between loading and saving files with this program:" & Environment.NewLine & Environment.NewLine
-                msg += My.Settings.edd_repo_dir & My.Settings.lang_mainfile_path & Environment.NewLine
-                msg += My.Settings.edd_repo_dir & My.Settings.lang_uc_path & Environment.NewLine
-                msg += My.Settings.edd_repo_dir & My.Settings.lang_je_path & Environment.NewLine
-                msg += My.Settings.edd_repo_dir & My.Settings.lang_ed_path
-                MsgBox(msg, MsgBoxStyle.Exclamation, "Cannot Save")
-                l_status.Text = "Saving Failed - file path changed after loading file"
-                Exit Sub
-            ElseIf file_encoding Is Nothing Then
-                MsgBox("File encoding has not been detected properly." & Environment.NewLine & "(it shouldn't be possible for this error to appear - please report an issue)", MsgBoxStyle.Exclamation, "Cannot Save")
-                l_status.Text = "Saving Failed - file encoding not detected"
-                Exit Sub
-            End If
-
-            'Preparations
+            'Creating list of strings from Translation rows
             pb_progress.Value = 0
             pb_progress.Maximum = dg_translation.Rows.Count
-
-            'Creating list of strings from Translation rows
-            Dim file_list As New List(Of String)
+            Dim lines_list As New List(Of String)
             Dim previous_section As String = Nothing
             For Each row As DataGridViewRow In dg_translation.Rows
-                If String.IsNullOrWhiteSpace(row.Cells(0).Value) OrElse row.Cells(0).Value = previous_section Then
-                    If String.IsNullOrWhiteSpace(row.Cells(3).Value) Then
-                        file_list.Add(row.Cells(1).Value & ": " & Chr(34) & row.Cells(2).Value & Chr(34) & " @")
-                    Else
-                        file_list.Add(row.Cells(1).Value & ": " & Chr(34) & row.Cells(2).Value & Chr(34) & " => " & Chr(34) & row.Cells(3).Value & Chr(34))
-                    End If
-                Else
+                If Not String.IsNullOrWhiteSpace(row.Cells(0).Value) AndAlso Not row.Cells(0).Value = previous_section Then
                     previous_section = row.Cells(0).Value
-                    file_list.Add(String.Empty)
-                    file_list.Add("SECTION " & row.Cells(0).Value)
-                    file_list.Add(String.Empty)
-                    If String.IsNullOrWhiteSpace(row.Cells(3).Value) Then
-                        file_list.Add(row.Cells(1).Value & ": " & Chr(34) & row.Cells(2).Value & Chr(34) & " @")
-                    Else
-                        file_list.Add(row.Cells(1).Value & ": " & Chr(34) & row.Cells(2).Value & Chr(34) & " => " & Chr(34) & row.Cells(3).Value & Chr(34))
-                    End If
+                    lines_list.Add(String.Empty)
+                    lines_list.Add(String.Format("SECTION {0}", row.Cells(0).Value))
+                    lines_list.Add(String.Empty)
+                End If
+                If String.IsNullOrWhiteSpace(row.Cells(3).Value) Then
+                    lines_list.Add(String.Format("{0}: ""{1}"" @", row.Cells(1).Value, row.Cells(2).Value))
+                Else
+                    lines_list.Add(String.Format("{0}: ""{1}"" => ""{2}""", row.Cells(1).Value, row.Cells(2).Value, row.Cells(3).Value))
                 End If
                 pb_progress.Value += 1
             Next
 
-            file_list.Add(String.Empty)
+            lines_list.Add(String.Empty)
 
             'Adding inclusions
             If cb_tran_inclusions.Items.Count > 0 Then
                 For Each item As String In cb_tran_inclusions.Items
-                    file_list.Add("include " & item)
-                    file_list.Add(String.Empty)
+                    'lines_list.Add("include " & item)
+                    lines_list.Add(String.Format("include {0}", item))
+                    lines_list.Add(String.Empty)
                 Next
             End If
 
             'Converting the list of lines into single string
-            Dim file_array() As String = file_list.ToArray()
-            Dim file_text As String = Join(file_array, Environment.NewLine)
+            Dim lines_array() As String = lines_list.ToArray()
+            Dim file_text As String = Join(lines_array, Environment.NewLine)
 
-            'Checking path again just to be sure
-            If Not Directory.Exists(Path.GetDirectoryName(tb_translation_path.Text)) Then
-                Dim msg As String = "Translation file directory does not exist or has been changed." & Environment.NewLine
-                msg += "Please do not change any of the following directories while saving files with this program:" &
-                    Environment.NewLine & Environment.NewLine
-                msg += My.Settings.edd_repo_dir & My.Settings.lang_mainfile_path & Environment.NewLine
-                msg += My.Settings.edd_repo_dir & My.Settings.lang_uc_path & Environment.NewLine
-                msg += My.Settings.edd_repo_dir & My.Settings.lang_je_path & Environment.NewLine
-                msg += My.Settings.edd_repo_dir & My.Settings.lang_ed_path
+            'Checking path and encoding
+            If String.IsNullOrWhiteSpace(tb_translation_path.Text) Then
+                MsgBox("Translation File path cannot be empty." & Environment.NewLine &
+                       "(it shouldn't be possible for this error to appear - please report an issue)", MsgBoxStyle.Exclamation, "Cannot Save")
+                l_status.Text = "Saving Failed - translation file path is empty"
+                Exit Sub
+            ElseIf Not Directory.Exists(Path.GetDirectoryName(tb_translation_path.Text)) Then
+                Dim msg As String = "Translation file directory does not exist or has been changed." & Environment.NewLine &
+                    "Please do not change any of the following directories between loading and saving files with this program:" &
+                    Environment.NewLine & Environment.NewLine &
+                    My.Settings.edd_repo_dir & My.Settings.lang_mainfile_path & Environment.NewLine &
+                    My.Settings.edd_repo_dir & My.Settings.lang_uc_path & Environment.NewLine &
+                    My.Settings.edd_repo_dir & My.Settings.lang_je_path & Environment.NewLine &
+                    My.Settings.edd_repo_dir & My.Settings.lang_ed_path
                 MsgBox(msg, MsgBoxStyle.Exclamation, "Cannot Save")
-                l_status.Text = "Saving Failed - file path changed while saving"
+                l_status.Text = "Saving Failed - file path changed after loading file"
+                Exit Sub
+            ElseIf file_encoding Is Nothing Then
+                MsgBox("File encoding has not been detected properly." & Environment.NewLine &
+                       "(it shouldn't be possible for this error to appear - please report an issue)", MsgBoxStyle.Exclamation, "Cannot Save")
+                l_status.Text = "Saving Failed - file encoding not detected"
                 Exit Sub
             End If
 
@@ -816,7 +830,9 @@ Public Class Main
             l_status.Text = "Successfully saved " & Path.GetFileName(tb_translation_path.Text)
 
         Else
+
             MsgBox("File has not been loaded. Nothing to save.", MsgBoxStyle.Exclamation, "Cannot Save")
+
         End If
 
     End Sub
@@ -864,17 +880,43 @@ Public Class Main
 
     End Function
 
-    'Clear everything when file paths change
-    Private Sub clear_output_on_file_path_change(sender As Object, e As EventArgs) Handles tb_translation_path.TextChanged, tb_example_path.TextChanged
-        dg_example.Rows.Clear()
-        cb_exmp_inclusions.Items.Clear()
-        cb_exmp_sectorder.Items.Clear()
+    'Convert format string to detector string
+    Private Function Format_to_detector(str As String) As String
+        Return String.Format(str, "*", "*", "*", "*", "*", "*", "*", "*", "*", "*")
+    End Function
 
-        dg_translation.Rows.Clear()
-        cb_tran_inclusions.Items.Clear()
-        cb_tran_sectorder.Items.Clear()
+    'Go to section in Translation
+    Private Sub Translation_go_to_section(sender As Object, e As EventArgs) Handles cb_tran_sectorder.SelectedIndexChanged
+        Dim section As String = cb_tran_sectorder.SelectedItem.ToString()
+        For Each row As DataGridViewRow In dg_translation.Rows
+            If row.Cells(0).Value = section And Not row.Visible = False Then
+                dg_translation.CurrentCell = row.Cells(0)
+                Exit For
+            End If
+        Next
+    End Sub
 
-        dg_diffs.Rows.Clear()
+    'Go to section in Example
+    Private Sub Example_go_to_section(sender As Object, e As EventArgs) Handles cb_exmp_sectorder.SelectedIndexChanged
+        Dim section As String = cb_exmp_sectorder.SelectedItem.ToString()
+        For Each row As DataGridViewRow In dg_example.Rows
+            If row.Cells(0).Value = section Then
+                dg_example.CurrentCell = row.Cells(0)
+                Exit For
+            End If
+        Next
+    End Sub
+
+    'Copy example text to translation text
+    Private Sub Copy_example_dc(sender As Object, e As DataGridViewCellEventArgs) Handles dg_translation.CellDoubleClick, dg_diffs.CellDoubleClick
+        If e.ColumnIndex = 2 Then
+            sender.Rows(e.RowIndex).Cells(3).Value = sender.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        End If
+    End Sub
+    Private Sub Copy_example_sc(sender As Object, e As DataGridViewCellEventArgs) Handles dg_translation.CellClick, dg_diffs.CellClick
+        If e.ColumnIndex = 2 AndAlso String.IsNullOrWhiteSpace(sender.Rows(e.RowIndex).Cells(3).Value) Then
+            sender.Rows(e.RowIndex).Cells(3).Value = sender.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        End If
     End Sub
 
 #End Region
@@ -895,7 +937,7 @@ Public Class Main
     End Sub
     Private Sub Update_tran_hide_translated(sender As Object, e As EventArgs) Handles cb_tran_hide_translated.Click
         My.Settings.tran_hide_translated = cb_tran_hide_translated.Checked
-        Translation_hide_show_rows()
+        Translation_hide_show_rows(False)
     End Sub
     Private Sub Update_tran_wordwrap(sender As Object, e As EventArgs) Handles cb_tran_wordwrap.Click
         My.Settings.tran_wordwrap = cb_tran_wordwrap.Checked

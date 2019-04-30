@@ -104,7 +104,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("*-*.tlf")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("{0}-{1}.tlf")>  _
         Public Property lang_mainfile_naming() As String
             Get
                 Return CType(Me("lang_mainfile_naming"),String)
@@ -140,7 +140,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("translation-*-uc.tlp")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("translation-{0}-uc.tlp")>  _
         Public Property lang_uc_naming() As String
             Get
                 Return CType(Me("lang_uc_naming"),String)
@@ -164,7 +164,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("translation-*-je.tlp")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("translation-{0}-je.tlp")>  _
         Public Property lang_je_naming() As String
             Get
                 Return CType(Me("lang_je_naming"),String)
@@ -188,7 +188,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("translation-*-ed.tlp")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("translation-{0}-ed.tlp")>  _
         Public Property lang_ed_naming() As String
             Get
                 Return CType(Me("lang_ed_naming"),String)

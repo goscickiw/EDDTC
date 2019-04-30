@@ -23,23 +23,22 @@ Partial Class Main
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ss_mainstatus = New System.Windows.Forms.StatusStrip()
         Me.pb_progress = New System.Windows.Forms.ToolStripProgressBar()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
@@ -94,8 +93,6 @@ Partial Class Main
         Me.tb_tran_search = New System.Windows.Forms.ToolStripTextBox()
         Me.b_tran_search = New System.Windows.Forms.ToolStripButton()
         Me.b_tran_search_reset = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
         Me.tran_viewoptions = New System.Windows.Forms.ToolStrip()
         Me.b_tran_viewoptions = New System.Windows.Forms.ToolStripDropDownButton()
         Me.cb_tran_hide_translated = New System.Windows.Forms.ToolStripMenuItem()
@@ -110,6 +107,15 @@ Partial Class Main
         Me.cb_tran_inclusions = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
         Me.l_tran_total_ids = New System.Windows.Forms.ToolStripLabel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.tp_diffs = New System.Windows.Forms.TabPage()
         Me.dg_diffs = New System.Windows.Forms.DataGridView()
         Me.c_diff_section = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -125,6 +131,10 @@ Partial Class Main
         Me.cb_diff_ignore_removed = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.l_diff_total_ids = New System.Windows.Forms.ToolStripLabel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.tp_example = New System.Windows.Forms.TabPage()
         Me.dg_example = New System.Windows.Forms.DataGridView()
         Me.c_exmp_sect = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -147,6 +157,7 @@ Partial Class Main
         Me.tr_incl_add = New System.Windows.Forms.ToolStripMenuItem()
         Me.tr_incl_edit = New System.Windows.Forms.ToolStripMenuItem()
         Me.tr_incl_remove = New System.Windows.Forms.ToolStripMenuItem()
+        Me.set_file_path = New System.Windows.Forms.OpenFileDialog()
         Me.ss_mainstatus.SuspendLayout()
         Me.ms_mainmenu.SuspendLayout()
         Me.tc_tables.SuspendLayout()
@@ -154,9 +165,12 @@ Partial Class Main
         CType(Me.dg_translation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tran_search.SuspendLayout()
         Me.tran_viewoptions.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.tp_diffs.SuspendLayout()
         CType(Me.dg_diffs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.diffs_viewoptions.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.tp_example.SuspendLayout()
         CType(Me.dg_example, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.exmp_viewoptions.SuspendLayout()
@@ -166,9 +180,9 @@ Partial Class Main
         'ss_mainstatus
         '
         Me.ss_mainstatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.pb_progress, Me.ToolStripSeparator13, Me.l_file_encoding, Me.ToolStripSeparator15, Me.l_status})
-        Me.ss_mainstatus.Location = New System.Drawing.Point(0, 572)
+        Me.ss_mainstatus.Location = New System.Drawing.Point(0, 588)
         Me.ss_mainstatus.Name = "ss_mainstatus"
-        Me.ss_mainstatus.Size = New System.Drawing.Size(1154, 23)
+        Me.ss_mainstatus.Size = New System.Drawing.Size(944, 23)
         Me.ss_mainstatus.TabIndex = 0
         Me.ss_mainstatus.Text = "Status"
         '
@@ -204,7 +218,7 @@ Partial Class Main
         Me.ms_mainmenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.EDDRepositoryToolStripMenuItem, Me.ToolStripSeparator2, Me.l_sel_lang, Me.cb_language, Me.b_new_lang, Me.ToolStripSeparator4, Me.b_auto_set_paths, Me.FilePathsToolStripMenuItem, Me.ToolStripSeparator3, Me.b_load_compare, Me.b_save_translation})
         Me.ms_mainmenu.Location = New System.Drawing.Point(0, 0)
         Me.ms_mainmenu.Name = "ms_mainmenu"
-        Me.ms_mainmenu.Size = New System.Drawing.Size(1154, 27)
+        Me.ms_mainmenu.Size = New System.Drawing.Size(944, 27)
         Me.ms_mainmenu.TabIndex = 1
         Me.ms_mainmenu.Text = "Menu"
         '
@@ -437,7 +451,7 @@ Partial Class Main
         Me.tc_tables.Location = New System.Drawing.Point(0, 27)
         Me.tc_tables.Name = "tc_tables"
         Me.tc_tables.SelectedIndex = 0
-        Me.tc_tables.Size = New System.Drawing.Size(1154, 545)
+        Me.tc_tables.Size = New System.Drawing.Size(944, 561)
         Me.tc_tables.TabIndex = 2
         '
         'tp_translation
@@ -446,10 +460,12 @@ Partial Class Main
         Me.tp_translation.Controls.Add(Me.dg_translation)
         Me.tp_translation.Controls.Add(Me.tran_search)
         Me.tp_translation.Controls.Add(Me.tran_viewoptions)
+        Me.tp_translation.Controls.Add(Me.Panel4)
+        Me.tp_translation.Controls.Add(Me.Panel2)
         Me.tp_translation.Location = New System.Drawing.Point(4, 22)
         Me.tp_translation.Name = "tp_translation"
         Me.tp_translation.Padding = New System.Windows.Forms.Padding(3)
-        Me.tp_translation.Size = New System.Drawing.Size(1146, 519)
+        Me.tp_translation.Size = New System.Drawing.Size(936, 535)
         Me.tp_translation.TabIndex = 1
         Me.tp_translation.Text = "Translation"
         Me.tp_translation.UseVisualStyleBackColor = True
@@ -466,17 +482,17 @@ Partial Class Main
         Me.dg_translation.Location = New System.Drawing.Point(3, 53)
         Me.dg_translation.Name = "dg_translation"
         Me.dg_translation.RowHeadersVisible = False
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dg_translation.RowsDefaultCellStyle = DataGridViewCellStyle5
-        Me.dg_translation.Size = New System.Drawing.Size(1136, 459)
+        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dg_translation.RowsDefaultCellStyle = DataGridViewCellStyle21
+        Me.dg_translation.Size = New System.Drawing.Size(926, 449)
         Me.dg_translation.TabIndex = 6
         '
         'c_tran_section
         '
         Me.c_tran_section.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.c_tran_section.DataPropertyName = "section"
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_tran_section.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_tran_section.DefaultCellStyle = DataGridViewCellStyle17
         Me.c_tran_section.HeaderText = "Section"
         Me.c_tran_section.Name = "c_tran_section"
         Me.c_tran_section.ReadOnly = True
@@ -487,8 +503,8 @@ Partial Class Main
         '
         Me.c_tran_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.c_tran_name.DataPropertyName = "id"
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_tran_name.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_tran_name.DefaultCellStyle = DataGridViewCellStyle18
         Me.c_tran_name.HeaderText = "ID"
         Me.c_tran_name.Name = "c_tran_name"
         Me.c_tran_name.ReadOnly = True
@@ -497,8 +513,8 @@ Partial Class Main
         'c_tran_example
         '
         Me.c_tran_example.DataPropertyName = "example"
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_tran_example.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_tran_example.DefaultCellStyle = DataGridViewCellStyle19
         Me.c_tran_example.HeaderText = "Example Text"
         Me.c_tran_example.Name = "c_tran_example"
         Me.c_tran_example.ReadOnly = True
@@ -507,18 +523,18 @@ Partial Class Main
         'c_tran_translation
         '
         Me.c_tran_translation.DataPropertyName = "translation"
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_tran_translation.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_tran_translation.DefaultCellStyle = DataGridViewCellStyle20
         Me.c_tran_translation.HeaderText = "Translation Text (editable)"
         Me.c_tran_translation.Name = "c_tran_translation"
         Me.c_tran_translation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'tran_search
         '
-        Me.tran_search.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel4, Me.tb_tran_search, Me.b_tran_search, Me.b_tran_search_reset, Me.ToolStripButton5, Me.ToolStripButton6})
+        Me.tran_search.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel4, Me.tb_tran_search, Me.b_tran_search, Me.b_tran_search_reset})
         Me.tran_search.Location = New System.Drawing.Point(3, 28)
         Me.tran_search.Name = "tran_search"
-        Me.tran_search.Size = New System.Drawing.Size(1136, 25)
+        Me.tran_search.Size = New System.Drawing.Size(926, 25)
         Me.tran_search.TabIndex = 9
         Me.tran_search.Text = "Search"
         '
@@ -536,7 +552,6 @@ Partial Class Main
         'b_tran_search
         '
         Me.b_tran_search.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.b_tran_search.Image = CType(resources.GetObject("b_tran_search.Image"), System.Drawing.Image)
         Me.b_tran_search.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.b_tran_search.Name = "b_tran_search"
         Me.b_tran_search.Size = New System.Drawing.Size(46, 22)
@@ -545,36 +560,17 @@ Partial Class Main
         'b_tran_search_reset
         '
         Me.b_tran_search_reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.b_tran_search_reset.Image = CType(resources.GetObject("b_tran_search_reset.Image"), System.Drawing.Image)
         Me.b_tran_search_reset.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.b_tran_search_reset.Name = "b_tran_search_reset"
         Me.b_tran_search_reset.Size = New System.Drawing.Size(39, 22)
         Me.b_tran_search_reset.Text = "Reset"
-        '
-        'ToolStripButton5
-        '
-        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton5.Image = CType(resources.GetObject("ToolStripButton5.Image"), System.Drawing.Image)
-        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton5.Name = "ToolStripButton5"
-        Me.ToolStripButton5.Size = New System.Drawing.Size(56, 22)
-        Me.ToolStripButton5.Text = "Previous"
-        '
-        'ToolStripButton6
-        '
-        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton6.Image = CType(resources.GetObject("ToolStripButton6.Image"), System.Drawing.Image)
-        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton6.Name = "ToolStripButton6"
-        Me.ToolStripButton6.Size = New System.Drawing.Size(35, 22)
-        Me.ToolStripButton6.Text = "Next"
         '
         'tran_viewoptions
         '
         Me.tran_viewoptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.b_tran_viewoptions, Me.ToolStripSeparator11, Me.ToolStripLabel1, Me.cb_tran_sectorder, Me.ToolStripSeparator12, Me.ToolStripLabel5, Me.cb_tran_inclusions, Me.ToolStripSeparator14, Me.l_tran_total_ids})
         Me.tran_viewoptions.Location = New System.Drawing.Point(3, 3)
         Me.tran_viewoptions.Name = "tran_viewoptions"
-        Me.tran_viewoptions.Size = New System.Drawing.Size(1136, 25)
+        Me.tran_viewoptions.Size = New System.Drawing.Size(926, 25)
         Me.tran_viewoptions.TabIndex = 1
         Me.tran_viewoptions.Text = "View Options"
         '
@@ -582,7 +578,6 @@ Partial Class Main
         '
         Me.b_tran_viewoptions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.b_tran_viewoptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cb_tran_hide_translated, Me.ToolStripSeparator9, Me.cb_tran_wordwrap, Me.cb_tran_show_example})
-        Me.b_tran_viewoptions.Image = CType(resources.GetObject("b_tran_viewoptions.Image"), System.Drawing.Image)
         Me.b_tran_viewoptions.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.b_tran_viewoptions.Name = "b_tran_viewoptions"
         Me.b_tran_viewoptions.Size = New System.Drawing.Size(88, 22)
@@ -592,19 +587,19 @@ Partial Class Main
         '
         Me.cb_tran_hide_translated.CheckOnClick = True
         Me.cb_tran_hide_translated.Name = "cb_tran_hide_translated"
-        Me.cb_tran_hide_translated.Size = New System.Drawing.Size(167, 22)
+        Me.cb_tran_hide_translated.Size = New System.Drawing.Size(180, 22)
         Me.cb_tran_hide_translated.Text = "Hide Translated"
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(164, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(177, 6)
         '
         'cb_tran_wordwrap
         '
         Me.cb_tran_wordwrap.CheckOnClick = True
         Me.cb_tran_wordwrap.Name = "cb_tran_wordwrap"
-        Me.cb_tran_wordwrap.Size = New System.Drawing.Size(167, 22)
+        Me.cb_tran_wordwrap.Size = New System.Drawing.Size(180, 22)
         Me.cb_tran_wordwrap.Text = "Wrap Text in Cells"
         '
         'cb_tran_show_example
@@ -613,7 +608,7 @@ Partial Class Main
         Me.cb_tran_show_example.CheckOnClick = True
         Me.cb_tran_show_example.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cb_tran_show_example.Name = "cb_tran_show_example"
-        Me.cb_tran_show_example.Size = New System.Drawing.Size(167, 22)
+        Me.cb_tran_show_example.Size = New System.Drawing.Size(180, 22)
         Me.cb_tran_show_example.Text = "Show Example"
         '
         'ToolStripSeparator11
@@ -660,15 +655,119 @@ Partial Class Main
         Me.l_tran_total_ids.Size = New System.Drawing.Size(64, 22)
         Me.l_tran_total_ids.Text = "Total IDs: 0"
         '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Panel4.Controls.Add(Me.Label11)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel4.Location = New System.Drawing.Point(3, 502)
+        Me.Panel4.MaximumSize = New System.Drawing.Size(0, 13)
+        Me.Panel4.MinimumSize = New System.Drawing.Size(0, 13)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(926, 13)
+        Me.Panel4.TabIndex = 11
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label11.Location = New System.Drawing.Point(0, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(502, 13)
+        Me.Label11.TabIndex = 0
+        Me.Label11.Text = "Double click Example Text to copy to Translation Text. Single click is enough if " &
+    "Translation Text is empty."
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.Label6)
+        Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.Label3)
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel2.Location = New System.Drawing.Point(3, 515)
+        Me.Panel2.MaximumSize = New System.Drawing.Size(0, 13)
+        Me.Panel2.MinimumSize = New System.Drawing.Size(0, 13)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(926, 13)
+        Me.Panel2.TabIndex = 10
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label7.Location = New System.Drawing.Point(752, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(168, 13)
+        Me.Label7.TabIndex = 5
+        Me.Label7.Text = "- entire section is added/removed."
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.LightGray
+        Me.Label6.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label6.Location = New System.Drawing.Point(681, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(71, 13)
+        Me.Label6.TabIndex = 4
+        Me.Label6.Text = "SectionName"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label5.Location = New System.Drawing.Point(386, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(295, 13)
+        Me.Label5.TabIndex = 3
+        Me.Label5.Text = "- found an old ID in translation file, not present in example file."
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.Salmon
+        Me.Label4.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label4.Location = New System.Drawing.Point(333, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(53, 13)
+        Me.Label4.TabIndex = 2
+        Me.Label4.Text = "Removed"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label3.Location = New System.Drawing.Point(38, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(295, 13)
+        Me.Label3.TabIndex = 1
+        Me.Label3.Text = "- found a new ID in example file, not present in translation file."
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.LightGreen
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label2.Location = New System.Drawing.Point(0, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(38, 13)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Added"
+        '
         'tp_diffs
         '
         Me.tp_diffs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.tp_diffs.Controls.Add(Me.dg_diffs)
         Me.tp_diffs.Controls.Add(Me.diffs_viewoptions)
+        Me.tp_diffs.Controls.Add(Me.Panel3)
         Me.tp_diffs.Location = New System.Drawing.Point(4, 22)
         Me.tp_diffs.Name = "tp_diffs"
         Me.tp_diffs.Padding = New System.Windows.Forms.Padding(3)
-        Me.tp_diffs.Size = New System.Drawing.Size(1146, 519)
+        Me.tp_diffs.Size = New System.Drawing.Size(936, 535)
         Me.tp_diffs.TabIndex = 0
         Me.tp_diffs.Text = "Differences"
         Me.tp_diffs.UseVisualStyleBackColor = True
@@ -685,16 +784,16 @@ Partial Class Main
         Me.dg_diffs.Location = New System.Drawing.Point(3, 28)
         Me.dg_diffs.Name = "dg_diffs"
         Me.dg_diffs.RowHeadersVisible = False
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dg_diffs.RowsDefaultCellStyle = DataGridViewCellStyle11
-        Me.dg_diffs.Size = New System.Drawing.Size(1136, 484)
+        DataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dg_diffs.RowsDefaultCellStyle = DataGridViewCellStyle27
+        Me.dg_diffs.Size = New System.Drawing.Size(926, 487)
         Me.dg_diffs.TabIndex = 5
         '
         'c_diff_section
         '
         Me.c_diff_section.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_diff_section.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_diff_section.DefaultCellStyle = DataGridViewCellStyle22
         Me.c_diff_section.HeaderText = "Section"
         Me.c_diff_section.Name = "c_diff_section"
         Me.c_diff_section.ReadOnly = True
@@ -704,8 +803,8 @@ Partial Class Main
         'c_diff_name
         '
         Me.c_diff_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_diff_name.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_diff_name.DefaultCellStyle = DataGridViewCellStyle23
         Me.c_diff_name.HeaderText = "ID"
         Me.c_diff_name.Name = "c_diff_name"
         Me.c_diff_name.ReadOnly = True
@@ -713,8 +812,8 @@ Partial Class Main
         '
         'c_diff_example
         '
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_diff_example.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_diff_example.DefaultCellStyle = DataGridViewCellStyle24
         Me.c_diff_example.HeaderText = "Example Text"
         Me.c_diff_example.Name = "c_diff_example"
         Me.c_diff_example.ReadOnly = True
@@ -722,8 +821,8 @@ Partial Class Main
         '
         'c_diff_translation
         '
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_diff_translation.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle25.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_diff_translation.DefaultCellStyle = DataGridViewCellStyle25
         Me.c_diff_translation.HeaderText = "Translation Text (editable)"
         Me.c_diff_translation.Name = "c_diff_translation"
         Me.c_diff_translation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -731,8 +830,8 @@ Partial Class Main
         'c_diff_addedremoved
         '
         Me.c_diff_addedremoved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_diff_addedremoved.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle26.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_diff_addedremoved.DefaultCellStyle = DataGridViewCellStyle26
         Me.c_diff_addedremoved.HeaderText = "Added/Removed"
         Me.c_diff_addedremoved.Name = "c_diff_addedremoved"
         Me.c_diff_addedremoved.ReadOnly = True
@@ -744,14 +843,13 @@ Partial Class Main
         Me.diffs_viewoptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.b_diff_apply, Me.ToolStripSeparator8, Me.b_diff_viewoptions, Me.ToolStripSeparator10, Me.l_diff_total_ids})
         Me.diffs_viewoptions.Location = New System.Drawing.Point(3, 3)
         Me.diffs_viewoptions.Name = "diffs_viewoptions"
-        Me.diffs_viewoptions.Size = New System.Drawing.Size(1136, 25)
+        Me.diffs_viewoptions.Size = New System.Drawing.Size(926, 25)
         Me.diffs_viewoptions.TabIndex = 0
         Me.diffs_viewoptions.Text = "View Options"
         '
         'b_diff_apply
         '
         Me.b_diff_apply.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.b_diff_apply.Image = CType(resources.GetObject("b_diff_apply.Image"), System.Drawing.Image)
         Me.b_diff_apply.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.b_diff_apply.Name = "b_diff_apply"
         Me.b_diff_apply.Size = New System.Drawing.Size(179, 22)
@@ -766,7 +864,6 @@ Partial Class Main
         '
         Me.b_diff_viewoptions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.b_diff_viewoptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cb_diff_wordwrap, Me.cb_diff_ignore_removed})
-        Me.b_diff_viewoptions.Image = CType(resources.GetObject("b_diff_viewoptions.Image"), System.Drawing.Image)
         Me.b_diff_viewoptions.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.b_diff_viewoptions.Name = "b_diff_viewoptions"
         Me.b_diff_viewoptions.Size = New System.Drawing.Size(88, 22)
@@ -776,14 +873,14 @@ Partial Class Main
         '
         Me.cb_diff_wordwrap.CheckOnClick = True
         Me.cb_diff_wordwrap.Name = "cb_diff_wordwrap"
-        Me.cb_diff_wordwrap.Size = New System.Drawing.Size(167, 22)
+        Me.cb_diff_wordwrap.Size = New System.Drawing.Size(180, 22)
         Me.cb_diff_wordwrap.Text = "Wrap Text in Cells"
         '
         'cb_diff_ignore_removed
         '
         Me.cb_diff_ignore_removed.CheckOnClick = True
         Me.cb_diff_ignore_removed.Name = "cb_diff_ignore_removed"
-        Me.cb_diff_ignore_removed.Size = New System.Drawing.Size(167, 22)
+        Me.cb_diff_ignore_removed.Size = New System.Drawing.Size(180, 22)
         Me.cb_diff_ignore_removed.Text = "Ignore Removed"
         '
         'ToolStripSeparator10
@@ -797,6 +894,52 @@ Partial Class Main
         Me.l_diff_total_ids.Size = New System.Drawing.Size(64, 22)
         Me.l_diff_total_ids.Text = "Total IDs: 0"
         '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Panel3.Controls.Add(Me.Label10)
+        Me.Panel3.Controls.Add(Me.Label9)
+        Me.Panel3.Controls.Add(Me.Label8)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel3.Location = New System.Drawing.Point(3, 515)
+        Me.Panel3.MaximumSize = New System.Drawing.Size(0, 13)
+        Me.Panel3.MinimumSize = New System.Drawing.Size(0, 13)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(926, 13)
+        Me.Panel3.TabIndex = 7
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Label10.Location = New System.Drawing.Point(424, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(502, 13)
+        Me.Label10.TabIndex = 6
+        Me.Label10.Text = "Double click Example Text to copy to Translation Text. Single click is enough if " &
+    "Translation Text is empty."
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.BackColor = System.Drawing.Color.LightGray
+        Me.Label9.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label9.Location = New System.Drawing.Point(171, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(29, 13)
+        Me.Label9.TabIndex = 4
+        Me.Label9.Text = "Gray"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label8.Location = New System.Drawing.Point(0, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(171, 13)
+        Me.Label8.TabIndex = 5
+        Me.Label8.Text = "Newly added IDs are highlighted in"
+        '
         'tp_example
         '
         Me.tp_example.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -805,7 +948,7 @@ Partial Class Main
         Me.tp_example.Location = New System.Drawing.Point(4, 22)
         Me.tp_example.Name = "tp_example"
         Me.tp_example.Padding = New System.Windows.Forms.Padding(3)
-        Me.tp_example.Size = New System.Drawing.Size(1146, 519)
+        Me.tp_example.Size = New System.Drawing.Size(936, 535)
         Me.tp_example.TabIndex = 2
         Me.tp_example.Text = "Example"
         Me.tp_example.UseVisualStyleBackColor = True
@@ -823,16 +966,16 @@ Partial Class Main
         Me.dg_example.Name = "dg_example"
         Me.dg_example.ReadOnly = True
         Me.dg_example.RowHeadersVisible = False
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dg_example.RowsDefaultCellStyle = DataGridViewCellStyle16
-        Me.dg_example.Size = New System.Drawing.Size(1136, 484)
+        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dg_example.RowsDefaultCellStyle = DataGridViewCellStyle32
+        Me.dg_example.Size = New System.Drawing.Size(926, 500)
         Me.dg_example.TabIndex = 9
         '
         'c_exmp_sect
         '
         Me.c_exmp_sect.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_exmp_sect.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle28.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_exmp_sect.DefaultCellStyle = DataGridViewCellStyle28
         Me.c_exmp_sect.HeaderText = "Section"
         Me.c_exmp_sect.Name = "c_exmp_sect"
         Me.c_exmp_sect.ReadOnly = True
@@ -842,8 +985,8 @@ Partial Class Main
         'c_exmp_name
         '
         Me.c_exmp_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_exmp_name.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle29.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_exmp_name.DefaultCellStyle = DataGridViewCellStyle29
         Me.c_exmp_name.HeaderText = "ID"
         Me.c_exmp_name.Name = "c_exmp_name"
         Me.c_exmp_name.ReadOnly = True
@@ -851,8 +994,8 @@ Partial Class Main
         '
         'c_exmp_example
         '
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_exmp_example.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle30.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_exmp_example.DefaultCellStyle = DataGridViewCellStyle30
         Me.c_exmp_example.HeaderText = "Example Text"
         Me.c_exmp_example.Name = "c_exmp_example"
         Me.c_exmp_example.ReadOnly = True
@@ -860,8 +1003,8 @@ Partial Class Main
         '
         'c_exmp_translation
         '
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.c_exmp_translation.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle31.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.c_exmp_translation.DefaultCellStyle = DataGridViewCellStyle31
         Me.c_exmp_translation.HeaderText = "Translation Text"
         Me.c_exmp_translation.Name = "c_exmp_translation"
         Me.c_exmp_translation.ReadOnly = True
@@ -872,7 +1015,7 @@ Partial Class Main
         Me.exmp_viewoptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.ToolStripSeparator17, Me.ToolStripLabel6, Me.cb_exmp_sectorder, Me.ToolStripSeparator18, Me.ToolStripLabel7, Me.cb_exmp_inclusions, Me.ToolStripSeparator19, Me.l_exmp_total_ids})
         Me.exmp_viewoptions.Location = New System.Drawing.Point(3, 3)
         Me.exmp_viewoptions.Name = "exmp_viewoptions"
-        Me.exmp_viewoptions.Size = New System.Drawing.Size(1136, 25)
+        Me.exmp_viewoptions.Size = New System.Drawing.Size(926, 25)
         Me.exmp_viewoptions.TabIndex = 2
         Me.exmp_viewoptions.Text = "View Options"
         '
@@ -880,7 +1023,6 @@ Partial Class Main
         '
         Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cb_exmp_wordwrap, Me.cb_exmp_show_translation})
-        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
         Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
         Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(88, 22)
@@ -890,14 +1032,14 @@ Partial Class Main
         '
         Me.cb_exmp_wordwrap.CheckOnClick = True
         Me.cb_exmp_wordwrap.Name = "cb_exmp_wordwrap"
-        Me.cb_exmp_wordwrap.Size = New System.Drawing.Size(167, 22)
+        Me.cb_exmp_wordwrap.Size = New System.Drawing.Size(180, 22)
         Me.cb_exmp_wordwrap.Text = "Wrap Text in Cells"
         '
         'cb_exmp_show_translation
         '
         Me.cb_exmp_show_translation.CheckOnClick = True
         Me.cb_exmp_show_translation.Name = "cb_exmp_show_translation"
-        Me.cb_exmp_show_translation.Size = New System.Drawing.Size(167, 22)
+        Me.cb_exmp_show_translation.Size = New System.Drawing.Size(180, 22)
         Me.cb_exmp_show_translation.Text = "Show Translation"
         '
         'ToolStripSeparator17
@@ -968,16 +1110,24 @@ Partial Class Main
         Me.tr_incl_remove.Size = New System.Drawing.Size(117, 22)
         Me.tr_incl_remove.Text = "Remove"
         '
+        'set_file_path
+        '
+        Me.set_file_path.DefaultExt = "tlf"
+        Me.set_file_path.FileName = "example_ex.tlf"
+        Me.set_file_path.Filter = "EDD Translation Files|*.tlf;*.tlp"
+        Me.set_file_path.InitialDirectory = Global.EDDTT.My.MySettings.Default.edd_repo_dir
+        Me.set_file_path.Title = "Get Translation File Location"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1154, 595)
+        Me.ClientSize = New System.Drawing.Size(944, 611)
         Me.Controls.Add(Me.tc_tables)
         Me.Controls.Add(Me.ss_mainstatus)
         Me.Controls.Add(Me.ms_mainmenu)
         Me.MainMenuStrip = Me.ms_mainmenu
-        Me.MinimumSize = New System.Drawing.Size(1170, 634)
+        Me.MinimumSize = New System.Drawing.Size(960, 650)
         Me.Name = "Main"
         Me.Text = "MainForm"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -993,11 +1143,17 @@ Partial Class Main
         Me.tran_search.PerformLayout()
         Me.tran_viewoptions.ResumeLayout(False)
         Me.tran_viewoptions.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.tp_diffs.ResumeLayout(False)
         Me.tp_diffs.PerformLayout()
         CType(Me.dg_diffs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.diffs_viewoptions.ResumeLayout(False)
         Me.diffs_viewoptions.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.tp_example.ResumeLayout(False)
         Me.tp_example.PerformLayout()
         CType(Me.dg_example, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1108,12 +1264,24 @@ Partial Class Main
     Friend WithEvents ToolStripLabel4 As ToolStripLabel
     Friend WithEvents tb_tran_search As ToolStripTextBox
     Friend WithEvents b_tran_search As ToolStripButton
-    Friend WithEvents b_tran_search_reset As ToolStripButton
-    Friend WithEvents ToolStripButton5 As ToolStripButton
-    Friend WithEvents ToolStripButton6 As ToolStripButton
     Friend WithEvents cb_exmp_show_translation As ToolStripMenuItem
     Friend WithEvents edit_translation_inclusions As ContextMenuStrip
     Friend WithEvents tr_incl_add As ToolStripMenuItem
     Friend WithEvents tr_incl_edit As ToolStripMenuItem
     Friend WithEvents tr_incl_remove As ToolStripMenuItem
+    Friend WithEvents set_file_path As OpenFileDialog
+    Friend WithEvents b_tran_search_reset As ToolStripButton
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label8 As Label
 End Class
