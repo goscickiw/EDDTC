@@ -33,17 +33,18 @@ At this point, the only thing you need to do to load the files is to go to the <
 (Unless you don't use the <kbd>Load and Compare on Auto-Set Paths</kbd> option, in this case you have to press <kbd>Load and Compare Files</kbd> as well)
 
 ### Editing the Translation
-##### 1. Editing
+#### 1. Editing
 You can edit the translation in the `Translation Text (editable)` column of the *Translation* and *Differences* tables.
 
 If you want to preserve the format, hidden spaces, special characters etc. from example, you can click on the corresponding cell in the `Example Text` column to copy its contents into the `Translation Text (editable)` column. If the translation cell is not empty, you need to double click instead.
-##### 2. Differences
+#### 2. Differences
 If there were new IDs added to the example file and they are not present in the translation file, they will be listed in the *Differences* tab.  
 Before loading the file, I removed some IDs to demonstrate. It looks like this:  
 ![EDDTT_differences_view](https://user-images.githubusercontent.com/39399945/56984856-4f7f2380-6b87-11e9-9b5c-4d03d1383ec9.PNG)
 
 You can add the translation text. When you're done, press <kbd>Apply Differences to Translation</kbd> to move the IDs to the *Translation* table.
-
+#### 3. Saving
+After you finish working on the translation, press <kbd>Save Changes</kbd>.
 
 ### Creating New Translation
 You can create a new set of translation files from the example files by using the <kbd>New Language</kbd> option.
