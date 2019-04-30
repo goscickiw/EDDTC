@@ -121,15 +121,6 @@ Partial Class Main
         Me.cb_tran_inclusions = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
         Me.l_tran_total_ids = New System.Windows.Forms.ToolStripLabel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.tp_diffs = New System.Windows.Forms.TabPage()
         Me.dg_diffs = New System.Windows.Forms.DataGridView()
         Me.c_diff_section = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -145,10 +136,6 @@ Partial Class Main
         Me.cb_diff_ignore_removed = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.l_diff_total_ids = New System.Windows.Forms.ToolStripLabel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.tp_example = New System.Windows.Forms.TabPage()
         Me.dg_example = New System.Windows.Forms.DataGridView()
         Me.c_exmp_sect = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -172,6 +159,19 @@ Partial Class Main
         Me.tr_incl_edit = New System.Windows.Forms.ToolStripMenuItem()
         Me.tr_incl_remove = New System.Windows.Forms.ToolStripMenuItem()
         Me.set_file_path = New System.Windows.Forms.OpenFileDialog()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.ss_mainstatus.SuspendLayout()
         Me.ms_mainmenu.SuspendLayout()
         Me.tc_tables.SuspendLayout()
@@ -179,16 +179,16 @@ Partial Class Main
         CType(Me.dg_translation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tran_search.SuspendLayout()
         Me.tran_viewoptions.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.tp_diffs.SuspendLayout()
         CType(Me.dg_diffs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.diffs_viewoptions.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.tp_example.SuspendLayout()
         CType(Me.dg_example, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.exmp_viewoptions.SuspendLayout()
         Me.edit_translation_inclusions.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'ss_mainstatus
@@ -483,8 +483,7 @@ Partial Class Main
         Me.tp_translation.Controls.Add(Me.dg_translation)
         Me.tp_translation.Controls.Add(Me.tran_search)
         Me.tp_translation.Controls.Add(Me.tran_viewoptions)
-        Me.tp_translation.Controls.Add(Me.Panel4)
-        Me.tp_translation.Controls.Add(Me.Panel2)
+        Me.tp_translation.Controls.Add(Me.Panel3)
         Me.tp_translation.Location = New System.Drawing.Point(4, 22)
         Me.tp_translation.Name = "tp_translation"
         Me.tp_translation.Padding = New System.Windows.Forms.Padding(3)
@@ -507,7 +506,7 @@ Partial Class Main
         Me.dg_translation.RowHeadersVisible = False
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dg_translation.RowsDefaultCellStyle = DataGridViewCellStyle5
-        Me.dg_translation.Size = New System.Drawing.Size(926, 449)
+        Me.dg_translation.Size = New System.Drawing.Size(926, 462)
         Me.dg_translation.TabIndex = 6
         '
         'c_tran_section
@@ -678,115 +677,13 @@ Partial Class Main
         Me.l_tran_total_ids.Size = New System.Drawing.Size(64, 22)
         Me.l_tran_total_ids.Text = "Total IDs: 0"
         '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel4.Controls.Add(Me.Label11)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel4.Location = New System.Drawing.Point(3, 502)
-        Me.Panel4.MaximumSize = New System.Drawing.Size(0, 13)
-        Me.Panel4.MinimumSize = New System.Drawing.Size(0, 13)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(926, 13)
-        Me.Panel4.TabIndex = 11
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label11.Location = New System.Drawing.Point(0, 0)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(502, 13)
-        Me.Label11.TabIndex = 0
-        Me.Label11.Text = "Double click Example Text to copy to Translation Text. Single click is enough if " &
-    "Translation Text is empty."
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.Label4)
-        Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(3, 515)
-        Me.Panel2.MaximumSize = New System.Drawing.Size(0, 13)
-        Me.Panel2.MinimumSize = New System.Drawing.Size(0, 13)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(926, 13)
-        Me.Panel2.TabIndex = 10
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label7.Location = New System.Drawing.Point(752, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(168, 13)
-        Me.Label7.TabIndex = 5
-        Me.Label7.Text = "- entire section is added/removed."
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.LightGray
-        Me.Label6.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label6.Location = New System.Drawing.Point(681, 0)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(71, 13)
-        Me.Label6.TabIndex = 4
-        Me.Label6.Text = "SectionName"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label5.Location = New System.Drawing.Point(386, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(295, 13)
-        Me.Label5.TabIndex = 3
-        Me.Label5.Text = "- found an old ID in translation file, not present in example file."
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.Salmon
-        Me.Label4.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label4.Location = New System.Drawing.Point(333, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(53, 13)
-        Me.Label4.TabIndex = 2
-        Me.Label4.Text = "Removed"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label3.Location = New System.Drawing.Point(38, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(295, 13)
-        Me.Label3.TabIndex = 1
-        Me.Label3.Text = "- found a new ID in example file, not present in translation file."
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.LightGreen
-        Me.Label2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label2.Location = New System.Drawing.Point(0, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(38, 13)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Added"
-        '
         'tp_diffs
         '
         Me.tp_diffs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.tp_diffs.Controls.Add(Me.dg_diffs)
         Me.tp_diffs.Controls.Add(Me.diffs_viewoptions)
-        Me.tp_diffs.Controls.Add(Me.Panel3)
+        Me.tp_diffs.Controls.Add(Me.Panel4)
+        Me.tp_diffs.Controls.Add(Me.Panel2)
         Me.tp_diffs.Location = New System.Drawing.Point(4, 22)
         Me.tp_diffs.Name = "tp_diffs"
         Me.tp_diffs.Padding = New System.Windows.Forms.Padding(3)
@@ -809,7 +706,7 @@ Partial Class Main
         Me.dg_diffs.RowHeadersVisible = False
         DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dg_diffs.RowsDefaultCellStyle = DataGridViewCellStyle11
-        Me.dg_diffs.Size = New System.Drawing.Size(926, 487)
+        Me.dg_diffs.Size = New System.Drawing.Size(926, 474)
         Me.dg_diffs.TabIndex = 5
         '
         'c_diff_section
@@ -916,52 +813,6 @@ Partial Class Main
         Me.l_diff_total_ids.Name = "l_diff_total_ids"
         Me.l_diff_total_ids.Size = New System.Drawing.Size(64, 22)
         Me.l_diff_total_ids.Text = "Total IDs: 0"
-        '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel3.Controls.Add(Me.Label10)
-        Me.Panel3.Controls.Add(Me.Label9)
-        Me.Panel3.Controls.Add(Me.Label8)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(3, 515)
-        Me.Panel3.MaximumSize = New System.Drawing.Size(0, 13)
-        Me.Panel3.MinimumSize = New System.Drawing.Size(0, 13)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(926, 13)
-        Me.Panel3.TabIndex = 7
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Label10.Location = New System.Drawing.Point(424, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(502, 13)
-        Me.Label10.TabIndex = 6
-        Me.Label10.Text = "Double click Example Text to copy to Translation Text. Single click is enough if " &
-    "Translation Text is empty."
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.BackColor = System.Drawing.Color.LightGray
-        Me.Label9.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label9.Location = New System.Drawing.Point(171, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(29, 13)
-        Me.Label9.TabIndex = 4
-        Me.Label9.Text = "Gray"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Label8.Location = New System.Drawing.Point(0, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(171, 13)
-        Me.Label8.TabIndex = 5
-        Me.Label8.Text = "Newly added IDs are highlighted in"
         '
         'tp_example
         '
@@ -1141,6 +992,155 @@ Partial Class Main
         Me.set_file_path.InitialDirectory = Global.EDDTT.My.MySettings.Default.edd_repo_dir
         Me.set_file_path.Title = "Get Translation File Location"
         '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Panel4.Controls.Add(Me.Label11)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel4.Location = New System.Drawing.Point(3, 502)
+        Me.Panel4.MaximumSize = New System.Drawing.Size(0, 13)
+        Me.Panel4.MinimumSize = New System.Drawing.Size(0, 13)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(926, 13)
+        Me.Panel4.TabIndex = 12
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label11.Location = New System.Drawing.Point(0, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(502, 13)
+        Me.Label11.TabIndex = 0
+        Me.Label11.Text = "Double click Example Text to copy to Translation Text. Single click is enough if " &
+    "Translation Text is empty."
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Panel3.Controls.Add(Me.Label10)
+        Me.Panel3.Controls.Add(Me.Label9)
+        Me.Panel3.Controls.Add(Me.Label8)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel3.Location = New System.Drawing.Point(3, 515)
+        Me.Panel3.MaximumSize = New System.Drawing.Size(0, 13)
+        Me.Panel3.MinimumSize = New System.Drawing.Size(0, 13)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(926, 13)
+        Me.Panel3.TabIndex = 11
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Label10.Location = New System.Drawing.Point(424, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(502, 13)
+        Me.Label10.TabIndex = 6
+        Me.Label10.Text = "Double click Example Text to copy to Translation Text. Single click is enough if " &
+    "Translation Text is empty."
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.BackColor = System.Drawing.Color.LightGray
+        Me.Label9.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label9.Location = New System.Drawing.Point(171, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(29, 13)
+        Me.Label9.TabIndex = 4
+        Me.Label9.Text = "Gray"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label8.Location = New System.Drawing.Point(0, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(171, 13)
+        Me.Label8.TabIndex = 5
+        Me.Label8.Text = "Newly added IDs are highlighted in"
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.Label6)
+        Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.Label3)
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel2.Location = New System.Drawing.Point(3, 515)
+        Me.Panel2.MaximumSize = New System.Drawing.Size(0, 13)
+        Me.Panel2.MinimumSize = New System.Drawing.Size(0, 13)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(926, 13)
+        Me.Panel2.TabIndex = 13
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label7.Location = New System.Drawing.Point(752, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(168, 13)
+        Me.Label7.TabIndex = 5
+        Me.Label7.Text = "- entire section is added/removed."
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.LightGray
+        Me.Label6.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label6.Location = New System.Drawing.Point(681, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(71, 13)
+        Me.Label6.TabIndex = 4
+        Me.Label6.Text = "SectionName"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label5.Location = New System.Drawing.Point(386, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(295, 13)
+        Me.Label5.TabIndex = 3
+        Me.Label5.Text = "- found an old ID in translation file, not present in example file."
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.Salmon
+        Me.Label4.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label4.Location = New System.Drawing.Point(333, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(53, 13)
+        Me.Label4.TabIndex = 2
+        Me.Label4.Text = "Removed"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label3.Location = New System.Drawing.Point(38, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(295, 13)
+        Me.Label3.TabIndex = 1
+        Me.Label3.Text = "- found a new ID in example file, not present in translation file."
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.LightGreen
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Label2.Location = New System.Drawing.Point(0, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(38, 13)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Added"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1166,23 +1166,23 @@ Partial Class Main
         Me.tran_search.PerformLayout()
         Me.tran_viewoptions.ResumeLayout(False)
         Me.tran_viewoptions.PerformLayout()
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.tp_diffs.ResumeLayout(False)
         Me.tp_diffs.PerformLayout()
         CType(Me.dg_diffs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.diffs_viewoptions.ResumeLayout(False)
         Me.diffs_viewoptions.PerformLayout()
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
         Me.tp_example.ResumeLayout(False)
         Me.tp_example.PerformLayout()
         CType(Me.dg_example, System.ComponentModel.ISupportInitialize).EndInit()
         Me.exmp_viewoptions.ResumeLayout(False)
         Me.exmp_viewoptions.PerformLayout()
         Me.edit_translation_inclusions.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1294,6 +1294,11 @@ Partial Class Main
     Friend WithEvents tr_incl_remove As ToolStripMenuItem
     Friend WithEvents set_file_path As OpenFileDialog
     Friend WithEvents b_tran_search_reset As ToolStripButton
+    Friend WithEvents cb_auto_set_on_new_language As ToolStripMenuItem
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label8 As Label
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label11 As Label
     Friend WithEvents Panel2 As Panel
@@ -1303,9 +1308,4 @@ Partial Class Main
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents cb_auto_set_on_new_language As ToolStripMenuItem
 End Class
