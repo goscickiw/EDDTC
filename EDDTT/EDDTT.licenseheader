@@ -1,4 +1,5 @@
-﻿'Copyright 2019 Wojciech Gościcki (goscickiw)
+﻿extensions: .vb
+'Copyright 2019 Wojciech Gościcki (goscickiw)
 '
 'Licensed under the Apache License, Version 2.0 (the "License");
 'you may Not use this file except In compliance With the License.
@@ -11,11 +12,3 @@
 'WITHOUT WARRANTIES Or CONDITIONS Of ANY KIND, either express Or implied.
 'See the License For the specific language governing permissions And
 'limitations under the License.
-Public Class PathSettings
-
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        My.Settings.Save()
-        Close()
-    End Sub
-
-End Class

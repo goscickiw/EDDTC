@@ -1,4 +1,17 @@
-﻿Imports System.IO
+﻿'Copyright 2019 Wojciech Gościcki (goscickiw)
+'
+'Licensed under the Apache License, Version 2.0 (the "License");
+'you may Not use this file except In compliance With the License.
+'You may obtain a copy Of the License at
+'
+'    http://www.apache.org/licenses/LICENSE-2.0
+'
+'Unless required by applicable law Or agreed To In writing, software
+'distributed under the License Is distributed On an "AS IS" BASIS,
+'WITHOUT WARRANTIES Or CONDITIONS Of ANY KIND, either express Or implied.
+'See the License For the specific language governing permissions And
+'limitations under the License.
+Imports System.IO
 Imports System.Text
 
 
@@ -1179,6 +1192,10 @@ Public Class Main
         PathSettings.ShowDialog()
     End Sub
 
+    Private Sub Open_about_dialog(sender As Object, e As EventArgs) Handles b_about.Click
+        About.ShowDialog()
+    End Sub
+
     'Reset all settings to default
     Private Sub Reset_all_settings(sender As Object, e As EventArgs) Handles b_reset_settings.Click
         If MsgBox("Are you sure that you want to reset all settings to defaults?", MsgBoxStyle.OkCancel, "Reset Settings") = MsgBoxResult.Ok Then
@@ -1193,6 +1210,8 @@ Public Class Main
 
     'Actions to do when program opens
     Private Sub On_open(sender As Object, e As EventArgs) Handles MyBase.Load
+        Text = My.Application.Info.ProductName
+        Icon = My.Resources.EDDTC
         cb_tran_inclusions.ComboBox.ContextMenuStrip = edit_translation_inclusions
         Refresh_settings()
         If My.Settings.auto_check_edd_repo AndAlso Not String.IsNullOrWhiteSpace(My.Settings.edd_repo_dir) Then
