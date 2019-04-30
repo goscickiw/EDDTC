@@ -305,6 +305,18 @@ Namespace My
                 Me("exmp_show_translation") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property auto_set_on_new_language() As Boolean
+            Get
+                Return CType(Me("auto_set_on_new_language"),Boolean)
+            End Get
+            Set
+                Me("auto_set_on_new_language") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
