@@ -1,41 +1,58 @@
-# EDDTC
-A simple GUI tool for translating EDDiscovery
+# EDDTT
+EDD Translation Tool - automated GUI tool for translating [EDDiscovery](https://github.com/EDDiscovery/EDDiscovery)
 
-The executable can be downloaded in the releases section: https://github.com/goscickiw/EDDTC/releases
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-It looks like this:
-![4](https://user-images.githubusercontent.com/39399945/56851009-66651200-690a-11e9-8179-75439a856ae4.PNG)
+It looks like this:  
+![EDDTT_preview](https://user-images.githubusercontent.com/39399945/56984094-881dfd80-6b85-11e9-93d6-9d2f930ce6f5.PNG)
 
 ## How to use
-### Editing existing translation
-If you want to set file paths manually, go to step 3.
+### Preparations
+You can use EDDTT in two ways:
+* Select the example and translation file manually in <kbd>File Paths</kbd> menu, or
+* Select the directory of your local EDDiscovery repository in <kbd>EDD repository</kbd> menu and automatically detect the paths to every file using the <kbd>Auto-Set Paths</kbd> menu. This option also allows you to create an entirely new translation file set from the example files by pressing the <kbd>New Language</kbd> button.
 
-1. Select your EDDiscovery repository (Press <kbd>...</kbd>):<br />
-![step1](https://user-images.githubusercontent.com/39399945/56852561-1c395c00-691d-11e9-8286-2a0dd26c48de.PNG)<br />
-![step1a](https://user-images.githubusercontent.com/39399945/56852577-4428bf80-691d-11e9-8714-e603dd04c210.PNG)
+**The first way** doesn't need much explaining. Just go to the <kbd>File Paths</kbd> menu and set the paths using the <kbd>Set the ... file path manually</kbd> buttons. Then, press the <kbd>Load and Compare Files</kbd> button to, well, load and compare the files.
 
-2. Press <kbd>Get Paths</kbd> to load TLF file names from repository directory, then choose your language and the file you want to edit (`tlf` - main file, `uc` - User Controls, `je` - Journal Events, `ed` - Elite Dangerous):<br />
-![step2](https://user-images.githubusercontent.com/39399945/56852597-7fc38980-691d-11e9-9115-3eb6c0ce98f1.png)
-![step2a](https://user-images.githubusercontent.com/39399945/56852646-08422a00-691e-11e9-9e10-394d08820ef3.png)
-![step2b](https://user-images.githubusercontent.com/39399945/56852654-2019ae00-691e-11e9-9ca0-45ffa3254e26.png)
+**The second (better) way** uses your local EDDiscovery repository path to automatically detect present languages and set the paths to them. It's much easier and faster than setting the paths manually every time.  
+In order to use it, you need to set the repository directory first.
+1. Go to the <kbd>EDD repository</kbd> menu and press <kbd>Set EDD repository directory</kbd>.
+2. Select the path to your local EDDiscovery repository (It should be the folder with `EDDiscovery.sln` in it).
+3. The path is stored in program settings, so you don't have to set it every time you start EDDTT.
 
-3. Press <kbd>Get Paths</kbd> again to automatically set paths to example and translation files (in this case they would be `translation-example-je.tlp` and `translation-polski-je.tlp`). You can also set the paths manually by pressing the <kbd>...</kbd> buttons:<br />
-![step3](https://user-images.githubusercontent.com/39399945/56852692-b2ba4d00-691e-11e9-92a2-6dce4426014b.PNG)
+When you set the path properly, the language selection, the <kbd>Auto-Set Paths</kbd> menu and the <kbd>New Language</kbd> button will be unlocked.  
+EDDTT will automatically detect all languages present in the repository. It will also do it on startup, and automatically select previously used language.
 
-4. Press <kbd>Load and Compare Files</kbd>. The program will load the files and compare the example file to the translation file. If there are **added** IDs existing in the example file but missing in the translation file, or **removed** IDs existing in the translation file but missing in the example file, they will be listed in the **Differences** tab. The **Differences** tab will be automatically selected if any differences are found. Otherwise, the **Translation File** tab will be selected (Go to step 6).<br />
-Before loading the file, I removed some IDs to demonstrate:<br />
-![step4](https://user-images.githubusercontent.com/39399945/56852970-0712fc00-6922-11e9-898d-e4fba0fcbac3.PNG)<br />
-You can fill in the cells in the **Translation Text (editable)** column. If you want to preserve any spaces or special characters from example, you can click the corresponding cell in the **Example Text** column. If the translation cell is not empty, you can double click the example to copy anyway.
+Select the language you want to edit from the drop-down list, or press <kbd>New Language</kbd> to create a new file set from example files (For more on how to use the <kbd>New Language</kbd> option, go to [Creating New Translation](#creating-new-translation)).  
+![EDDTT_select_language](https://user-images.githubusercontent.com/39399945/56984277-f2cf3900-6b85-11e9-9bfb-f483d4a20e45.png)
 
-5. After you're done with the differences, press <kbd>Apply to Translation</kbd> in the **Differences View Options (D)** tab. This will move the differences (with your changes, if you made any) to the table in **Translation File** tab. It will not save to the file yet.<br />
-![step5](https://user-images.githubusercontent.com/39399945/56853246-645c7c80-6925-11e9-9381-de9948608295.png)<br />
-(The View Options tabs and the main tabs are linked in such a way that if the main tab is changed, the View Options tab will be changed accordingly. It works the same the other way around)
+At this point, the only thing you need to do to load the files is to go to the <kbd>Auto-Set Paths</kbd> menu and choose which file you want to edit:  
+![EDDTT_autoset_menu](https://user-images.githubusercontent.com/39399945/56982613-02e51980-6b82-11e9-9e17-fb806c9868bc.png)  
+(Unless you don't use the <kbd>Load and Compare on Auto-Set Paths</kbd> option, in this case you have to press <kbd>Load and Compare Files</kbd> as well)
 
-6. Go to the **Translation File** tab. The added IDs will be highlighted in gray.<br />
-As you can see, the IDs were added in the correct section. If an entire new section was added, it will be placed on the bottom of the table.<br />
-![step6](https://user-images.githubusercontent.com/39399945/56853356-c8337500-6926-11e9-88af-210f8f3e9481.PNG)<br />
-You can edit the translations and copy the examples the same way as in step 4. When you're done with your work, press <kbd>Save Translation</kbd>. EDDTC will apply your changes to the translation file.
+### Editing the Translation
+##### 1. Editing
+You can edit the translation in the `Translation Text (editable)` column of the *Translation* and *Differences* tables.
 
-7. I suggest using GitHub Desktop to review the changes made by EDDTC to the translation files before committing them. This is how the changes look like in GitHub Desktop:<br />
-![step7](https://user-images.githubusercontent.com/39399945/56853459-a89d4c00-6928-11e9-887f-6b94527d831d.PNG)<br />
-(These changes were just for demonstration, i discarded them later)
+If you want to preserve the format, hidden spaces, special characters etc. from example, you can click on the corresponding cell in the `Example Text` column to copy its contents into the `Translation Text (editable)` column. If the translation cell is not empty, you need to double click instead.
+##### 2. Differences
+If there were new IDs added to the example file and they are not present in the translation file, they will be listed in the *Differences* tab.  
+Before loading the file, I removed some IDs to demonstrate. It looks like this:  
+![EDDTT_differences_view](https://user-images.githubusercontent.com/39399945/56984856-4f7f2380-6b87-11e9-9b5c-4d03d1383ec9.PNG)
+
+You can add the translation text. When you're done, press <kbd>Apply Differences to Translation</kbd> to move the IDs to the *Translation* table.
+
+
+### Creating New Translation
+You can create a new set of translation files from the example files by using the <kbd>New Language</kbd> option.
+
+Press the <kbd>New Language</kbd> button.  
+This window should show up:  
+![EDDTT_new_language](https://user-images.githubusercontent.com/39399945/56985909-be5d7c00-6b89-11e9-9048-5b06b0463063.PNG)
+
+Enter the name for the new language, as in the example. Then press <kbd>OK</kbd>.  
+(Anuluj means Cancel in Polish, but I don't want to install English OS just to make this picture)
+
+EDDTT will create a new set of language files from example files. In the main file, the inclusions for other files will be changed accordingly.
+
+Also, if you have the <kbd>Auto-Set Paths after creating new language</kbd> option enabled, EDDTT will set the paths to the example and newly created translation main files. If you have <kbd>Load and Compare on Auto-Set Paths</kbd> enabled as well, these files will be automatically loaded.

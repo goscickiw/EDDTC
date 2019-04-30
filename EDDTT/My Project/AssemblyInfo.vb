@@ -1,4 +1,17 @@
-﻿Imports System.Resources
+﻿'Copyright 2019 Wojciech Gościcki (goscickiw)
+'
+'Licensed under the Apache License, Version 2.0 (the "License");
+'you may Not use this file except In compliance With the License.
+'You may obtain a copy Of the License at
+'
+'    http://www.apache.org/licenses/LICENSE-2.0
+'
+'Unless required by applicable law Or agreed To In writing, software
+'distributed under the License Is distributed On an "AS IS" BASIS,
+'WITHOUT WARRANTIES Or CONDITIONS Of ANY KIND, either express Or implied.
+'See the License For the specific language governing permissions And
+'limitations under the License.
+Imports System.Resources
 Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
@@ -9,17 +22,17 @@ Imports System.Runtime.InteropServices
 
 ' Sprawdź wartości atrybutów zestawu
 
-<Assembly: AssemblyTitle("EDD Translation Compare")>
+<Assembly: AssemblyTitle("EDDTT")>
 <Assembly: AssemblyDescription("A simple GUI tool for translating EDDiscovery")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("EDD Translation Compare")>
-<Assembly: AssemblyCopyright("Wojciech Gościcki (goscickiw)")>
+<Assembly: AssemblyProduct("EDD Translation Tool")>
+<Assembly: AssemblyCopyright("Copyright © Wojciech Gościcki (goscickiw) 2019")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
 'Następujący identyfikator GUID jest identyfikatorem biblioteki typów w przypadku udostępnienia tego projektu w modelu COM
-<Assembly: Guid("da207e7c-42c5-48dc-a3a7-cda2e99ba5a7")>
+<Assembly: Guid("960d268f-51f3-4b92-bc00-4338a21a45c8")>
 
 ' Informacje o wersji zestawu zawierają następujące cztery wartości:
 '
