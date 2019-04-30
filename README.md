@@ -3,6 +3,8 @@ EDD Translation Tool - automated GUI tool for translating [EDDiscovery](https://
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+Download here: https://github.com/goscickiw/EDDTC/releases/latest
+
 It looks like this:  
 ![EDDTT_preview](https://user-images.githubusercontent.com/39399945/56984094-881dfd80-6b85-11e9-93d6-9d2f930ce6f5.PNG)
 
