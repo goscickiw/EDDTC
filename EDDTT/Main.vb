@@ -1029,12 +1029,12 @@ Public Class Main
 
     'Copy example text to translation text
     Private Sub Copy_example_dc(sender As Object, e As DataGridViewCellEventArgs) Handles dg_translation.CellDoubleClick, dg_diffs.CellDoubleClick
-        If e.ColumnIndex = 2 Then
+        If e.ColumnIndex = 2 AndAlso Not e.RowIndex < 0 Then
             sender.Rows(e.RowIndex).Cells(3).Value = sender.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
         End If
     End Sub
     Private Sub Copy_example_sc(sender As Object, e As DataGridViewCellEventArgs) Handles dg_translation.CellClick, dg_diffs.CellClick
-        If e.ColumnIndex = 2 AndAlso String.IsNullOrWhiteSpace(sender.Rows(e.RowIndex).Cells(3).Value) Then
+        If e.ColumnIndex = 2 AndAlso Not e.RowIndex < 0 AndAlso String.IsNullOrWhiteSpace(sender.Rows(e.RowIndex).Cells(3).Value) Then
             sender.Rows(e.RowIndex).Cells(3).Value = sender.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
         End If
     End Sub
