@@ -15,7 +15,6 @@ Imports System.IO
 Imports System.Text
 
 
-
 Public Class Main
 
 
@@ -29,23 +28,22 @@ Public Class Main
 
     'Set EDD repository
     Private Sub Set_edd_repo_location(sender As Object, e As EventArgs) Handles b_edd_repo_browse.Click
-        With My.Settings
-            .edd_repo_set = False
-            Dim temp_edd_repo_dir As String = .edd_repo_dir
-            If set_edd_repo.ShowDialog() = DialogResult.OK Then
-                .edd_repo_dir = set_edd_repo.SelectedPath
-            Else
-                .edd_repo_dir = temp_edd_repo_dir
-            End If
-        End With
-        Refresh_settings()
-        Check_edd_repo()
+        If set_edd_repo.ShowDialog() = DialogResult.OK Then
+            My.Settings.edd_repo_set = False
+            My.Settings.edd_repo_dir = set_edd_repo.SelectedPath
+            Check_edd_repo()
+            Refresh_settings()
+        End If
     End Sub
 
     'Manually re-check EDD repository
     Private Sub Manually_check_edd_repo(sender As Object, e As EventArgs) Handles b_edd_repo_check.Click
-        Check_edd_repo()
-        Refresh_settings()
+        If Not String.IsNullOrWhiteSpace(My.Settings.edd_repo_dir) Then
+            Check_edd_repo()
+            Refresh_settings()
+        Else
+            MsgBox("EDD repository directory is empty. Nothing to check.", MsgBoxStyle.Information, "Re-Check Repository")
+        End If
     End Sub
 
     'Check if EDD repository has compatible structure
@@ -60,9 +58,9 @@ Public Class Main
                 End If
             Next
             If Not String.IsNullOrWhiteSpace(missing_subdirectories) Then
-                MsgBox("The following subdirectories are not present in the repository directory:" &
-                       Environment.NewLine & missing_subdirectories & Environment.NewLine &
-                       "Please choose a correct EDDiscovery repository directory or check the Path Settings.",
+                MsgBox("The following subdirectories are not present in the " & .edd_repo_dir & " directory:" &
+                       Environment.NewLine & Environment.NewLine & missing_subdirectories & Environment.NewLine &
+                       "Please choose a correct EDDiscovery repository directory or check the File Detection Settings.",
                        MsgBoxStyle.Exclamation, "Missing Translation Subdirectories")
                 .edd_repo_set = False
                 Refresh_settings()
@@ -70,14 +68,7 @@ Public Class Main
             End If
 
             Dim missing_example_files As String = Nothing
-            Dim example_filepaths_list As List(Of String) = Filepaths_main_uc_je_ed(.lang_exfile_name)
-            If example_filepaths_list Is Nothing Then
-                l_status.Text = "Invalid naming format string"
-                .edd_repo_set = False
-                Refresh_settings()
-                Return False
-            End If
-            For Each filepath As String In example_filepaths_list
+            For Each filepath As String In Filepaths_main_uc_je_ed(.lang_exfile_name)
                 If Not File.Exists(filepath) Then
                     missing_example_files += filepath & Environment.NewLine
                 End If
@@ -85,7 +76,7 @@ Public Class Main
             If Not String.IsNullOrWhiteSpace(missing_example_files) Then
                 MsgBox("The following example files are not present in the repository:" & Environment.NewLine &
                        missing_example_files & Environment.NewLine &
-                       "Please choose a correct EDDiscovery repository directory or check the Path Settings.",
+                       "Please choose a correct EDDiscovery repository directory or check the File Detection Settings.",
                        MsgBoxStyle.Exclamation, "Missing Example Files")
                 .edd_repo_set = False
                 Refresh_settings()
@@ -106,35 +97,39 @@ Public Class Main
 
 #Region "Detecting and setting paths"
 
-    'Set example file path
-    Private Sub set_example_file_path(sender As Object, e As EventArgs) Handles b_example_browse.Click
-        If set_file_path.ShowDialog() = DialogResult.OK Then
-            tb_example_path.Text = set_file_path.FileName
-        End If
-    End Sub
+    'Set file paths manually
+    Private Sub Set_example_file_path(sender As Object, e As EventArgs) Handles b_example_browse.Click, b_translation_browse.Click
 
-    'Set translation file path
-    Private Sub set_translation_file_path(sender As Object, e As EventArgs) Handles b_translation_browse.Click
-        If set_file_path.ShowDialog() = DialogResult.OK Then
-            tb_translation_path.Text = set_file_path.FileName
+        If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
+            MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
+                   MsgBoxStyle.OkCancel, "Set Path") = MsgBoxResult.Cancel Then
+            Exit Sub
         End If
+
+        If set_file_path.ShowDialog() = DialogResult.OK Then
+            Select Case True
+                Case sender Is b_example_browse
+                    tb_example_path.Text = set_file_path.FileName
+                Case sender Is b_translation_browse
+                    tb_translation_path.Text = set_file_path.FileName
+            End Select
+        End If
+
     End Sub
 
     'Auto-Set Paths
     Private Sub Auto_detect_paths(sender As Object, e As EventArgs) Handles b_setpaths_mainfile.Click, b_setpaths_uc.Click, b_setpaths_je.Click, b_setpaths_ed.Click
 
+        If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
+            MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
+                   MsgBoxStyle.OkCancel, "Set Path") = MsgBoxResult.Cancel Then
+            Exit Sub
+        End If
+
         Dim mainfile_ext As String = My.Settings.lang_mainfile_naming.Substring(My.Settings.lang_mainfile_naming.IndexOf("."))
         Dim mainfile_name As String = cb_language.Text & mainfile_ext
         Dim translation_paths_list As List(Of String) = Filepaths_main_uc_je_ed(mainfile_name)
-        If translation_paths_list Is Nothing Then
-            l_status.Text = "Invalid naming format string"
-            Exit Sub
-        End If
         Dim example_paths_list As List(Of String) = Filepaths_main_uc_je_ed(My.Settings.lang_exfile_name)
-        If example_paths_list Is Nothing Then
-            l_status.Text = "Invalid naming format string"
-            Exit Sub
-        End If
 
         Dim file_type_index As Integer = 0
         Select Case True
@@ -150,6 +145,8 @@ Public Class Main
 
         tb_example_path.Text = example_paths_list(file_type_index)
         tb_translation_path.Text = translation_paths_list(file_type_index)
+
+        l_status.Text = "Ready to load files"
 
         If My.Settings.auto_load_files Then
             Load_files()
@@ -193,27 +190,15 @@ Public Class Main
     Private Function Filepaths_main_uc_je_ed(main_file_name As String) As List(Of String)
 
         Dim lang_short As String = Get_short_name(main_file_name, My.Settings.lang_mainfile_naming)
-        Try
 
-            Dim files_list As New List(Of String) From {
-                My.Settings.edd_repo_dir & My.Settings.lang_mainfile_path & main_file_name,
-                My.Settings.edd_repo_dir & My.Settings.lang_uc_path & String.Format(My.Settings.lang_uc_naming, lang_short),
-                My.Settings.edd_repo_dir & My.Settings.lang_je_path & String.Format(My.Settings.lang_je_naming, lang_short),
-                My.Settings.edd_repo_dir & My.Settings.lang_ed_path & String.Format(My.Settings.lang_ed_naming, lang_short)
-            }
+        Dim files_list As New List(Of String) From {
+            My.Settings.edd_repo_dir & My.Settings.lang_mainfile_path & main_file_name,
+            My.Settings.edd_repo_dir & My.Settings.lang_uc_path & String.Format(My.Settings.lang_uc_naming, lang_short),
+            My.Settings.edd_repo_dir & My.Settings.lang_je_path & String.Format(My.Settings.lang_je_naming, lang_short),
+            My.Settings.edd_repo_dir & My.Settings.lang_ed_path & String.Format(My.Settings.lang_ed_naming, lang_short)
+        }
 
-            Return files_list
-
-        Catch ex As Exception
-            If MsgBox(String.Format("Invalid naming format string.{0}Do you want to reset settings to default?{0}{0}Exception:{0}{1}",
-                                 Environment.NewLine, ex), MsgBoxStyle.YesNo, "Invalid Settings") = MsgBoxResult.Yes Then
-                My.Settings.Reset()
-                Refresh_settings()
-            End If
-
-            Return Nothing
-
-        End Try
+        Return files_list
 
     End Function
 
@@ -229,11 +214,20 @@ Public Class Main
 
     'Manual load
     Private Sub b_load_compare_Click(sender As Object, e As EventArgs) Handles b_load_compare.Click
+
+        If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
+            MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
+                   MsgBoxStyle.OkCancel, "Load Files") = MsgBoxResult.Cancel Then
+            Exit Sub
+        End If
+
         Load_files()
     End Sub
 
     'Loading function
     Private Sub Load_files()
+
+        Clear_everything()
 
         'Reading example file
         If String.IsNullOrWhiteSpace(tb_example_path.Text) Then
@@ -241,13 +235,13 @@ Public Class Main
             l_status.Text = "Cannot Load - example file path is empty"
             Exit Sub
         ElseIf Not Directory.Exists(Path.GetDirectoryName(tb_example_path.Text)) Then
-            MsgBox("Example file directory does not exist." & Environment.NewLine & "Change repository directory or Path Settings.",
+            MsgBox("Example file directory does not exist." & Environment.NewLine & "Change repository directory or File Detection Settings.",
                    MsgBoxStyle.Exclamation, "Cannot Load")
             l_status.Text = "Cannot Load - example file directory does not exist"
             Exit Sub
         ElseIf Not File.Exists(tb_example_path.Text) Then
             MsgBox("Example file does not exist in this directory. Check if it has been removed or its name changed." &
-                   Environment.NewLine & "If its name has been changed, change its name or name format in Path Settings accordingly.",
+                   Environment.NewLine & "If its name has been changed, change its name or name format in File Detection Settings accordingly.",
                    MsgBoxStyle.Exclamation, "Cannot Load")
             l_status.Text = "Cannot Load - example file does not exist"
             Exit Sub
@@ -272,13 +266,13 @@ Public Class Main
             l_file_encoding.Text = "Not Loaded"
             Exit Sub
         ElseIf Not Directory.Exists(Path.GetDirectoryName(tb_translation_path.Text)) Then
-            MsgBox("Translation file directory does not exist." & Environment.NewLine & "Change repository directory or Path Settings.",
+            MsgBox("Translation file directory does not exist." & Environment.NewLine & "Change repository directory or File Detection Settings.",
                    MsgBoxStyle.Exclamation, "Cannot Load")
             l_status.Text = "Cannot Load - translation file directory does not exist"
             Exit Sub
         ElseIf Not File.Exists(tb_translation_path.Text) Then
             MsgBox("Translation file does not exist in this directory. Check if it has been removed or its name changed." &
-                   Environment.NewLine & "If its name has been changed, change its name format in Path Settings accordingly.",
+                   Environment.NewLine & "If its name has been changed, change its name format in File Detection Settings accordingly.",
                    MsgBoxStyle.Exclamation, "Cannot Load")
             l_status.Text = "Cannot Load - translation file does not exist"
             l_file_encoding.Text = "Not Loaded"
@@ -361,49 +355,45 @@ Public Class Main
                 line = line.Replace(problematic, replacement)
             End If
 
-            'If (line Like "*: " & Chr(34) & "*" & Chr(34) & " *" OrElse line Like "*:" & Chr(34) & "*" & Chr(34) & " *") And Not line Like "//*" Then
-            If (line Like "*: ""*"" *" OrElse line Like "*:""*"" *") And Not line Like "//*" Then
+            If Nospace(line) Like "*:""*""*" And Not line Like "//*" Then
 
-                Dim line_sect As String = Nothing
-                Dim line_name As String = Nothing
-                Dim line_exmp As String = Nothing
-                Dim line_trns As String = Nothing
+                Dim line_elements As New List(Of String) From {
+                    Nothing,
+                    Nothing,
+                    Nothing,
+                    Nothing
+                }
 
                 For sect_index As Integer = line_index To 0 Step -1
                     Dim sect_line As String = array(sect_index)
                     If sect_line Like "SECTION *" Then
-                        line_sect = sect_line.Substring(8)
-                        If Not sectorder.Items.Contains(line_sect) Then
-                            sectorder.Items.Add(line_sect)
+                        line_elements(0) = sect_line.Substring(8)
+                        If Not sectorder.Items.Contains(line_elements(0)) Then
+                            sectorder.Items.Add(line_elements(0))
                         End If
                         Exit For
                     End If
                 Next
 
-                line_name = line.Substring(0, line.IndexOf(":"))
+                line_elements(1) = line.Substring(0, line.IndexOf(":"))
 
-                line_exmp = line.Substring(line.IndexOf(Chr(34)) + 1)
-                line_exmp = line_exmp.Substring(0, line_exmp.IndexOf(Chr(34)))
+                line_elements(2) = line.Substring(line.IndexOf("""") + 1)
+                line_elements(2) = line_elements(2).Substring(0, line_elements(2).IndexOf(""""))
 
-                If (line Like "*: ""*"" => ""*""" OrElse line Like "*:""*"" => ""*""") And Not line Like "* @" Then
-                    line_trns = line.Substring(line.IndexOf(" => " & Chr(34)) + 5)
-                    line_trns = line_trns.Substring(0, line_trns.IndexOf(Chr(34)))
-                End If
-
-                If Not String.IsNullOrWhiteSpace(line_sect) AndAlso line_sect.Contains(replacement) Then
-                    line_sect = line_sect.Replace(replacement, problematic)
-                End If
-                If Not String.IsNullOrWhiteSpace(line_name) AndAlso line_name.Contains(replacement) Then
-                    line_name = line_name.Replace(replacement, problematic)
-                End If
-                If Not String.IsNullOrWhiteSpace(line_exmp) AndAlso line_exmp.Contains(replacement) Then
-                    line_exmp = line_exmp.Replace(replacement, problematic)
-                End If
-                If Not String.IsNullOrWhiteSpace(line_trns) AndAlso line_trns.Contains(replacement) Then
-                    line_trns = line_trns.Replace(replacement, problematic)
+                If Nospace(line) Like "*:""*""=>""*""" And Not line Like "*@" Then
+                    line_elements(3) = line.Substring(line.IndexOf("=>"))
+                    line_elements(3) = line_elements(3).Substring(line_elements(3).IndexOf("""") + 1)
+                    line_elements(3) = line_elements(3).Substring(0, line_elements(3).IndexOf(""""))
                 End If
 
-                dg.Rows.Add(line_sect, line_name, line_exmp, line_trns)
+                'Changing ╬ back to \"
+                For i As Integer = 0 To line_elements.Count - 1
+                    If Not String.IsNullOrWhiteSpace(line_elements(i)) AndAlso line_elements(i).Contains(replacement) Then
+                        line_elements(i) = line_elements(i).Replace(replacement, problematic)
+                    End If
+                Next
+
+                dg.Rows.Add(line_elements(0), line_elements(1), line_elements(2), line_elements(3))
                 found_count += 1
 
             ElseIf line Like "include *" Then
@@ -738,124 +728,115 @@ Public Class Main
 
     Private Sub Create_new_language_file_set(sender As Object, e As EventArgs) Handles b_new_lang.Click
 
-        If dg_translation.Rows.Count <> 0 AndAlso
-            MsgBox("You have a translation loaded at the moment. All unsaved progress will be lost when creating a new language. Do you want to continue?",
-                   MsgBoxStyle.OkCancel, "Create New Language") = MsgBoxResult.Cancel Then
-            Exit Sub
-        End If
-
         Dim new_language_name As String = InputBox(String.Format("Enter language name (in that language){0}and ISO 639-1 code.{0}{0}Example: {1}", Environment.NewLine,
                                                                  String.Format(My.Settings.lang_mainfile_naming.Substring(0, My.Settings.lang_mainfile_naming.IndexOf(".")), "english", "en")),
                                                                  "Create New Language")
 
-
+        If String.IsNullOrWhiteSpace(new_language_name) Then
+            Exit Sub
+        End If
 
         With My.Settings
 
-            If Not String.IsNullOrWhiteSpace(new_language_name) AndAlso new_language_name Like
-                Format_to_detector(.lang_mainfile_naming.Substring(0, .lang_mainfile_naming.IndexOf("."))) Then
+            If Not new_language_name Like Format_to_detector(.lang_mainfile_naming.Substring(0, .lang_mainfile_naming.IndexOf("."))) Then
+                MsgBox("New language name has incorrect format.", MsgBoxStyle.Exclamation, "Cannot create new language")
+                Exit Sub
+            End If
 
-                Dim example_filepaths_list As List(Of String) = Filepaths_main_uc_je_ed(.lang_exfile_name)
-                If example_filepaths_list Is Nothing Then
-                    l_status.Text = "Invalid naming format string"
+            Dim example_filepaths_list As List(Of String) = Filepaths_main_uc_je_ed(.lang_exfile_name)
+
+            For Each filepath As String In example_filepaths_list
+                If Not File.Exists(filepath) Then
+                    MsgBox(String.Format("{0} does not exist. Cannot create new translation.", filepath), MsgBoxStyle.Critical, "Missing Example File")
                     Exit Sub
                 End If
+            Next
 
-                For Each filepath As String In example_filepaths_list
-                    If Not File.Exists(filepath) Then
-                        MsgBox(String.Format("{0} does not exist. Cannot create new translation.", filepath), MsgBoxStyle.Critical, "Missing Example File")
-                        Exit Sub
-                    End If
-                Next
+            Dim newlang_filepaths_list As List(Of String) = Filepaths_main_uc_je_ed(new_language_name & .lang_mainfile_naming.Substring(.lang_mainfile_naming.IndexOf(".")))
 
-                Dim newlang_filepaths_list As List(Of String) = Filepaths_main_uc_je_ed(new_language_name & .lang_mainfile_naming.Substring(.lang_mainfile_naming.IndexOf(".")))
-                If newlang_filepaths_list Is Nothing Then
-                    l_status.Text = "Invalid naming format string"
-                    Exit Sub
-                End If
-
-                If File.Exists(newlang_filepaths_list(0)) AndAlso MsgBox(new_language_name & " already exists. Do you want to overwrite that translation?",
+            If File.Exists(newlang_filepaths_list(0)) AndAlso MsgBox(new_language_name & " already exists. Do you want to overwrite that translation?",
                                                                      MsgBoxStyle.OkCancel, "Translation Already Exists") = DialogResult.Cancel Then
-                    Exit Sub
-                End If
+                Exit Sub
+            End If
 
-                'Reading example
-                Dim file_reader As New StreamReader(example_filepaths_list(0), True)
-                file_encoding = file_reader.CurrentEncoding
-                Dim example As String
-                Try
-                    example = file_reader.ReadToEnd()
-                Catch ex As Exception
-                    MsgBox(String.Format("Failed to load example file {0}:{1}{1}{2}", example_filepaths_list(0),
-                                         Environment.NewLine, ex.Message), MsgBoxStyle.Critical, "Loading Error")
-                    l_status.Text = String.Format("Failed to load {0}", example_filepaths_list(0))
-                    file_reader.Close()
-                    Exit Sub
-                End Try
+            'Reading example
+            Dim file_reader As New StreamReader(example_filepaths_list(0), True)
+            file_encoding = file_reader.CurrentEncoding
+            Dim example As String
+            Try
+                example = file_reader.ReadToEnd()
+            Catch ex As Exception
+                MsgBox(String.Format("Failed to load example file {0}:{1}{1}{2}", example_filepaths_list(0),
+                                     Environment.NewLine, ex.Message), MsgBoxStyle.Critical, "Loading Error")
+                l_status.Text = String.Format("Failed to load {0}", example_filepaths_list(0))
                 file_reader.Close()
+                Exit Sub
+            End Try
+            file_reader.Close()
 
-                Dim example_array() As String = Split(example, Environment.NewLine)
-                Dim lines_list As New List(Of String)(example_array)
+            Dim example_array() As String = Split(example, Environment.NewLine)
+            Dim lines_list As New List(Of String)(example_array)
 
-                'Removing example inclusions
-                For exmp_line_index As Integer = lines_list.Count - 1 To 0 Step -1
-                    Dim current_line As String = lines_list(exmp_line_index)
-                    If String.IsNullOrWhiteSpace(current_line) OrElse current_line Like "include *" Then
-                        lines_list.RemoveAt(exmp_line_index)
-                    End If
-                Next
+            'Removing example inclusions
+            For exmp_line_index As Integer = lines_list.Count - 1 To 0 Step -1
+                Dim current_line As String = lines_list(exmp_line_index)
+                If String.IsNullOrWhiteSpace(current_line) OrElse current_line Like "include *" Then
+                    lines_list.RemoveAt(exmp_line_index)
+                End If
+            Next
 
-                'Adding inclusions
-                For i As Integer = 1 To 3
-                    lines_list.Add(String.Empty)
-                    lines_list.Add(String.Format("include {0}", Path.GetFileName(newlang_filepaths_list(i))))
-                Next
-
-                'New line at end of file
+            'Adding inclusions
+            For i As Integer = 1 To 3
                 lines_list.Add(String.Empty)
-                Dim newlang_array() As String = lines_list.ToArray()
-                Dim new_file As String = Join(newlang_array, Environment.NewLine)
+                lines_list.Add(String.Format("include {0}", Path.GetFileName(newlang_filepaths_list(i))))
+            Next
 
-                'Saving new translation main file
-                Dim file_writer As New StreamWriter(newlang_filepaths_list(0), False, file_encoding)
-                Try
-                    pb_progress.Value = 0
-                    pb_progress.Maximum = new_file.Length
-                    For Each chr As Char In new_file
-                        file_writer.Write(chr)
-                        pb_progress.Value += 1
-                    Next
-                Catch ex As Exception
-                    MsgBox(String.Format("Failed to save translation file {0}:{1}{1}{2}", Path.GetFileName(newlang_filepaths_list(0)),
-                                         Environment.NewLine, ex.Message), MsgBoxStyle.Critical, "Saving Error")
-                    l_status.Text = String.Format("Failed to save {0}", Path.GetFileName(newlang_filepaths_list(0)))
-                    file_writer.Close()
-                    Exit Sub
-                End Try
-                file_writer.Close()
-
-                'Copying other translation files
-                For i As Integer = 1 To 3
-                    My.Computer.FileSystem.CopyFile(example_filepaths_list(i), newlang_filepaths_list(i), True)
+            'New line at end of file
+            lines_list.Add(String.Empty)
+            Dim newlang_array() As String = lines_list.ToArray()
+            Dim new_file As String = Join(newlang_array, Environment.NewLine)
+            'Saving new translation main file
+            Dim file_writer As New StreamWriter(newlang_filepaths_list(0), False, file_encoding)
+            Try
+                pb_progress.Value = 0
+                pb_progress.Maximum = new_file.Length
+                For Each chr As Char In new_file
+                    file_writer.Write(chr)
+                    pb_progress.Value += 1
                 Next
+            Catch ex As Exception
+                MsgBox(String.Format("Failed to save translation file {0}:{1}{1}{2}", Path.GetFileName(newlang_filepaths_list(0)),
+                                         Environment.NewLine, ex.Message), MsgBoxStyle.Critical, "Saving Error")
+                l_status.Text = String.Format("Failed to save {0}", Path.GetFileName(newlang_filepaths_list(0)))
+                file_writer.Close()
+                Exit Sub
+            End Try
+            file_writer.Close()
+            'Copying other translation files
+            For i As Integer = 1 To 3
+                My.Computer.FileSystem.CopyFile(example_filepaths_list(i), newlang_filepaths_list(i), True)
+            Next
 
-                l_status.Text = String.Format("Successfully created {0} translation files.", new_language_name)
+            l_status.Text = String.Format("Successfully created {0} translation files.", new_language_name)
 
-                Detect_languages()
-                If cb_language.Items.Contains(new_language_name) Then
-                    cb_language.SelectedIndex = cb_language.Items.IndexOf(new_language_name)
+            Detect_languages()
+            If cb_language.Items.Contains(new_language_name) Then
+                cb_language.SelectedIndex = cb_language.Items.IndexOf(new_language_name)
+            End If
+
+            'Auto-Set & Auto-Load
+            If .auto_set_on_new_language Then
+                If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
+                    MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
+                           MsgBoxStyle.OkCancel, "Auto-Load New Language") = MsgBoxResult.Cancel Then
+                    Exit Sub
                 End If
                 Clear_everything()
-
-                'Auto-Set & Auto-Load
-                If .auto_set_on_new_language Then
-                    tb_example_path.Text = example_filepaths_list(0)
-                    tb_translation_path.Text = newlang_filepaths_list(0)
-                    If .auto_load_files Then
-                        Load_files()
-                    End If
+                tb_example_path.Text = example_filepaths_list(0)
+                tb_translation_path.Text = newlang_filepaths_list(0)
+                If .auto_load_files Then
+                    Load_files()
                 End If
-
             End If
 
         End With
@@ -1013,32 +994,15 @@ Public Class Main
         End Select
 
     End Sub
-    'Private Sub Update_id_counters()
-    '    l_diff_total_ids.Text = String.Format("Total IDs: {0}", dg_diffs.Rows.Count)
-    '    l_tran_total_ids.Text = String.Format("Total IDs: {0}", dg_translation.Rows.Count)
-    '    l_exmp_total_ids.Text = String.Format("Total IDs: {0}", dg_example.Rows.Count)
-    'End Sub
-
-    'Insert word into string at char
-    Private Function Insert_at(str As String, word As String, chr As Char) As String
-
-        If str.Contains(chr) Then
-
-            Dim output As String = str.Substring(0, str.IndexOf(chr)) & word
-            output += str.Substring(str.IndexOf(chr) + 1, str.Length - (str.IndexOf(chr) + 1))
-            Return output
-
-        Else
-
-            Return str
-
-        End If
-
-    End Function
 
     'Convert format string to detector string
     Private Function Format_to_detector(str As String) As String
         Return String.Format(str, "*", "*", "*", "*", "*", "*", "*", "*", "*", "*")
+    End Function
+
+    'Remove spaces from string
+    Private Function Nospace(str As String) As String
+        Return str.Replace(" ", "")
     End Function
 
     'Go to section in Translation
@@ -1077,7 +1041,7 @@ Public Class Main
 
     'Get short language name
     Private Function Get_short_name(lang_mainfile As String, naming As String) As String
-        Dim lang_short_start As Integer = naming.IndexOf("{0}")
+        Dim lang_short_start As Integer = naming.IndexOf("{")
         Return lang_mainfile.Substring(lang_short_start, lang_mainfile.IndexOf(naming(lang_short_start + 3)))
     End Function
 
@@ -1094,6 +1058,10 @@ Public Class Main
 
         dg_diffs.Rows.Clear()
 
+        pb_progress.Value = 0
+        l_file_encoding.Text = "Not Loaded"
+        l_status.Text = "Ready"
+
     End Sub
 
 #End Region
@@ -1109,87 +1077,110 @@ Public Class Main
     End Sub
 
     'Update settings from unbindable controls
-    Private Sub Update_auto_load(sender As Object, e As EventArgs) Handles cb_autoload.Click
-        My.Settings.auto_load_files = cb_autoload.Checked
-    End Sub
-    Private Sub Update_auto_set_on_new_language(sender As Object, e As EventArgs) Handles cb_auto_set_on_new_language.Click
-        My.Settings.auto_set_on_new_language = cb_auto_set_on_new_language.Checked
-    End Sub
-    Private Sub Update_tran_hide_translated(sender As Object, e As EventArgs) Handles cb_tran_hide_translated.Click
-        My.Settings.tran_hide_translated = cb_tran_hide_translated.Checked
-        Translation_hide_show_rows(False)
-    End Sub
-    Private Sub Update_tran_wordwrap(sender As Object, e As EventArgs) Handles cb_tran_wordwrap.Click
-        My.Settings.tran_wordwrap = cb_tran_wordwrap.Checked
+    Private Sub Update_settings(sender As Object, e As EventArgs) Handles cb_autoload.Click, cb_auto_set_on_new_language.Click,
+        cb_autocheck_repo.Click, cb_warn_before_clearing.Click, cb_tran_hide_translated.Click, cb_tran_wordwrap.Click,
+        cb_tran_show_example.Click, cb_diff_wordwrap.Click, cb_diff_ignore_removed.Click, cb_exmp_wordwrap.Click,
+        cb_exmp_show_translation.Click
+
+        With My.Settings
+            Select Case True
+
+                Case sender Is cb_autoload
+                    .auto_load_files = sender.Checked
+
+                Case sender Is cb_auto_set_on_new_language
+                    .auto_set_on_new_language = sender.Checked
+
+                Case sender Is cb_autocheck_repo
+                    .auto_check_edd_repo = sender.Checked
+
+                Case sender Is cb_warn_before_clearing
+                    .warn_before_clearing = sender.Checked
+
+                Case sender Is cb_tran_hide_translated
+                    .tran_hide_translated = sender.Checked
+                    Translation_hide_show_rows(False)
+
+                Case sender Is cb_tran_wordwrap
+                    .tran_wordwrap = sender.Checked
+
+                Case sender Is cb_tran_show_example
+                    .tran_show_example = sender.Checked
+
+                Case sender Is cb_diff_wordwrap
+                    .diff_wordwrap = sender.Checked
+
+                Case sender Is cb_diff_ignore_removed
+                    .diff_ignore_removed = sender.Checked
+
+                Case sender Is cb_exmp_wordwrap
+                    .exmp_wordwrap = sender.Checked
+
+                Case sender Is cb_exmp_show_translation
+                    .exmp_show_translation = sender.Checked
+
+            End Select
+        End With
+
         Refresh_settings()
-    End Sub
-    Private Sub Update_tran_show_example(sender As Object, e As EventArgs) Handles cb_tran_show_example.Click
-        My.Settings.tran_show_example = cb_tran_show_example.Checked
-        Refresh_settings()
-    End Sub
-    Private Sub Update_diff_wordwrap(sender As Object, e As EventArgs) Handles cb_diff_wordwrap.Click
-        My.Settings.diff_wordwrap = cb_diff_wordwrap.Checked
-        Refresh_settings()
-    End Sub
-    Private Sub Update_diff_ignore_removed(sender As Object, e As EventArgs) Handles cb_diff_ignore_removed.Click
-        My.Settings.diff_ignore_removed = cb_diff_ignore_removed.Checked
-    End Sub
-    Private Sub Update_exmp_wordwrap(sender As Object, e As EventArgs) Handles cb_exmp_wordwrap.Click
-        My.Settings.exmp_wordwrap = cb_exmp_wordwrap.Checked
-        Refresh_settings()
-    End Sub
-    Private Sub Update_exmp_show_translation(sender As Object, e As EventArgs) Handles cb_exmp_show_translation.Click
-        My.Settings.exmp_show_translation = cb_exmp_show_translation.Checked
-        Refresh_settings()
-    End Sub
-    Private Sub Update_auto_check_edd_repo(sender As Object, e As EventArgs) Handles cb_autocheck_repo.Click
-        My.Settings.auto_check_edd_repo = cb_autocheck_repo.Checked
+
     End Sub
 
     'Refresh settings in unbindable controls
     Private Sub Refresh_settings()
+
         With My.Settings
+
             tb_edd_repo_dir.Text = .edd_repo_dir
             set_edd_repo.SelectedPath = .edd_repo_dir
+
             l_sel_lang.Enabled = .edd_repo_set
             cb_language.Enabled = .edd_repo_set
             b_new_lang.Enabled = .edd_repo_set
             b_auto_set_paths.Enabled = .edd_repo_set
+
             cb_autoload.Checked = .auto_load_files
             cb_auto_set_on_new_language.Checked = .auto_set_on_new_language
+            cb_autocheck_repo.Checked = .auto_check_edd_repo
+            cb_warn_before_clearing.Checked = .warn_before_clearing
+
             cb_tran_hide_translated.Checked = .tran_hide_translated
             cb_tran_wordwrap.Checked = .tran_wordwrap
             cb_tran_show_example.Checked = .tran_show_example
+
             cb_diff_wordwrap.Checked = .diff_wordwrap
             cb_diff_ignore_removed.Checked = .diff_ignore_removed
-            cb_autocheck_repo.Checked = .auto_check_edd_repo
 
-            If My.Settings.diff_wordwrap Then
+            cb_exmp_wordwrap.Checked = .exmp_wordwrap
+            cb_exmp_show_translation.Checked = .exmp_show_translation
+
+            If .diff_wordwrap Then
                 dg_diffs.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True
             Else
                 dg_diffs.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False
             End If
 
-            If My.Settings.tran_wordwrap Then
+            If .tran_wordwrap Then
                 dg_translation.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True
             Else
                 dg_translation.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False
             End If
-            c_tran_example.Visible = My.Settings.tran_show_example
+            c_tran_example.Visible = .tran_show_example
 
-            If My.Settings.exmp_wordwrap Then
+            If .exmp_wordwrap Then
                 dg_example.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True
             Else
                 dg_example.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False
             End If
-            c_exmp_translation.Visible = My.Settings.exmp_show_translation
+            c_exmp_translation.Visible = .exmp_show_translation
 
         End With
+
     End Sub
 
-    'Open path settings dialog
-    Private Sub Open_path_settings(sender As Object, e As EventArgs) Handles b_path_settings.Click
-        PathSettings.ShowDialog()
+    'Open File Detection Settings dialog
+    Private Sub Open_path_settings(sender As Object, e As EventArgs) Handles b_file_detection_settings.Click
+        FileDetectionSettings.ShowDialog()
     End Sub
 
     Private Sub Open_about_dialog(sender As Object, e As EventArgs) Handles b_about.Click
@@ -1213,12 +1204,19 @@ Public Class Main
         Text = My.Application.Info.ProductName
         Icon = My.Resources.EDDTC
         cb_tran_inclusions.ComboBox.ContextMenuStrip = edit_translation_inclusions
-        Refresh_settings()
-        If My.Settings.auto_check_edd_repo AndAlso Not String.IsNullOrWhiteSpace(My.Settings.edd_repo_dir) Then
-            Check_edd_repo()
-        Else
-            Detect_languages()
-        End If
+        With My.Settings
+            If Not (Correct_format(.lang_mainfile_naming, 1) And Correct_format(.lang_uc_naming, 0) And
+                Correct_format(.lang_je_naming, 0) And Correct_format(.lang_ed_naming, 0)) Then
+                My.Settings.Reset()
+                MsgBox("Some naming format settings were not correct. As this would prevent the program from starting, settings were reset to default.", MsgBoxStyle.Critical, "Invalid Settings")
+            End If
+            Refresh_settings()
+            If .auto_check_edd_repo AndAlso Not String.IsNullOrWhiteSpace(.edd_repo_dir) Then
+                Check_edd_repo()
+            Else
+                Detect_languages()
+            End If
+        End With
     End Sub
 
     'Actions to do when program closes
@@ -1234,44 +1232,3 @@ Public Class Main
 
 
 End Class
-
-
-#Region "Row Hiding Optimization"
-
-Public Class RowFilteringOptimization
-
-
-    Private dg As DataGridView
-    Private column_mode_backup(-1) As DataGridViewAutoSizeColumnMode
-
-
-    Public Sub New(dg As DataGridView)
-        Me.dg = dg
-    End Sub
-
-
-    Public Sub Start()
-
-        ReDim column_mode_backup(dg.Columns.Count)
-        For Each col As DataGridViewColumn In dg.Columns
-            column_mode_backup(col.Index) = col.AutoSizeMode
-            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        Next
-
-    End Sub
-
-
-    Public Sub Finish()
-
-        If dg IsNot Nothing AndAlso Not column_mode_backup.Length < dg.Columns.Count Then
-            For Each col As DataGridViewColumn In dg.Columns
-                col.AutoSizeMode = column_mode_backup(col.Index)
-            Next
-        End If
-
-    End Sub
-
-
-End Class
-
-#End Region
