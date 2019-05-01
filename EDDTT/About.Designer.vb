@@ -115,10 +115,10 @@ Partial Class About
         '
         Me.TableLayoutPanel.ColumnCount = 1
         Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel.Controls.Add(Me.l_github_page, 0, 3)
         Me.TableLayoutPanel.Controls.Add(Me.LabelProductName, 0, 0)
-        Me.TableLayoutPanel.Controls.Add(Me.LabelCopyright, 0, 2)
         Me.TableLayoutPanel.Controls.Add(Me.LabelVersion, 0, 1)
+        Me.TableLayoutPanel.Controls.Add(Me.LabelCopyright, 0, 2)
+        Me.TableLayoutPanel.Controls.Add(Me.l_github_page, 0, 3)
         Me.TableLayoutPanel.Location = New System.Drawing.Point(12, 12)
         Me.TableLayoutPanel.Name = "TableLayoutPanel"
         Me.TableLayoutPanel.RowCount = 4
@@ -135,7 +135,8 @@ Partial Class About
         Me.l_github_page.AutoSize = True
         Me.l_github_page.Location = New System.Drawing.Point(3, 100)
         Me.l_github_page.Name = "l_github_page"
-        Me.l_github_page.Size = New System.Drawing.Size(67, 13)
+        Me.l_github_page.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.l_github_page.Size = New System.Drawing.Size(70, 13)
         Me.l_github_page.TabIndex = 3
         Me.l_github_page.TabStop = True
         Me.l_github_page.Tag = "https://github.com/goscickiw/EDDTC"

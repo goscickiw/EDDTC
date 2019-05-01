@@ -12,7 +12,7 @@
 'See the License For the specific language governing permissions And
 'limitations under the License.
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class PathSettings
+Partial Class FileDetectionSettings
     Inherits System.Windows.Forms.Form
 
     'Formularz przesłania metodę dispose, aby wyczyścić listę składników.
@@ -342,7 +342,7 @@ Partial Class PathSettings
         Me.OK_Button.TabIndex = 9
         Me.OK_Button.Text = "OK"
         '
-        'PathSettings
+        'FileDetectionSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -355,10 +355,10 @@ Partial Class PathSettings
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "PathSettings"
+        Me.Name = "FileDetectionSettings"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Path Settings"
+        Me.Text = "File Detection Settings"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
