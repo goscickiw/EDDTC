@@ -23,7 +23,7 @@ Imports System.Runtime.InteropServices
 ' Sprawdź wartości atrybutów zestawu
 
 <Assembly: AssemblyTitle("EDDTT")>
-<Assembly: AssemblyDescription("A simple GUI tool for translating EDDiscovery")>
+<Assembly: AssemblyDescription("An automated GUI tool for translating EDDiscovery")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("EDD Translation Tool")>
 <Assembly: AssemblyCopyright("Copyright © Wojciech Gościcki (goscickiw) 2019")>
@@ -45,6 +45,5 @@ Imports System.Runtime.InteropServices
 ' przy użyciu symbolu „*”, tak jak pokazano poniżej:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.0.0.1")>
 <Assembly: NeutralResourcesLanguage("en")>
