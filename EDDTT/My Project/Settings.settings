@@ -71,5 +71,20 @@
     <Setting Name="warn_before_clearing" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="format_section" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SECTION {0}</Value>
+    </Setting>
+    <Setting Name="format_id_empty" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0}: "{1}" @</Value>
+    </Setting>
+    <Setting Name="format_id_translated" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0}: "{1}" =&gt; "{2}"</Value>
+    </Setting>
+    <Setting Name="format_inclusion" Type="System.String" Scope="User">
+      <Value Profile="(Default)">include {0}</Value>
+    </Setting>
+    <Setting Name="format_id_spaces" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

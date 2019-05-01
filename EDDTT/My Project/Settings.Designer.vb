@@ -343,6 +343,66 @@ Namespace My
                 Me("warn_before_clearing") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("SECTION {0}")>  _
+        Public Property format_section() As String
+            Get
+                Return CType(Me("format_section"),String)
+            End Get
+            Set
+                Me("format_section") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("{0}: ""{1}"" @")>  _
+        Public Property format_id_empty() As String
+            Get
+                Return CType(Me("format_id_empty"),String)
+            End Get
+            Set
+                Me("format_id_empty") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("{0}: ""{1}"" => ""{2}""")>  _
+        Public Property format_id_translated() As String
+            Get
+                Return CType(Me("format_id_translated"),String)
+            End Get
+            Set
+                Me("format_id_translated") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("include {0}")>  _
+        Public Property format_inclusion() As String
+            Get
+                Return CType(Me("format_inclusion"),String)
+            End Get
+            Set
+                Me("format_inclusion") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property format_id_spaces() As Boolean
+            Get
+                Return CType(Me("format_id_spaces"),Boolean)
+            End Get
+            Set
+                Me("format_id_spaces") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

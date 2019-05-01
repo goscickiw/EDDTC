@@ -45,6 +45,26 @@ Module Utils
 
 #End Region
 
+#Region "String Operation Functions"
+
+    'Convert format string to detector string
+    Public Function Like_format(str As String) As String
+        Return String.Format(str, "*", "*", "*", "*", "*", "*", "*", "*", "*", "*")
+    End Function
+
+    'Remove spaces from string
+    Public Function Nospace(str As String) As String
+        Return str.Replace(" ", "")
+    End Function
+
+    'Get short language name
+    Public Function Get_short_name(lang_mainfile As String, naming As String) As String
+        Dim lang_short_start As Integer = naming.IndexOf("{0}")
+        Return lang_mainfile.Substring(lang_short_start, lang_mainfile.IndexOf(naming(lang_short_start + 3)))
+    End Function
+
+#End Region
+
 #Region "Row Hiding Optimization"
 
     Public Class RowFilteringOptimization
