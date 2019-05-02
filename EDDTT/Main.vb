@@ -53,9 +53,7 @@ Public Class Main
 
             Dim missing_subdirectories As String = Nothing
             For Each subdir As String In { .lang_mainfile_path, .lang_uc_path, .lang_je_path, .lang_ed_path}
-                If Not Directory.Exists(.edd_repo_dir & subdir) Then
-                    missing_subdirectories += subdir & Environment.NewLine
-                End If
+                If Not Directory.Exists(.edd_repo_dir & subdir) Then missing_subdirectories += subdir & Environment.NewLine
             Next
             If Not String.IsNullOrWhiteSpace(missing_subdirectories) Then
                 MsgBox("The following subdirectories are not present in the " & .edd_repo_dir & " directory:" &
@@ -69,9 +67,7 @@ Public Class Main
 
             Dim missing_example_files As String = Nothing
             For Each filepath As String In Filepaths_main_uc_je_ed(.lang_exfile_name)
-                If Not File.Exists(filepath) Then
-                    missing_example_files += filepath & Environment.NewLine
-                End If
+                If Not File.Exists(filepath) Then missing_example_files += filepath & Environment.NewLine
             Next
             If Not String.IsNullOrWhiteSpace(missing_example_files) Then
                 MsgBox("The following example files are not present in the repository:" & Environment.NewLine &
@@ -102,9 +98,7 @@ Public Class Main
 
         If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
             MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
-                   MsgBoxStyle.OkCancel, "Set Path") = MsgBoxResult.Cancel Then
-            Exit Sub
-        End If
+                   MsgBoxStyle.OkCancel, "Set Path") = MsgBoxResult.Cancel Then Exit Sub
 
         If set_file_path.ShowDialog() = DialogResult.OK Then
             Select Case True
@@ -122,9 +116,7 @@ Public Class Main
 
         If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
             MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
-                   MsgBoxStyle.OkCancel, "Set Path") = MsgBoxResult.Cancel Then
-            Exit Sub
-        End If
+                   MsgBoxStyle.OkCancel, "Set Path") = MsgBoxResult.Cancel Then Exit Sub
 
         Dim mainfile_ext As String = My.Settings.lang_mainfile_naming.Substring(My.Settings.lang_mainfile_naming.IndexOf("."))
         Dim mainfile_name As String = cb_language.Text & mainfile_ext
@@ -148,9 +140,7 @@ Public Class Main
 
         l_status.Text = "Ready to load files"
 
-        If My.Settings.auto_load_files Then
-            Load_files()
-        End If
+        If My.Settings.auto_load_files Then Load_files()
 
     End Sub
 
@@ -164,17 +154,14 @@ Public Class Main
             If mainfile_dir.Exists Then
                 For Each file In mainfile_dir.GetFiles()
                     If file IsNot Nothing AndAlso file.ToString() Like Like_format(.lang_mainfile_naming) AndAlso
-                        Not file.ToString.ToLower.Contains(.lang_exfile_name.ToLower) Then
-                        cb_language.Items.Add(file.Name.Substring(0, file.Name.IndexOf(".")))
-                    End If
+                        Not file.ToString.ToLower.Contains(.lang_exfile_name.ToLower)Then cb_language.Items.Add(file.Name.Substring(0, file.Name.IndexOf(".")))
                 Next
             End If
 
             If cb_language.Items.Count > 0 Then
                 If cb_language.Items.Contains(My.Settings.last_language) Then
                     cb_language.SelectedIndex = cb_language.Items.IndexOf(My.Settings.last_language)
-                Else
-                    cb_language.SelectedIndex = 0
+                Else cb_language.SelectedIndex = 0
                 End If
                 Return True
             Else
@@ -188,18 +175,17 @@ Public Class Main
 
     'Generate file paths list for language
     Private Function Filepaths_main_uc_je_ed(main_file_name As String) As List(Of String)
+        With My.Settings
+            Dim lang_short As String = Get_short_name(main_file_name, .lang_mainfile_naming)
 
-        Dim lang_short As String = Get_short_name(main_file_name, My.Settings.lang_mainfile_naming)
-
-        Dim files_list As New List(Of String) From {
-            My.Settings.edd_repo_dir & My.Settings.lang_mainfile_path & main_file_name,
-            My.Settings.edd_repo_dir & My.Settings.lang_uc_path & String.Format(My.Settings.lang_uc_naming, lang_short),
-            My.Settings.edd_repo_dir & My.Settings.lang_je_path & String.Format(My.Settings.lang_je_naming, lang_short),
-            My.Settings.edd_repo_dir & My.Settings.lang_ed_path & String.Format(My.Settings.lang_ed_naming, lang_short)
-        }
-
-        Return files_list
-
+            Dim files_list As New List(Of String) From {
+                .edd_repo_dir & .lang_mainfile_path & main_file_name,
+                .edd_repo_dir & .lang_uc_path & String.Format(.lang_uc_naming, lang_short),
+                .edd_repo_dir & .lang_je_path & String.Format(.lang_je_naming, lang_short),
+                .edd_repo_dir & .lang_ed_path & String.Format(.lang_ed_naming, lang_short)
+            }
+            Return files_list
+        End With
     End Function
 
     'Clear everything when file paths change
@@ -214,13 +200,9 @@ Public Class Main
 
     'Manual load
     Private Sub b_load_compare_Click(sender As Object, e As EventArgs) Handles b_load_compare.Click
-
         If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
             MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
-                   MsgBoxStyle.OkCancel, "Load Files") = MsgBoxResult.Cancel Then
-            Exit Sub
-        End If
-
+                   MsgBoxStyle.OkCancel, "Load Files") = MsgBoxResult.Cancel Then Exit Sub
         Load_files()
     End Sub
 
@@ -310,9 +292,7 @@ Public Class Main
         dg_diffs.Rows.Clear()
         Dim added_count As Integer = Find_diffs(dg_example, dg_translation, dg_diffs, "Added")
         Dim removed_count As Integer = 0
-        If My.Settings.diff_ignore_removed = False Then
-            removed_count = Find_diffs(dg_translation, dg_example, dg_diffs, "Removed")
-        End If
+        If My.Settings.diff_ignore_removed = False Then removed_count = Find_diffs(dg_translation, dg_example, dg_diffs, "Removed")
 
         If added_count = 0 And removed_count = 0 Then
             l_status.Text += " No differences found."
@@ -345,80 +325,78 @@ Public Class Main
         pb_progress.Value = 0
         pb_progress.Maximum = array.Length - 1
 
-        Dim det_id_empty = Like_format(My.Settings.format_id_empty)
-        Dim det_id_translated = Like_format(My.Settings.format_id_translated)
-        If Not My.Settings.format_id_spaces Then
-            det_id_empty = Nospace(det_id_empty)
-            det_id_translated = Nospace(det_id_translated)
-        End If
+        With My.Settings
 
-        For line_index = 0 To array.Length - 1
+            Dim det_id_empty = If(.format_id_spaces, Like_format(.format_id_empty), Nospace(Like_format(.format_id_empty)))
+            Dim det_id_translated = If(.format_id_spaces, Like_format(.format_id_translated), Nospace(Like_format(.format_id_translated)))
 
-            Dim line As String = array(line_index)
+            For line_index = 0 To array.Length - 1
 
-            'Changing \" to ╬ (changes are later reverted)
-            If line.Contains(problematic) Then
-                line = line.Replace(problematic, replacement)
-            End If
+                Dim line As String = array(line_index)
 
-            Dim det_line = line
-            If Not My.Settings.format_id_spaces Then
-                det_line = Nospace(det_line)
-            End If
+                'Changing \" to ╬ (changes are later reverted)
+                If line.Contains(problematic) Then
+                    line = line.Replace(problematic, replacement)
+                End If
 
-            If Not line Like "//*" AndAlso (det_line Like det_id_empty OrElse det_line Like det_id_translated) Then
+                Dim det_line = If(.format_id_spaces, line, Nospace(line))
 
-                Dim line_elements As New List(Of String) From {
-                    Nothing,
-                    Nothing,
-                    Nothing,
-                    Nothing
-                }
+                If Not line Like "//*" AndAlso (det_line Like det_id_empty OrElse det_line Like det_id_translated) Then
 
-                For sect_index As Integer = line_index To 0 Step -1
-                    Dim sect_line As String = array(sect_index)
-                    If sect_line Like Like_format(My.Settings.format_section) Then
-                        line_elements(0) = sect_line.Substring(8)
-                        If Not sectorder.Items.Contains(line_elements(0)) Then
-                            sectorder.Items.Add(line_elements(0))
+                    Dim line_elements As New List(Of String) From {
+                        Nothing,
+                        Nothing,
+                        Nothing,
+                        Nothing
+                    }
+
+                    For sect_index As Integer = line_index To 0 Step -1
+                        Dim sect_line As String = array(sect_index)
+                        If sect_line Like Like_format(.format_section) Then
+                            line_elements(0) = Unformat(sect_line, .format_section)(0)
+                            If Not sectorder.Items.Contains(line_elements(0)) Then
+                                sectorder.Items.Add(line_elements(0))
+                            End If
+                            Exit For
                         End If
-                        Exit For
+                    Next
+
+                    'TODO Make Unformat ignore spaces here if "Spaces are important" setting is not enabled
+                    Dim translation_line As String() = Nothing
+                    If det_line Like det_id_empty And Not det_line Like det_id_translated Then
+                        translation_line = Unformat(line, .format_id_empty)
+                    ElseIf det_line Like det_id_translated And Not det_line Like det_id_empty Then
+                        translation_line = Unformat(line, .format_id_translated)
                     End If
-                Next
 
-                'TODO This needs to be made compatible with customizable format strings. Maybe some kind of sscanf-like reverse String.Format?
-                line_elements(1) = line.Substring(0, line.IndexOf(":"))
-                line_elements(2) = line.Substring(line.IndexOf("""") + 1)
-                line_elements(2) = line_elements(2).Substring(0, line_elements(2).IndexOf(""""))
+                    If translation_line IsNot Nothing Then
+                        For i As Integer = 1 To translation_line.Count()
+                            line_elements(i) = translation_line(i - 1)
+                        Next
+                    End If
 
-                If det_line Like det_id_translated And Not det_line Like det_id_empty Then
-                    'TODO This needs to be made compatible with customizable format strings. Maybe some kind of sscanf-like reverse String.Format?
-                    line_elements(3) = line.Substring(line.IndexOf("=>"))
-                    line_elements(3) = line_elements(3).Substring(line_elements(3).IndexOf("""") + 1)
-                    line_elements(3) = line_elements(3).Substring(0, line_elements(3).IndexOf(""""))
+                    'Changing ╬ back to \"
+                    For i As Integer = 0 To line_elements.Count - 1
+                        If Not String.IsNullOrWhiteSpace(line_elements(i)) AndAlso line_elements(i).Contains(replacement) Then
+                            line_elements(i) = line_elements(i).Replace(replacement, problematic)
+                        End If
+                    Next
+
+                    dg.Rows.Add(line_elements(0), line_elements(1), line_elements(2), line_elements(3))
+                    found_count += 1
+
+                ElseIf line Like Like_format(.format_inclusion) Then
+                    Dim line_inclusion As String = Unformat(line, .format_inclusion)(0)
+                    If Not inclusions.Items.Contains(line_inclusion) Then
+                        inclusions.Items.Add(line_inclusion)
+                    End If
                 End If
 
-                'Changing ╬ back to \"
-                For i As Integer = 0 To line_elements.Count - 1
-                    If Not String.IsNullOrWhiteSpace(line_elements(i)) AndAlso line_elements(i).Contains(replacement) Then
-                        line_elements(i) = line_elements(i).Replace(replacement, problematic)
-                    End If
-                Next
+                pb_progress.Value = line_index
 
-                dg.Rows.Add(line_elements(0), line_elements(1), line_elements(2), line_elements(3))
-                found_count += 1
+            Next
 
-            ElseIf line Like Like_format(My.Settings.format_inclusion) Then
-                'TODO This needs to be made compatible with customizable format strings. Maybe some kind of sscanf-like reverse String.Format?
-                Dim line_inclusion As String = line.Substring(8)
-                If Not inclusions.Items.Contains(line_inclusion) Then
-                    inclusions.Items.Add(line_inclusion)
-                End If
-            End If
-
-            pb_progress.Value = line_index
-
-        Next
+        End With
 
         If sectorder.Items.Count > 0 Then
             sectorder.SelectedIndex = 0
@@ -469,9 +447,8 @@ Public Class Main
             If diff_found Then
 
                 dg_diff.Rows.Add(row_from.Cells(0).Value, row_from.Cells(1).Value, row_from.Cells(2).Value, row_from.Cells(3).Value, difftype)
-                If entire_sect_diff_found Then
-                    dg_diff.Rows(dg_diff.Rows.GetLastRow(0)).Cells(0).Style = style_gray
-                End If
+
+                If entire_sect_diff_found Then dg_diff.Rows(dg_diff.Rows.GetLastRow(0)).Cells(0).Style = style_gray
                 If difftype = "Added" Then
                     dg_diff.Rows(dg_diff.Rows.GetLastRow(0)).Cells(4).Style = style_green
                 ElseIf difftype = "Removed" Then
@@ -657,21 +634,16 @@ Public Class Main
                             Dim tran_name As String = translation_row.Cells(1).Value
 
                             If diff_section = tran_section And diff_name = tran_name Then
-
                                 dg_translation.Rows.Remove(translation_row)
                                 removed_id_count += 1
-
                             End If
 
                         Next
 
                         'Removing sections from translation section order if they aren't present in example
                         If Not String.IsNullOrWhiteSpace(diff_section) AndAlso
-                            (cb_tran_sectorder.Items.Contains(diff_section) And Not cb_exmp_sectorder.Items.Contains(diff_section)) Then
-
-                            cb_tran_sectorder.Items.Remove(diff_section)
-
-                        End If
+                            cb_tran_sectorder.Items.Contains(diff_section) AndAlso
+                            Not cb_exmp_sectorder.Items.Contains(diff_section) Then cb_tran_sectorder.Items.Remove(diff_section)
 
                     End If
 
@@ -683,18 +655,11 @@ Public Class Main
             dg_diffs.Rows.Clear()
 
             l_status.Text = String.Format("Added {0} IDs.", added_id_count)
+            If removed_id_count > 0 Then l_status.Text += String.Format(" Removed {0} IDs.", removed_id_count)
 
-            If removed_id_count > 0 Then
-                l_status.Text += String.Format(" Removed {0} IDs.", removed_id_count)
-            End If
-
-            'Update_id_counters()
             Translation_hide_show_rows(False)
 
-        Else
-
-            MsgBox("No differences found, nothing to apply.", MsgBoxStyle.Exclamation, "No Differences Found")
-
+        Else MsgBox("No differences found, nothing to apply.", MsgBoxStyle.Exclamation, "No Differences Found")
         End If
     End Sub
 #End Region
@@ -703,9 +668,7 @@ Public Class Main
     'Add new inclusion
     Private Sub Tr_incl_add_Click(sender As Object, e As EventArgs) Handles tr_incl_add.Click
         Dim new_inclusion As String = InputBox("File name:", "New Inclusion")
-        If Not String.IsNullOrWhiteSpace(new_inclusion) Then
-            cb_tran_inclusions.Items.Add(new_inclusion)
-        End If
+        If Not String.IsNullOrWhiteSpace(new_inclusion) Then cb_tran_inclusions.Items.Add(new_inclusion)
     End Sub
 
     'Edit inclusion
@@ -714,23 +677,17 @@ Public Class Main
             Dim selected_index As Integer = cb_tran_inclusions.SelectedIndex
             Dim selected_inclusion As String = cb_tran_inclusions.Items(selected_index)
             Dim edited_inclusion As String = InputBox("File name:", "Edit Inclusion", selected_inclusion)
-            If Not String.IsNullOrWhiteSpace(edited_inclusion) Then
-                cb_tran_inclusions.Items(selected_index) = edited_inclusion
-            End If
-        Else
-            MsgBox("Select an inclusion first.", MsgBoxStyle.Information, "Edit Inclusion")
+            If Not String.IsNullOrWhiteSpace(edited_inclusion) Then cb_tran_inclusions.Items(selected_index) = edited_inclusion
+        Else MsgBox("Select an inclusion first.", MsgBoxStyle.Information, "Edit Inclusion")
         End If
     End Sub
 
     'Remove selected inclusion
-    Private Sub tr_incl_remove_Click(sender As Object, e As EventArgs) Handles tr_incl_remove.Click
+    Private Sub Tr_incl_remove_Click(sender As Object, e As EventArgs) Handles tr_incl_remove.Click
         If cb_tran_inclusions.SelectedItem IsNot Nothing Then
             If MsgBox("Are you sure that you want to remove the " & cb_tran_inclusions.SelectedItem.ToString() & " inclusion?",
-                      MsgBoxStyle.OkCancel, "Remove Inclusion") = MsgBoxResult.Ok Then
-                cb_tran_inclusions.Items.Remove(cb_tran_inclusions.SelectedItem)
-            End If
-        Else
-            MsgBox("Select an inclusion first.", MsgBoxStyle.Information, "Remove Inclusion")
+                      MsgBoxStyle.OkCancel, "Remove Inclusion") = MsgBoxResult.Ok Then cb_tran_inclusions.Items.Remove(cb_tran_inclusions.SelectedItem)
+        Else MsgBox("Select an inclusion first.", MsgBoxStyle.Information, "Remove Inclusion")
         End If
     End Sub
 #End Region
@@ -743,9 +700,7 @@ Public Class Main
                                                                  String.Format(My.Settings.lang_mainfile_naming.Substring(0, My.Settings.lang_mainfile_naming.IndexOf(".")), "english", "en")),
                                                                  "Create New Language")
 
-        If String.IsNullOrWhiteSpace(new_language_name) Then
-            Exit Sub
-        End If
+        If String.IsNullOrWhiteSpace(new_language_name) Then Exit Sub
 
         With My.Settings
 
@@ -766,9 +721,7 @@ Public Class Main
             Dim newlang_filepaths_list As List(Of String) = Filepaths_main_uc_je_ed(new_language_name & .lang_mainfile_naming.Substring(.lang_mainfile_naming.IndexOf(".")))
 
             If File.Exists(newlang_filepaths_list(0)) AndAlso MsgBox(new_language_name & " already exists. Do you want to overwrite that translation?",
-                                                                     MsgBoxStyle.OkCancel, "Translation Already Exists") = DialogResult.Cancel Then
-                Exit Sub
-            End If
+                                                                     MsgBoxStyle.OkCancel, "Translation Already Exists") = DialogResult.Cancel Then Exit Sub
 
             'Reading example
             Dim file_reader As New StreamReader(example_filepaths_list(0), True)
@@ -791,9 +744,8 @@ Public Class Main
             'Removing example inclusions
             For exmp_line_index As Integer = lines_list.Count - 1 To 0 Step -1
                 Dim current_line As String = lines_list(exmp_line_index)
-                If String.IsNullOrWhiteSpace(current_line) OrElse current_line Like Like_format(.format_inclusion) Then
-                    lines_list.RemoveAt(exmp_line_index)
-                End If
+                If String.IsNullOrWhiteSpace(current_line) OrElse
+                    current_line Like Like_format(.format_inclusion) Then lines_list.RemoveAt(exmp_line_index)
             Next
 
             'Adding inclusions
@@ -831,23 +783,17 @@ Public Class Main
             l_status.Text = String.Format("Successfully created {0} translation files.", new_language_name)
 
             Detect_languages()
-            If cb_language.Items.Contains(new_language_name) Then
-                cb_language.SelectedIndex = cb_language.Items.IndexOf(new_language_name)
-            End If
+            If cb_language.Items.Contains(new_language_name) Then cb_language.SelectedIndex = cb_language.Items.IndexOf(new_language_name)
 
             'Auto-Set & Auto-Load
             If .auto_set_on_new_language Then
                 If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
                     MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
-                           MsgBoxStyle.OkCancel, "Auto-Load New Language") = MsgBoxResult.Cancel Then
-                    Exit Sub
-                End If
+                           MsgBoxStyle.OkCancel, "Auto-Load New Language") = MsgBoxResult.Cancel Then Exit Sub
                 Clear_everything()
                 tb_example_path.Text = example_filepaths_list(0)
                 tb_translation_path.Text = newlang_filepaths_list(0)
-                If .auto_load_files Then
-                    Load_files()
-                End If
+                If .auto_load_files Then Load_files()
             End If
 
         End With
@@ -860,7 +806,6 @@ Public Class Main
 
     'TODO Something probably in here (or when applying differences) caused a section to be split in two. Needs to be diagnosed and fixed.
     Private Sub Save_translation(sender As Object, e As EventArgs) Handles b_save_translation.Click
-
         If dg_translation.Rows.Count > 0 Then
 
             With My.Settings
@@ -879,8 +824,7 @@ Public Class Main
                     End If
                     If String.IsNullOrWhiteSpace(row.Cells(3).Value) Then
                         lines_list.Add(String.Format(.format_id_empty, row.Cells(1).Value, row.Cells(2).Value))
-                    Else
-                        lines_list.Add(String.Format(.format_id_translated, row.Cells(1).Value, row.Cells(2).Value, row.Cells(3).Value))
+                    Else lines_list.Add(String.Format(.format_id_translated, row.Cells(1).Value, row.Cells(2).Value, row.Cells(3).Value))
                     End If
                     pb_progress.Value += 1
                 Next
@@ -945,12 +889,8 @@ Public Class Main
 
             End With
 
-        Else
-
-            MsgBox("File has not been loaded. Nothing to save.", MsgBoxStyle.Information, "Nothing to Save")
-
+        Else MsgBox("File has not been loaded. Nothing to save.", MsgBoxStyle.Information, "Nothing to Save")
         End If
-
     End Sub
 
 #End Region
@@ -960,18 +900,21 @@ Public Class Main
 
     'Search
     Private Sub Update_search_filter(sender As Object, e As EventArgs) Handles b_tran_search.Click, b_tran_search_reset.Click
-
         Translation_hide_show_rows(sender Is b_tran_search)
-
     End Sub
 
     'Hide or show all IDs in translation depending on "Hide Translated" and "Search" options
     Private Sub Translation_hide_show_rows(search_mode As Boolean)
         If dg_translation.Rows.Count > 0 Then
-            Dim dg_util As New RowFilteringOptimization(dg_translation)
-            dg_util.Start()
             pb_progress.Value = 0
             pb_progress.Maximum = dg_translation.Rows.Count
+            'Disabling column auto size to speed up hiding rows
+            Dim column_mode_backup(dg_translation.Columns.Count) As DataGridViewAutoSizeColumnMode
+            For Each col As DataGridViewColumn In dg_translation.Columns
+                column_mode_backup(col.Index) = col.AutoSizeMode
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+            Next
+            'Checking if rows match requirements and setting visibility
             For Each row As DataGridViewRow In dg_translation.Rows
                 Dim match As Boolean = Not search_mode OrElse String.IsNullOrWhiteSpace(tb_tran_search.Text)
                 If Not match Then
@@ -985,7 +928,10 @@ Public Class Main
                 row.Visible = (String.IsNullOrWhiteSpace(row.Cells(3).Value) OrElse Not My.Settings.tran_hide_translated) AndAlso match
                 pb_progress.Value += 1
             Next
-            dg_util.Finish()
+            'Restoring column auto size
+            For Each col As DataGridViewColumn In dg_translation.Columns
+                col.AutoSizeMode = column_mode_backup(col.Index)
+            Next
         End If
     End Sub
 
@@ -1033,14 +979,11 @@ Public Class Main
 
     'Copy example text to translation text
     Private Sub Copy_example_dc(sender As Object, e As DataGridViewCellEventArgs) Handles dg_translation.CellDoubleClick, dg_diffs.CellDoubleClick
-        If e.ColumnIndex = 2 AndAlso Not e.RowIndex < 0 Then
-            sender.Rows(e.RowIndex).Cells(3).Value = sender.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-        End If
+        If e.ColumnIndex = 2 AndAlso Not e.RowIndex < 0 Then sender.Rows(e.RowIndex).Cells(3).Value = sender.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
     End Sub
     Private Sub Copy_example_sc(sender As Object, e As DataGridViewCellEventArgs) Handles dg_translation.CellClick, dg_diffs.CellClick
-        If e.ColumnIndex = 2 AndAlso Not e.RowIndex < 0 AndAlso String.IsNullOrWhiteSpace(sender.Rows(e.RowIndex).Cells(3).Value) Then
-            sender.Rows(e.RowIndex).Cells(3).Value = sender.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-        End If
+        If e.ColumnIndex = 2 AndAlso Not e.RowIndex < 0 AndAlso
+            String.IsNullOrWhiteSpace(sender.Rows(e.RowIndex).Cells(3).Value) Then sender.Rows(e.RowIndex).Cells(3).Value = sender.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
     End Sub
 
     'Clear all tables
@@ -1069,9 +1012,7 @@ Public Class Main
 
     'Update last used language
     Private Sub Change_language(sender As Object, e As EventArgs) Handles cb_language.SelectedIndexChanged
-        If Not String.IsNullOrWhiteSpace(cb_language.Text) Then
-            My.Settings.last_language = cb_language.Text
-        End If
+        If Not String.IsNullOrWhiteSpace(cb_language.Text) Then My.Settings.last_language = cb_language.Text
     End Sub
 
     'Update settings from unbindable controls
@@ -1154,21 +1095,18 @@ Public Class Main
 
             If .diff_wordwrap Then
                 dg_diffs.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True
-            Else
-                dg_diffs.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False
+            Else dg_diffs.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False
             End If
 
             If .tran_wordwrap Then
                 dg_translation.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True
-            Else
-                dg_translation.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False
+            Else dg_translation.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False
             End If
             c_tran_example.Visible = .tran_show_example
 
             If .exmp_wordwrap Then
                 dg_example.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.True
-            Else
-                dg_example.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False
+            Else dg_example.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False
             End If
             c_exmp_translation.Visible = .exmp_show_translation
 
@@ -1203,6 +1141,7 @@ Public Class Main
         Icon = My.Resources.EDDTC
         cb_tran_inclusions.ComboBox.ContextMenuStrip = edit_translation_inclusions
         With My.Settings
+            'TODO Add checking for file structure format strings as well
             If Not (Correct_format(.lang_mainfile_naming, 1) And Correct_format(.lang_uc_naming, 0) And
                 Correct_format(.lang_je_naming, 0) And Correct_format(.lang_ed_naming, 0)) Then
                 My.Settings.Reset()
@@ -1211,19 +1150,14 @@ Public Class Main
             Refresh_settings()
             If .auto_check_edd_repo AndAlso Not String.IsNullOrWhiteSpace(.edd_repo_dir) Then
                 Check_edd_repo()
-            Else
-                Detect_languages()
+            Else Detect_languages()
             End If
         End With
     End Sub
 
     'Actions to do when program closes
     Private Sub On_close(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-
-        If Not String.IsNullOrWhiteSpace(cb_language.Text) Then
-            My.Settings.last_language = cb_language.Text
-        End If
-
+        If Not String.IsNullOrWhiteSpace(cb_language.Text) Then My.Settings.last_language = cb_language.Text
     End Sub
 
 #End Region

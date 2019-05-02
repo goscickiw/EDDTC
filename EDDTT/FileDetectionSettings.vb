@@ -33,6 +33,7 @@ Public Class FileDetectionSettings
 
     Private Sub On_close(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         'TODO Simplify this
+        'TODO Add checking for file structure format strings as well
         With My.Settings
             If Not Correct_format(.lang_mainfile_naming, 1) Then
                 .lang_mainfile_naming = temp_mainfile_naming
