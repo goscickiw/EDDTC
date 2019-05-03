@@ -19,7 +19,6 @@ Public Class Main
 
 
     Private Const problematic As String = "\"""
-    Private Const replacement As String = "╬"
 
     Dim file_encoding As Encoding = Nothing
 
@@ -240,6 +239,11 @@ Public Class Main
             Exit Sub
         End Try
         example_reader.Close()
+        If example.Contains(My.Settings.replacement_chr) Then
+            MsgBox(String.Format("The {0} character is used within the example file. Please go to File Detection Settings/File Structure to change it to something that isn't used in the files.",
+                                 My.Settings.replacement_chr), MsgBoxStyle.Exclamation, "Cannot Load")
+            Exit Sub
+        End If
 
         'Reading translation file
         If String.IsNullOrWhiteSpace(tb_translation_path.Text) Then
@@ -274,6 +278,11 @@ Public Class Main
             Exit Sub
         End Try
         translation_reader.Close()
+        If translation.Contains(My.Settings.replacement_chr) Then
+            MsgBox(String.Format("The {0} character is used within the example file. Please go to File Detection Settings/File Structure to change it to something that isn't used in the files.",
+                                 My.Settings.replacement_chr), MsgBoxStyle.Exclamation, "Cannot Load")
+            Exit Sub
+        End If
 
         'Display Encoding
         If file_encoding IsNot Nothing Then
@@ -336,7 +345,7 @@ Public Class Main
 
                 'Changing \" to ╬ (changes are later reverted)
                 If line.Contains(problematic) Then
-                    line = line.Replace(problematic, replacement)
+                    line = line.Replace(problematic, .replacement_chr)
                 End If
 
                 Dim det_line = If(.format_id_spaces, line, Nospace(line))
@@ -353,7 +362,7 @@ Public Class Main
                     For sect_index As Integer = line_index To 0 Step -1
                         Dim sect_line As String = array(sect_index)
                         If sect_line Like Like_format(.format_section) Then
-                            line_elements(0) = Unformat(sect_line, .format_section)(0)
+                            line_elements(0) = Unformat(sect_line, .format_section, False)(0)
                             If Not sectorder.Items.Contains(line_elements(0)) Then
                                 sectorder.Items.Add(line_elements(0))
                             End If
@@ -361,12 +370,11 @@ Public Class Main
                         End If
                     Next
 
-                    'TODO Make Unformat ignore spaces here if "Spaces are important" setting is not enabled
                     Dim translation_line As String() = Nothing
                     If det_line Like det_id_empty And Not det_line Like det_id_translated Then
-                        translation_line = Unformat(line, .format_id_empty)
+                        translation_line = Unformat(line, .format_id_empty, Not .format_id_spaces)
                     ElseIf det_line Like det_id_translated And Not det_line Like det_id_empty Then
-                        translation_line = Unformat(line, .format_id_translated)
+                        translation_line = Unformat(line, .format_id_translated, Not .format_id_spaces)
                     End If
 
                     If translation_line IsNot Nothing Then
@@ -377,8 +385,8 @@ Public Class Main
 
                     'Changing ╬ back to \"
                     For i As Integer = 0 To line_elements.Count - 1
-                        If Not String.IsNullOrWhiteSpace(line_elements(i)) AndAlso line_elements(i).Contains(replacement) Then
-                            line_elements(i) = line_elements(i).Replace(replacement, problematic)
+                        If Not String.IsNullOrWhiteSpace(line_elements(i)) AndAlso line_elements(i).Contains(.replacement_chr) Then
+                            line_elements(i) = line_elements(i).Replace(.replacement_chr, problematic)
                         End If
                     Next
 
@@ -386,7 +394,7 @@ Public Class Main
                     found_count += 1
 
                 ElseIf line Like Like_format(.format_inclusion) Then
-                    Dim line_inclusion As String = Unformat(line, .format_inclusion)(0)
+                    Dim line_inclusion As String = Unformat(line, .format_inclusion, False)(0)
                     If Not inclusions.Items.Contains(line_inclusion) Then
                         inclusions.Items.Add(line_inclusion)
                     End If
@@ -1141,11 +1149,12 @@ Public Class Main
         Icon = My.Resources.EDDTC
         cb_tran_inclusions.ComboBox.ContextMenuStrip = edit_translation_inclusions
         With My.Settings
-            'TODO Add checking for file structure format strings as well
             If Not (Correct_format(.lang_mainfile_naming, 1) And Correct_format(.lang_uc_naming, 0) And
-                Correct_format(.lang_je_naming, 0) And Correct_format(.lang_ed_naming, 0)) Then
+                Correct_format(.lang_je_naming, 0) And Correct_format(.lang_ed_naming, 0) And
+                Correct_format(.format_section, 0) And Correct_format(.format_id_empty, 1) And
+                Correct_format(.format_id_translated, 2) And Correct_format(.format_inclusion, 0)) Then
                 My.Settings.Reset()
-                MsgBox("Some naming format settings were not correct. As this would prevent the program from starting, settings were reset to default.", MsgBoxStyle.Critical, "Invalid Settings")
+                MsgBox("Some file naming or line format settings were not correct. Settings were reset to default.", MsgBoxStyle.Critical, "Invalid Settings")
             End If
             Refresh_settings()
             If .auto_check_edd_repo AndAlso Not String.IsNullOrWhiteSpace(.edd_repo_dir) Then

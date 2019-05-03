@@ -53,11 +53,13 @@ Partial Class FileDetectionSettings
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tp_file_structure = New System.Windows.Forms.TabPage()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.tb_ed_naming = New System.Windows.Forms.TextBox()
         Me.tb_ed_path = New System.Windows.Forms.TextBox()
         Me.tb_je_naming = New System.Windows.Forms.TextBox()
@@ -67,6 +69,7 @@ Partial Class FileDetectionSettings
         Me.tb_exfile_name = New System.Windows.Forms.TextBox()
         Me.tb_mainfile_naming = New System.Windows.Forms.TextBox()
         Me.tb_mainfile_path = New System.Windows.Forms.TextBox()
+        Me.tb_replacement_chr = New System.Windows.Forms.TextBox()
         Me.cb_format_id_spaces = New System.Windows.Forms.CheckBox()
         Me.tb_format_id_translated = New System.Windows.Forms.TextBox()
         Me.tb_format_id_empty = New System.Windows.Forms.TextBox()
@@ -81,6 +84,7 @@ Partial Class FileDetectionSettings
         Me.tp_file_structure.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'OK_Button
@@ -291,6 +295,8 @@ Partial Class FileDetectionSettings
         '
         Me.tp_file_structure.BackColor = System.Drawing.SystemColors.Control
         Me.tp_file_structure.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.tp_file_structure.Controls.Add(Me.GroupBox7)
+        Me.tp_file_structure.Controls.Add(Me.GroupBox6)
         Me.tp_file_structure.Controls.Add(Me.GroupBox5)
         Me.tp_file_structure.Location = New System.Drawing.Point(4, 22)
         Me.tp_file_structure.Name = "tp_file_structure"
@@ -303,7 +309,6 @@ Partial Class FileDetectionSettings
         '
         Me.GroupBox5.AutoSize = True
         Me.GroupBox5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.GroupBox5.Controls.Add(Me.GroupBox6)
         Me.GroupBox5.Controls.Add(Me.tb_format_inclusion)
         Me.GroupBox5.Controls.Add(Me.Label13)
         Me.GroupBox5.Controls.Add(Me.tb_format_section)
@@ -312,21 +317,10 @@ Partial Class FileDetectionSettings
         Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.GroupBox5.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(306, 187)
+        Me.GroupBox5.Size = New System.Drawing.Size(306, 85)
         Me.GroupBox5.TabIndex = 10
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Sections and Inclusions"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.Label10.Location = New System.Drawing.Point(3, 16)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(144, 13)
-        Me.Label10.TabIndex = 1
-        Me.Label10.Text = "Section ({0} = section name):"
         '
         'Label13
         '
@@ -339,6 +333,17 @@ Partial Class FileDetectionSettings
         Me.Label13.TabIndex = 8
         Me.Label13.Text = "Inclusion ({0} = included file name):"
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.Label10.Location = New System.Drawing.Point(3, 16)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(144, 13)
+        Me.Label10.TabIndex = 1
+        Me.Label10.Text = "Section ({0} = section name):"
+        '
         'GroupBox6
         '
         Me.GroupBox6.AutoSize = True
@@ -350,12 +355,23 @@ Partial Class FileDetectionSettings
         Me.GroupBox6.Controls.Add(Me.Label11)
         Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.GroupBox6.Location = New System.Drawing.Point(3, 82)
+        Me.GroupBox6.Location = New System.Drawing.Point(3, 88)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(300, 102)
-        Me.GroupBox6.TabIndex = 11
+        Me.GroupBox6.Size = New System.Drawing.Size(306, 102)
+        Me.GroupBox6.TabIndex = 12
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Translation IDs"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.Label12.Location = New System.Drawing.Point(3, 49)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(300, 13)
+        Me.Label12.TabIndex = 15
+        Me.Label12.Text = "Translated ID ({0} = ID name, {1} = example, {2} = translation):"
         '
         'Label11
         '
@@ -368,16 +384,33 @@ Partial Class FileDetectionSettings
         Me.Label11.TabIndex = 13
         Me.Label11.Text = "Empty ID ({0} = ID name, {1} = example):"
         '
-        'Label12
+        'GroupBox7
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        Me.Label12.Location = New System.Drawing.Point(3, 49)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(300, 13)
-        Me.Label12.TabIndex = 15
-        Me.Label12.Text = "Translated ID ({0} = ID name, {1} = example, {2} = translation):"
+        Me.GroupBox7.AutoSize = True
+        Me.GroupBox7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.GroupBox7.Controls.Add(Me.tb_replacement_chr)
+        Me.GroupBox7.Controls.Add(Me.Label14)
+        Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.GroupBox7.Location = New System.Drawing.Point(3, 190)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(306, 97)
+        Me.GroupBox7.TabIndex = 13
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Other"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.Label14.Location = New System.Drawing.Point(3, 16)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(293, 52)
+        Me.Label14.TabIndex = 14
+        Me.Label14.Text = "Due to how this program loads data from files, \"" needs to be" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "temporarily replac" &
+    "ed with a different character, that isn't used" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "anywhere in the translation file" &
+    "." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You can set this character here:"
         '
         'tb_ed_naming
         '
@@ -478,6 +511,18 @@ Partial Class FileDetectionSettings
         Me.tb_mainfile_path.TabIndex = 1
         Me.tb_mainfile_path.Text = Global.EDDTT.My.MySettings.Default.lang_mainfile_path
         '
+        'tb_replacement_chr
+        '
+        Me.tb_replacement_chr.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.EDDTT.My.MySettings.Default, "replacement_chr", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.tb_replacement_chr.Dock = System.Windows.Forms.DockStyle.Top
+        Me.tb_replacement_chr.Font = New System.Drawing.Font("Courier New", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        Me.tb_replacement_chr.Location = New System.Drawing.Point(3, 68)
+        Me.tb_replacement_chr.MaxLength = 1
+        Me.tb_replacement_chr.Name = "tb_replacement_chr"
+        Me.tb_replacement_chr.Size = New System.Drawing.Size(300, 26)
+        Me.tb_replacement_chr.TabIndex = 15
+        Me.tb_replacement_chr.Text = Global.EDDTT.My.MySettings.Default.replacement_chr
+        '
         'cb_format_id_spaces
         '
         Me.cb_format_id_spaces.AutoSize = True
@@ -487,7 +532,7 @@ Partial Class FileDetectionSettings
         Me.cb_format_id_spaces.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
         Me.cb_format_id_spaces.Location = New System.Drawing.Point(3, 82)
         Me.cb_format_id_spaces.Name = "cb_format_id_spaces"
-        Me.cb_format_id_spaces.Size = New System.Drawing.Size(294, 17)
+        Me.cb_format_id_spaces.Size = New System.Drawing.Size(300, 17)
         Me.cb_format_id_spaces.TabIndex = 11
         Me.cb_format_id_spaces.Text = "Spaces are important when loading"
         Me.cb_format_id_spaces.UseVisualStyleBackColor = True
@@ -499,7 +544,7 @@ Partial Class FileDetectionSettings
         Me.tb_format_id_translated.Font = New System.Drawing.Font("Courier New", 8.25!)
         Me.tb_format_id_translated.Location = New System.Drawing.Point(3, 62)
         Me.tb_format_id_translated.Name = "tb_format_id_translated"
-        Me.tb_format_id_translated.Size = New System.Drawing.Size(294, 20)
+        Me.tb_format_id_translated.Size = New System.Drawing.Size(300, 20)
         Me.tb_format_id_translated.TabIndex = 16
         Me.tb_format_id_translated.Text = Global.EDDTT.My.MySettings.Default.format_id_translated
         '
@@ -510,7 +555,7 @@ Partial Class FileDetectionSettings
         Me.tb_format_id_empty.Font = New System.Drawing.Font("Courier New", 8.25!)
         Me.tb_format_id_empty.Location = New System.Drawing.Point(3, 29)
         Me.tb_format_id_empty.Name = "tb_format_id_empty"
-        Me.tb_format_id_empty.Size = New System.Drawing.Size(294, 20)
+        Me.tb_format_id_empty.Size = New System.Drawing.Size(300, 20)
         Me.tb_format_id_empty.TabIndex = 14
         Me.tb_format_id_empty.Text = Global.EDDTT.My.MySettings.Default.format_id_empty
         '
@@ -567,6 +612,8 @@ Partial Class FileDetectionSettings
         Me.GroupBox5.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -602,9 +649,12 @@ Partial Class FileDetectionSettings
     Friend WithEvents tb_format_section As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents cb_format_id_spaces As CheckBox
     Friend WithEvents tb_format_id_translated As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents tb_format_id_empty As TextBox
     Friend WithEvents Label11 As Label
-    Friend WithEvents cb_format_id_spaces As CheckBox
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents tb_replacement_chr As TextBox
 End Class

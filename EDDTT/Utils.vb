@@ -71,16 +71,14 @@ Module Utils
 #Region "Unformat"
 
     'Unformat
-    Function Unformat(str As String, format As String) As String()
+    Function Unformat(str As String, format As String, ignore_spaces As Boolean) As String()
         format = Regex.Escape(format).Replace("\{", "{")
+        If ignore_spaces Then format = format.Replace("\ ", "\ ?")
         Dim element_count As Integer = 0
         While True
             Dim element As String = "{" & element_count & "}"
             If Not format.Contains(element) Then Exit While
             format = format.Replace(element, String.Format("(?'group{0}'.*)", element_count))
-            'TODO Something needs to be done about this
-            'format.ReplaceFirst(element, String.Format("(?'group{0}'.*)", element_count))
-            'format = format.Replace(element, String.Format("\{0}", element_count))
             element_count += 1
         End While
 

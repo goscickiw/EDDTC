@@ -403,6 +403,18 @@ Namespace My
                 Me("format_id_spaces") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("╬")>  _
+        Public Property replacement_chr() As String
+            Get
+                Return CType(Me("replacement_chr"),String)
+            End Get
+            Set
+                Me("replacement_chr") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

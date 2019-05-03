@@ -17,6 +17,10 @@ Public Class FileDetectionSettings
     Private temp_uc_naming As String = Nothing
     Private temp_je_naming As String = Nothing
     Private temp_ed_naming As String = Nothing
+    Private temp_section As String = Nothing
+    Private temp_id_empty As String = Nothing
+    Private temp_id_translated As String = Nothing
+    Private temp_inclusion As String = Nothing
 
     Private Sub On_open(sender As Object, e As EventArgs) Handles MyBase.Load
         With My.Settings
@@ -24,6 +28,10 @@ Public Class FileDetectionSettings
             temp_uc_naming = .lang_uc_naming
             temp_je_naming = .lang_je_naming
             temp_ed_naming = .lang_ed_naming
+            temp_section = .format_section
+            temp_id_empty = .format_id_empty
+            temp_id_translated = .format_id_translated
+            temp_inclusion = .format_inclusion
         End With
     End Sub
 
@@ -33,7 +41,6 @@ Public Class FileDetectionSettings
 
     Private Sub On_close(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         'TODO Simplify this
-        'TODO Add checking for file structure format strings as well
         With My.Settings
             If Not Correct_format(.lang_mainfile_naming, 1) Then
                 .lang_mainfile_naming = temp_mainfile_naming
@@ -50,6 +57,22 @@ Public Class FileDetectionSettings
             If Not Correct_format(.lang_ed_naming, 0) Then
                 .lang_ed_naming = temp_ed_naming
                 MsgBox("Elite Dangerous file naming format is not correct. Restored previous setting.", MsgBoxStyle.Exclamation, "Invalid Format")
+            End If
+            If Not Correct_format(.format_section, 0) Then
+                .format_section = temp_section
+                MsgBox("Section line format is not correct. Restored previous setting.", MsgBoxStyle.Exclamation, "Invalid Format")
+            End If
+            If Not Correct_format(.format_id_empty, 1) Then
+                .format_id_empty = temp_id_empty
+                MsgBox("Empty ID line format is not correct. Restored previous setting.", MsgBoxStyle.Exclamation, "Invalid Format")
+            End If
+            If Not Correct_format(.format_id_translated, 2) Then
+                .format_id_translated = temp_id_translated
+                MsgBox("Translated ID line format is not correct. Restored previous setting.", MsgBoxStyle.Exclamation, "Invalid Format")
+            End If
+            If Not Correct_format(.format_inclusion, 0) Then
+                .format_inclusion = temp_inclusion
+                MsgBox("Inclusion line format is not correct. Restored previous setting.", MsgBoxStyle.Exclamation, "Invalid Format")
             End If
         End With
     End Sub
