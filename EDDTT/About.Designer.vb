@@ -139,7 +139,7 @@ Partial Class About
         Me.l_github_page.Size = New System.Drawing.Size(70, 13)
         Me.l_github_page.TabIndex = 3
         Me.l_github_page.TabStop = True
-        Me.l_github_page.Tag = "https://github.com/goscickiw/EDDTC"
+        Me.l_github_page.Tag = "https://github.com/goscickiw/EDDTT"
         Me.l_github_page.Text = "GitHub page"
         '
         'TextBoxLicense
