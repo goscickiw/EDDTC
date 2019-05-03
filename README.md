@@ -2,6 +2,7 @@
 EDD Translation Tool - automated GUI tool for translating [EDDiscovery](https://github.com/EDDiscovery/EDDiscovery)
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build status](https://ci.appveyor.com/api/projects/status/38m7ytk14dbcig7f/branch/master?svg=true)](https://ci.appveyor.com/project/goscickiw/eddtt/branch/master)
 
 Download here: https://github.com/goscickiw/EDDTC/releases/latest
 
@@ -35,6 +36,7 @@ At this point, the only thing you need to do to load the files is to go to the <
 ### Editing the Translation
 #### 1. Editing
 You can edit the translation in the `Translation Text (editable)` column of the *Translation* and *Differences* tables.
+
 
 If you want to preserve the format, hidden spaces, special characters etc. from example, you can click on the corresponding cell in the `Example Text` column to copy its contents into the `Translation Text (editable)` column. If the translation cell is not empty, you need to double click instead.
 #### 2. Differences
