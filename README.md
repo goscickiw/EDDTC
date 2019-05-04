@@ -19,8 +19,10 @@ You can use EDDTT in two ways:
 
 **The second (better) way** uses your local EDDiscovery repository path to automatically detect present languages and set the paths to them. It's much easier and faster than setting the paths manually every time.  
 In order to use it, you need to set the repository directory first.
+
+0. If you want to use the location of your EDDiscovery installation instead of EDD local repository, go to <kbd>File Detection Settings</kbd>/<kbd>Paths and Naming</kbd> and change every Path to just `\`.
 1. Go to the <kbd>EDD repository</kbd> menu and press <kbd>Set EDD repository directory</kbd>.
-2. Select the path to your local EDDiscovery repository (It should be the folder with `EDDiscovery.sln` in it).
+2. Select the path to your local EDDiscovery repository (It should be the folder with `EDDiscovery.sln` in it, or the folder with `EDDiscovery.exe` if you use step 0).
 3. The path is stored in program settings, so you don't have to set it every time you start EDDTT.
 
 When you set the path properly, the language selection, the <kbd>Auto-Set Paths</kbd> menu and the <kbd>New Language</kbd> button will be unlocked.  
