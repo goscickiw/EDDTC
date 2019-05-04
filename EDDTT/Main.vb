@@ -20,7 +20,8 @@ Public Class Main
 
     Private Const problematic As String = "\"""
 
-    Dim file_encoding As Encoding = Nothing
+    Private file_encoding As Encoding = Nothing
+    Private translation_modified As Boolean = False
 
 
 #Region "Setting EDD Repository"
@@ -93,11 +94,9 @@ Public Class Main
 #Region "Detecting and setting paths"
 
     'Set file paths manually
-    Private Sub Set_example_file_path(sender As Object, e As EventArgs) Handles b_example_browse.Click, b_translation_browse.Click
+    Private Sub Set_file_paths_manually(sender As Object, e As EventArgs) Handles b_example_browse.Click, b_translation_browse.Click
 
-        If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
-            MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
-                   MsgBoxStyle.OkCancel, "Set Path") = MsgBoxResult.Cancel Then Exit Sub
+        If Unsaved_changes_detected("Set Path") Then Exit Sub
 
         If set_file_path.ShowDialog() = DialogResult.OK Then
             Select Case True
@@ -113,9 +112,7 @@ Public Class Main
     'Auto-Set Paths
     Private Sub Auto_detect_paths(sender As Object, e As EventArgs) Handles b_setpaths_mainfile.Click, b_setpaths_uc.Click, b_setpaths_je.Click, b_setpaths_ed.Click
 
-        If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
-            MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
-                   MsgBoxStyle.OkCancel, "Set Path") = MsgBoxResult.Cancel Then Exit Sub
+        If Unsaved_changes_detected("Set Path") Then Exit Sub
 
         Dim mainfile_ext As String = My.Settings.lang_mainfile_naming.Substring(My.Settings.lang_mainfile_naming.IndexOf("."))
         Dim mainfile_name As String = cb_language.Text & mainfile_ext
@@ -198,10 +195,8 @@ Public Class Main
 #Region "Loading Files"
 
     'Manual load
-    Private Sub b_load_compare_Click(sender As Object, e As EventArgs) Handles b_load_compare.Click
-        If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
-            MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
-                   MsgBoxStyle.OkCancel, "Load Files") = MsgBoxResult.Cancel Then Exit Sub
+    Private Sub Click_Load_files(sender As Object, e As EventArgs) Handles b_load_compare.Click
+        If Unsaved_changes_detected("Load Files") Then Exit Sub
         Load_files()
     End Sub
 
@@ -296,6 +291,8 @@ Public Class Main
         Dim translation_id_count As Integer = File_contents_to_grid(translation, dg_translation, cb_tran_sectorder, cb_tran_inclusions)
         l_status.Text = "Loaded " & example_id_count & " IDs from " & Path.GetFileName(tb_example_path.Text) & " and " &
             translation_id_count & " IDs from " & Path.GetFileName(tb_translation_path.Text) & "."
+
+        Unsaved_changes(False)
 
         'Finding added/removed IDs
         dg_diffs.Rows.Clear()
@@ -660,6 +657,7 @@ Public Class Main
                 End If
             Next
 
+            Unsaved_changes(True)
             dg_diffs.Rows.Clear()
 
             l_status.Text = String.Format("Added {0} IDs.", added_id_count)
@@ -676,7 +674,10 @@ Public Class Main
     'Add new inclusion
     Private Sub Tr_incl_add_Click(sender As Object, e As EventArgs) Handles tr_incl_add.Click
         Dim new_inclusion As String = InputBox("File name:", "New Inclusion")
-        If Not String.IsNullOrWhiteSpace(new_inclusion) Then cb_tran_inclusions.Items.Add(new_inclusion)
+        If Not String.IsNullOrWhiteSpace(new_inclusion) Then
+            cb_tran_inclusions.Items.Add(new_inclusion)
+            Unsaved_changes(True)
+        End If
     End Sub
 
     'Edit inclusion
@@ -685,7 +686,10 @@ Public Class Main
             Dim selected_index As Integer = cb_tran_inclusions.SelectedIndex
             Dim selected_inclusion As String = cb_tran_inclusions.Items(selected_index)
             Dim edited_inclusion As String = InputBox("File name:", "Edit Inclusion", selected_inclusion)
-            If Not String.IsNullOrWhiteSpace(edited_inclusion) Then cb_tran_inclusions.Items(selected_index) = edited_inclusion
+            If Not String.IsNullOrWhiteSpace(edited_inclusion) Then
+                cb_tran_inclusions.Items(selected_index) = edited_inclusion
+                Unsaved_changes(True)
+            End If
         Else MsgBox("Select an inclusion first.", MsgBoxStyle.Information, "Edit Inclusion")
         End If
     End Sub
@@ -694,7 +698,10 @@ Public Class Main
     Private Sub Tr_incl_remove_Click(sender As Object, e As EventArgs) Handles tr_incl_remove.Click
         If cb_tran_inclusions.SelectedItem IsNot Nothing Then
             If MsgBox("Are you sure that you want to remove the " & cb_tran_inclusions.SelectedItem.ToString() & " inclusion?",
-                      MsgBoxStyle.OkCancel, "Remove Inclusion") = MsgBoxResult.Ok Then cb_tran_inclusions.Items.Remove(cb_tran_inclusions.SelectedItem)
+                      MsgBoxStyle.OkCancel, "Remove Inclusion") = MsgBoxResult.Ok Then
+                cb_tran_inclusions.Items.Remove(cb_tran_inclusions.SelectedItem)
+                Unsaved_changes(True)
+            End If
         Else MsgBox("Select an inclusion first.", MsgBoxStyle.Information, "Remove Inclusion")
         End If
     End Sub
@@ -795,9 +802,7 @@ Public Class Main
 
             'Auto-Set & Auto-Load
             If .auto_set_on_new_language Then
-                If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso
-                    MsgBox("You have a translation loaded at the moment. If you continue, all unsaved progress will be lost. Do you want to continue?",
-                           MsgBoxStyle.OkCancel, "Auto-Load New Language") = MsgBoxResult.Cancel Then Exit Sub
+                If Unsaved_changes_detected("Auto-Set New Language") Then Exit Sub
                 Clear_everything()
                 tb_example_path.Text = example_filepaths_list(0)
                 tb_translation_path.Text = newlang_filepaths_list(0)
@@ -810,10 +815,50 @@ Public Class Main
 
 #End Region
 
-#Region "Saving Translation File"
+#Region "Saving Translation File, detecting changes"
 
+    'Detecting changes to translation
+    Private Sub Detect_changes_to_translation(sender As Object, e As EventArgs) Handles dg_translation.CellValueChanged
+        Unsaved_changes(True)
+    End Sub
+
+    'Setting unsaved changes variable and making "Save Changes" button text bold
+    Private Sub Unsaved_changes(state As Boolean)
+        translation_modified = state
+        Select Case state
+            Case True
+                b_save_translation.Font = New Font(b_save_translation.Font, FontStyle.Bold)
+            Case False
+                b_save_translation.Font = New Font(b_save_translation.Font, FontStyle.Regular)
+        End Select
+    End Sub
+
+    'Asking what to do with unsaved changes before clearing tables
+    Private Function Unsaved_changes_detected(title_text As String) As Boolean
+        If My.Settings.warn_before_clearing AndAlso dg_translation.Rows.Count <> 0 AndAlso translation_modified Then
+            Select Case MsgBox("You have unsaved changes in your translation. If you continue, all unsaved progress will be lost. Do you want to save the translation first?", MsgBoxStyle.YesNoCancel, title_text)
+                Case MsgBoxResult.Yes
+                    Save_translation()
+                    Return False
+                Case MsgBoxResult.No
+                    Return False
+                Case MsgBoxResult.Cancel
+                    Return True
+                Case Else
+                    Return True
+            End Select
+        Else Return False
+        End If
+    End Function
+
+    'Click Save
+    Private Sub Click_Save_translation(sender As Object, e As EventArgs) Handles b_save_translation.Click
+        Save_translation()
+    End Sub
+
+    'Saving Translation
     'TODO Something probably in here (or when applying differences) caused a section to be split in two. Needs to be diagnosed and fixed.
-    Private Sub Save_translation(sender As Object, e As EventArgs) Handles b_save_translation.Click
+    Private Sub Save_translation()
         If dg_translation.Rows.Count > 0 Then
 
             With My.Settings
@@ -892,6 +937,8 @@ Public Class Main
                     Exit Sub
                 End Try
                 file_writer.Close()
+
+                Unsaved_changes(False)
 
                 l_status.Text = "Successfully saved " & Path.GetFileName(tb_translation_path.Text)
 
@@ -1008,6 +1055,7 @@ Public Class Main
         dg_diffs.Rows.Clear()
 
         pb_progress.Value = 0
+        Unsaved_changes(False)
         l_file_encoding.Text = "Not Loaded"
         l_status.Text = "Ready"
 
@@ -1162,6 +1210,7 @@ Public Class Main
             Else Detect_languages()
             End If
         End With
+        Unsaved_changes(False)
     End Sub
 
     'Actions to do when program closes
