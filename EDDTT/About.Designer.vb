@@ -71,7 +71,7 @@ Partial Class About
         Me.LabelVersion.MaximumSize = New System.Drawing.Size(0, 17)
         Me.LabelVersion.Name = "LabelVersion"
         Me.LabelVersion.Size = New System.Drawing.Size(42, 13)
-        Me.LabelVersion.TabIndex = 0
+        Me.LabelVersion.TabIndex = 1
         Me.LabelVersion.Text = "Version"
         Me.LabelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -84,7 +84,7 @@ Partial Class About
         Me.LabelCopyright.MaximumSize = New System.Drawing.Size(0, 17)
         Me.LabelCopyright.Name = "LabelCopyright"
         Me.LabelCopyright.Size = New System.Drawing.Size(51, 13)
-        Me.LabelCopyright.TabIndex = 0
+        Me.LabelCopyright.TabIndex = 2
         Me.LabelCopyright.Text = "Copyright"
         Me.LabelCopyright.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         '
@@ -95,7 +95,7 @@ Partial Class About
         Me.OKButton.Location = New System.Drawing.Point(497, 297)
         Me.OKButton.Name = "OKButton"
         Me.OKButton.Size = New System.Drawing.Size(75, 23)
-        Me.OKButton.TabIndex = 0
+        Me.OKButton.TabIndex = 3
         Me.OKButton.Text = "&OK"
         '
         'TextBoxDescription

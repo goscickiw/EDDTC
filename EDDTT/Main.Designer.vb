@@ -53,6 +53,7 @@ Partial Class Main
         Me.cb_autoload = New System.Windows.Forms.ToolStripMenuItem()
         Me.cb_auto_set_on_new_language = New System.Windows.Forms.ToolStripMenuItem()
         Me.cb_autocheck_repo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cb_warn_before_clearing = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.b_file_detection_settings = New System.Windows.Forms.ToolStripMenuItem()
         Me.b_reset_settings = New System.Windows.Forms.ToolStripMenuItem()
@@ -162,7 +163,6 @@ Partial Class Main
         Me.tr_incl_edit = New System.Windows.Forms.ToolStripMenuItem()
         Me.tr_incl_remove = New System.Windows.Forms.ToolStripMenuItem()
         Me.set_file_path = New System.Windows.Forms.OpenFileDialog()
-        Me.cb_warn_before_clearing = New System.Windows.Forms.ToolStripMenuItem()
         Me.ss_mainstatus.SuspendLayout()
         Me.ms_mainmenu.SuspendLayout()
         Me.tc_tables.SuspendLayout()
@@ -188,7 +188,7 @@ Partial Class Main
         Me.ss_mainstatus.Location = New System.Drawing.Point(0, 588)
         Me.ss_mainstatus.Name = "ss_mainstatus"
         Me.ss_mainstatus.Size = New System.Drawing.Size(944, 23)
-        Me.ss_mainstatus.TabIndex = 0
+        Me.ss_mainstatus.TabIndex = 2
         Me.ss_mainstatus.Text = "Status"
         '
         'pb_progress
@@ -224,7 +224,7 @@ Partial Class Main
         Me.ms_mainmenu.Location = New System.Drawing.Point(0, 0)
         Me.ms_mainmenu.Name = "ms_mainmenu"
         Me.ms_mainmenu.Size = New System.Drawing.Size(944, 27)
-        Me.ms_mainmenu.TabIndex = 1
+        Me.ms_mainmenu.TabIndex = 0
         Me.ms_mainmenu.Text = "Menu"
         '
         'SettingsToolStripMenuItem
@@ -260,6 +260,15 @@ Partial Class Main
         Me.cb_autocheck_repo.Name = "cb_autocheck_repo"
         Me.cb_autocheck_repo.Size = New System.Drawing.Size(303, 22)
         Me.cb_autocheck_repo.Text = "Check EDD repository on startup"
+        '
+        'cb_warn_before_clearing
+        '
+        Me.cb_warn_before_clearing.Checked = True
+        Me.cb_warn_before_clearing.CheckOnClick = True
+        Me.cb_warn_before_clearing.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cb_warn_before_clearing.Name = "cb_warn_before_clearing"
+        Me.cb_warn_before_clearing.Size = New System.Drawing.Size(303, 22)
+        Me.cb_warn_before_clearing.Text = "Ask to save changes before clearing tables"
         '
         'ToolStripSeparator6
         '
@@ -466,7 +475,7 @@ Partial Class Main
         Me.tc_tables.Name = "tc_tables"
         Me.tc_tables.SelectedIndex = 0
         Me.tc_tables.Size = New System.Drawing.Size(944, 561)
-        Me.tc_tables.TabIndex = 2
+        Me.tc_tables.TabIndex = 1
         '
         'tp_translation
         '
@@ -479,7 +488,7 @@ Partial Class Main
         Me.tp_translation.Name = "tp_translation"
         Me.tp_translation.Padding = New System.Windows.Forms.Padding(3)
         Me.tp_translation.Size = New System.Drawing.Size(936, 535)
-        Me.tp_translation.TabIndex = 1
+        Me.tp_translation.TabIndex = 0
         Me.tp_translation.Text = "Translation"
         Me.tp_translation.UseVisualStyleBackColor = True
         '
@@ -506,7 +515,7 @@ Partial Class Main
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dg_translation.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.dg_translation.Size = New System.Drawing.Size(926, 462)
-        Me.dg_translation.TabIndex = 6
+        Me.dg_translation.TabIndex = 2
         '
         'c_tran_section
         '
@@ -548,7 +557,7 @@ Partial Class Main
         Me.tran_search.Location = New System.Drawing.Point(3, 28)
         Me.tran_search.Name = "tran_search"
         Me.tran_search.Size = New System.Drawing.Size(926, 25)
-        Me.tran_search.TabIndex = 9
+        Me.tran_search.TabIndex = 1
         Me.tran_search.Text = "Search"
         '
         'ToolStripLabel4
@@ -584,7 +593,7 @@ Partial Class Main
         Me.tran_viewoptions.Location = New System.Drawing.Point(3, 3)
         Me.tran_viewoptions.Name = "tran_viewoptions"
         Me.tran_viewoptions.Size = New System.Drawing.Size(926, 25)
-        Me.tran_viewoptions.TabIndex = 1
+        Me.tran_viewoptions.TabIndex = 0
         Me.tran_viewoptions.Text = "View Options"
         '
         'b_tran_viewoptions
@@ -600,19 +609,19 @@ Partial Class Main
         '
         Me.cb_tran_hide_translated.CheckOnClick = True
         Me.cb_tran_hide_translated.Name = "cb_tran_hide_translated"
-        Me.cb_tran_hide_translated.Size = New System.Drawing.Size(167, 22)
+        Me.cb_tran_hide_translated.Size = New System.Drawing.Size(180, 22)
         Me.cb_tran_hide_translated.Text = "Hide Translated"
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(164, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(177, 6)
         '
         'cb_tran_wordwrap
         '
         Me.cb_tran_wordwrap.CheckOnClick = True
         Me.cb_tran_wordwrap.Name = "cb_tran_wordwrap"
-        Me.cb_tran_wordwrap.Size = New System.Drawing.Size(167, 22)
+        Me.cb_tran_wordwrap.Size = New System.Drawing.Size(180, 22)
         Me.cb_tran_wordwrap.Text = "Wrap Text in Cells"
         '
         'cb_tran_show_example
@@ -621,7 +630,7 @@ Partial Class Main
         Me.cb_tran_show_example.CheckOnClick = True
         Me.cb_tran_show_example.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cb_tran_show_example.Name = "cb_tran_show_example"
-        Me.cb_tran_show_example.Size = New System.Drawing.Size(167, 22)
+        Me.cb_tran_show_example.Size = New System.Drawing.Size(180, 22)
         Me.cb_tran_show_example.Text = "Show Example"
         '
         'ToolStripSeparator11
@@ -680,7 +689,7 @@ Partial Class Main
         Me.Panel3.MinimumSize = New System.Drawing.Size(0, 13)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(926, 13)
-        Me.Panel3.TabIndex = 11
+        Me.Panel3.TabIndex = 3
         '
         'Label10
         '
@@ -689,7 +698,7 @@ Partial Class Main
         Me.Label10.Location = New System.Drawing.Point(424, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(502, 13)
-        Me.Label10.TabIndex = 6
+        Me.Label10.TabIndex = 2
         Me.Label10.Text = "Double click Example Text to copy to Translation Text. Single click is enough if " &
     "Translation Text is empty."
         '
@@ -701,7 +710,7 @@ Partial Class Main
         Me.Label9.Location = New System.Drawing.Point(171, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(29, 13)
-        Me.Label9.TabIndex = 4
+        Me.Label9.TabIndex = 1
         Me.Label9.Text = "Gray"
         '
         'Label8
@@ -711,7 +720,7 @@ Partial Class Main
         Me.Label8.Location = New System.Drawing.Point(0, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(171, 13)
-        Me.Label8.TabIndex = 5
+        Me.Label8.TabIndex = 0
         Me.Label8.Text = "Newly added IDs are highlighted in"
         '
         'tp_diffs
@@ -725,7 +734,7 @@ Partial Class Main
         Me.tp_diffs.Name = "tp_diffs"
         Me.tp_diffs.Padding = New System.Windows.Forms.Padding(3)
         Me.tp_diffs.Size = New System.Drawing.Size(936, 535)
-        Me.tp_diffs.TabIndex = 0
+        Me.tp_diffs.TabIndex = 1
         Me.tp_diffs.Text = "Differences"
         Me.tp_diffs.UseVisualStyleBackColor = True
         '
@@ -752,7 +761,7 @@ Partial Class Main
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dg_diffs.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.dg_diffs.Size = New System.Drawing.Size(926, 474)
-        Me.dg_diffs.TabIndex = 5
+        Me.dg_diffs.TabIndex = 1
         '
         'c_diff_section
         '
@@ -859,7 +868,7 @@ Partial Class Main
         Me.Panel4.MinimumSize = New System.Drawing.Size(0, 13)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(926, 13)
-        Me.Panel4.TabIndex = 12
+        Me.Panel4.TabIndex = 2
         '
         'Label11
         '
@@ -887,7 +896,7 @@ Partial Class Main
         Me.Panel2.MinimumSize = New System.Drawing.Size(0, 13)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(926, 13)
-        Me.Panel2.TabIndex = 13
+        Me.Panel2.TabIndex = 3
         '
         'Label7
         '
@@ -989,7 +998,7 @@ Partial Class Main
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dg_example.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.dg_example.Size = New System.Drawing.Size(926, 500)
-        Me.dg_example.TabIndex = 9
+        Me.dg_example.TabIndex = 1
         '
         'c_exmp_sect
         '
@@ -1028,7 +1037,7 @@ Partial Class Main
         Me.exmp_viewoptions.Location = New System.Drawing.Point(3, 3)
         Me.exmp_viewoptions.Name = "exmp_viewoptions"
         Me.exmp_viewoptions.Size = New System.Drawing.Size(926, 25)
-        Me.exmp_viewoptions.TabIndex = 2
+        Me.exmp_viewoptions.TabIndex = 0
         Me.exmp_viewoptions.Text = "View Options"
         '
         'ToolStripDropDownButton1
@@ -1130,15 +1139,6 @@ Partial Class Main
         Me.set_file_path.InitialDirectory = Global.EDDTT.My.MySettings.Default.edd_repo_dir
         Me.set_file_path.Title = "Get Translation File Location"
         '
-        'cb_warn_before_clearing
-        '
-        Me.cb_warn_before_clearing.Checked = True
-        Me.cb_warn_before_clearing.CheckOnClick = True
-        Me.cb_warn_before_clearing.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cb_warn_before_clearing.Name = "cb_warn_before_clearing"
-        Me.cb_warn_before_clearing.Size = New System.Drawing.Size(303, 22)
-        Me.cb_warn_before_clearing.Text = "Warning before clearing tables"
-        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1217,8 +1217,8 @@ Partial Class Main
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents tc_tables As TabControl
-    Friend WithEvents tp_diffs As TabPage
     Friend WithEvents tp_translation As TabPage
+    Friend WithEvents tp_diffs As TabPage
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents b_load_compare As ToolStripMenuItem
     Friend WithEvents b_save_translation As ToolStripMenuItem
@@ -1226,30 +1226,6 @@ Partial Class Main
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents b_about As ToolStripMenuItem
-    Friend WithEvents diffs_viewoptions As ToolStrip
-    Friend WithEvents b_diff_apply As ToolStripButton
-    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
-    Friend WithEvents tran_viewoptions As ToolStrip
-    Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
-    Friend WithEvents l_diff_total_ids As ToolStripLabel
-    Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
-    Friend WithEvents l_tran_total_ids As ToolStripLabel
-    Friend WithEvents cb_tran_sectorder As ToolStripComboBox
-    Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
-    Friend WithEvents ToolStripLabel1 As ToolStripLabel
-    Friend WithEvents ToolStripLabel5 As ToolStripLabel
-    Friend WithEvents ToolStripSeparator14 As ToolStripSeparator
-    Friend WithEvents cb_tran_inclusions As ToolStripComboBox
-    Friend WithEvents dg_translation As DataGridView
-    Friend WithEvents b_diff_viewoptions As ToolStripDropDownButton
-    Friend WithEvents cb_diff_wordwrap As ToolStripMenuItem
-    Friend WithEvents cb_diff_ignore_removed As ToolStripMenuItem
-    Friend WithEvents b_tran_viewoptions As ToolStripDropDownButton
-    Friend WithEvents cb_tran_hide_translated As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
-    Friend WithEvents cb_tran_wordwrap As ToolStripMenuItem
-    Friend WithEvents cb_tran_show_example As ToolStripMenuItem
-    Friend WithEvents dg_diffs As DataGridView
     Friend WithEvents ToolStripSeparator13 As ToolStripSeparator
     Friend WithEvents l_file_encoding As ToolStripStatusLabel
     Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
@@ -1268,22 +1244,54 @@ Partial Class Main
     Friend WithEvents l_exmp_total_ids As ToolStripLabel
     Friend WithEvents cb_autoload As ToolStripMenuItem
     Friend WithEvents cb_autocheck_repo As ToolStripMenuItem
-    Friend WithEvents tran_search As ToolStrip
-    Friend WithEvents ToolStripLabel4 As ToolStripLabel
-    Friend WithEvents tb_tran_search As ToolStripTextBox
-    Friend WithEvents b_tran_search As ToolStripButton
     Friend WithEvents cb_exmp_show_translation As ToolStripMenuItem
     Friend WithEvents edit_translation_inclusions As ContextMenuStrip
     Friend WithEvents tr_incl_add As ToolStripMenuItem
     Friend WithEvents tr_incl_edit As ToolStripMenuItem
     Friend WithEvents tr_incl_remove As ToolStripMenuItem
     Friend WithEvents set_file_path As OpenFileDialog
-    Friend WithEvents b_tran_search_reset As ToolStripButton
     Friend WithEvents cb_auto_set_on_new_language As ToolStripMenuItem
+    Friend WithEvents c_exmp_sect As DataGridViewTextBoxColumn
+    Friend WithEvents c_exmp_name As DataGridViewTextBoxColumn
+    Friend WithEvents c_exmp_example As DataGridViewTextBoxColumn
+    Friend WithEvents c_exmp_translation As DataGridViewTextBoxColumn
+    Friend WithEvents cb_warn_before_clearing As ToolStripMenuItem
+    Friend WithEvents tran_search As ToolStrip
+    Friend WithEvents ToolStripLabel4 As ToolStripLabel
+    Friend WithEvents tb_tran_search As ToolStripTextBox
+    Friend WithEvents b_tran_search As ToolStripButton
+    Friend WithEvents b_tran_search_reset As ToolStripButton
+    Friend WithEvents tran_viewoptions As ToolStrip
+    Friend WithEvents b_tran_viewoptions As ToolStripDropDownButton
+    Friend WithEvents cb_tran_hide_translated As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
+    Friend WithEvents cb_tran_wordwrap As ToolStripMenuItem
+    Friend WithEvents cb_tran_show_example As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents cb_tran_sectorder As ToolStripComboBox
+    Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
+    Friend WithEvents ToolStripLabel5 As ToolStripLabel
+    Friend WithEvents cb_tran_inclusions As ToolStripComboBox
+    Friend WithEvents ToolStripSeparator14 As ToolStripSeparator
+    Friend WithEvents l_tran_total_ids As ToolStripLabel
+    Friend WithEvents diffs_viewoptions As ToolStrip
+    Friend WithEvents b_diff_viewoptions As ToolStripDropDownButton
+    Friend WithEvents cb_diff_wordwrap As ToolStripMenuItem
+    Friend WithEvents cb_diff_ignore_removed As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
+    Friend WithEvents b_diff_apply As ToolStripButton
+    Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
+    Friend WithEvents l_diff_total_ids As ToolStripLabel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Label10 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents dg_translation As DataGridView
+    Friend WithEvents c_tran_section As DataGridViewTextBoxColumn
+    Friend WithEvents c_tran_name As DataGridViewTextBoxColumn
+    Friend WithEvents c_tran_example As DataGridViewTextBoxColumn
+    Friend WithEvents c_tran_translation As DataGridViewTextBoxColumn
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label11 As Label
     Friend WithEvents Panel2 As Panel
@@ -1293,18 +1301,10 @@ Partial Class Main
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents c_tran_section As DataGridViewTextBoxColumn
-    Friend WithEvents c_tran_name As DataGridViewTextBoxColumn
-    Friend WithEvents c_tran_example As DataGridViewTextBoxColumn
-    Friend WithEvents c_tran_translation As DataGridViewTextBoxColumn
+    Friend WithEvents dg_diffs As DataGridView
     Friend WithEvents c_diff_section As DataGridViewTextBoxColumn
     Friend WithEvents c_diff_name As DataGridViewTextBoxColumn
     Friend WithEvents c_diff_example As DataGridViewTextBoxColumn
     Friend WithEvents c_diff_translation As DataGridViewTextBoxColumn
     Friend WithEvents c_diff_addedremoved As DataGridViewTextBoxColumn
-    Friend WithEvents c_exmp_sect As DataGridViewTextBoxColumn
-    Friend WithEvents c_exmp_name As DataGridViewTextBoxColumn
-    Friend WithEvents c_exmp_example As DataGridViewTextBoxColumn
-    Friend WithEvents c_exmp_translation As DataGridViewTextBoxColumn
-    Friend WithEvents cb_warn_before_clearing As ToolStripMenuItem
 End Class
