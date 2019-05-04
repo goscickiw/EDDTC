@@ -45,5 +45,5 @@ Imports System.Runtime.InteropServices
 ' przy użyciu symbolu „*”, tak jak pokazano poniżej:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.1.0")>
+<Assembly: AssemblyVersion("1.0.1.1")>
 <Assembly: NeutralResourcesLanguage("en")>
